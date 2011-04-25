@@ -6,6 +6,15 @@ alias grep='grep --color=auto'
 alias add='/usr/bin/ssh-add -t 18000 ~/.ssh/key.dsa ~/.ssh/nokia.rsa'
 alias lock='/usr/bin/ssh-add -D'
 
+if which rpm &> /dev/null; then
+	#Redhat specific
+	alias yum=yum -y
+fi
+
+if which dpkg &> /dev/null; then
+	#debian specific
+fi
+
 
 # environment
 export EDITOR=vim
