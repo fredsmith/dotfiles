@@ -13,6 +13,7 @@ fi
 
 if which dpkg &> /dev/null; then
 	#debian specific
+	alias yum=aptitude
 fi
 
 
