@@ -8,7 +8,7 @@ alias lock='/usr/bin/ssh-add -D'
 
 if which rpm &> /dev/null; then
 	#Redhat specific
-	alias yum=yum -y
+	alias yum='yum -y'
 fi
 
 if which dpkg &> /dev/null; then
