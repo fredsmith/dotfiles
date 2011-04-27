@@ -5,10 +5,17 @@
 alias grep='grep --color=auto'
 alias add='/usr/bin/ssh-add -t 18000 ~/.ssh/key.dsa ~/.ssh/nokia.rsa'
 alias lock='/usr/bin/ssh-add -D'
+alias ll='ls -l'
+alias la='ls -a'
 
 if which rpm &> /dev/null; then
 	#Redhat specific
-	alias yum='yum -y'
+	if [ "$LOGNAME" = "root" ]; then
+		alias yum='yum -y'
+	else
+
+		alias yum='sudo yum -y'
+	fi
 fi
 
 if which dpkg &> /dev/null; then
@@ -37,20 +44,23 @@ export PS1="\[\e]0;\u@\h: \w\a\]\[\033[36m\][\t] \[\033[1;33m\]\u\[\033[0m\]@\h:
 # update the values of LINES and COLUMNS.
 
 shopt -s checkwinsize
+ADDNEWLINE=false
 
 # Configure git
 if [ ! -f ~/.gitconfig ]; then
 	if which git &> /dev/null; then
-		echo "configuring Git";
+		echo -en "\033[36m[Git]\033[0m";
 		git config --global user.name "Fred Smith"
 		git config --global user.email "fred.smith@fredsmith.org"
+		ADDNEWLINE=true
 	fi
 fi
 
 
 # Configure vim
 if [ ! -f ~/.vimrc ]; then
-	echo "configuring Vim";
+	echo -en "\033[36m[Vim]\033[0m";
+	ADDNEWLINE=true
 	echo "syntax on" > ~/.vimrc
 fi
 
@@ -62,22 +72,30 @@ fi
 
 
 if [ ! -d ~/.ssh ]; then
-	echo "configuring ~/.ssh";
+	echo -en "\033[36m[~/.ssh]\033[0m";
+	ADDNEWLINE=true
 	mkdir ~/.ssh/;
 	chmod -R go-rwx ~/.ssh/;
 fi
 
 if [ ! -f ~/.ssh/authorized_keys ]; then
-	echo "configuring authorized_keys";
+	touch ~/.ssh/authorized_keys;
+fi
+
+if ! grep derf@azeroth.xicada.com ~/.ssh/authorized_keys > /dev/null; then
+	echo -en "\033[36m[~/.ssh/authorized_keys]\033[0m";
+	ADDNEWLINE=true
 	echo "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAxKz0Pa5oPXs26d4nf0BgP4c8HZR7MlJDBonktUQZcL0oJFBIgMHxtG5qvlnuP1wN+4fG3+ksTFvqDErPYUTcWNdQ230MtkH7hEX1CYMHVck8/ohooe5pd7+V/Xxqa3HxrfwPHPuP4sfwkVHYswYS+dx6P787O9IGkrh/Lw91eM5E04ub0+irDJJDuGXrjvZ6VC3rOUoZ5SB6mafwKsJGGLoyY4Gks5rFqTpZDervwxM18TKIPgqD43+GQce4wzLRYIa60yMMHpK4THOaet4HMPlr+Immt/OM71/ZubaPxG13XOq7t5JjKuejsJlo0cO4ycbFsy78dRcCOSnStHFQpw== derf@azeroth.xicada.com" >> ~/.ssh/authorized_keys
 	chmod -R go-rwx ~/.ssh/;
 fi
 
 
 if [ ! -f ~/.ssh/config ]; then
-	echo "configuring ssh config";
+	echo -en "\033[36m[~/.ssh/config]\033[0m";
+	ADDNEWLINE=true
 	echo "Host *
 ForwardAgent yes
 ServerAliveInterval 120" > ~/.ssh/config
 	chmod -R go-rwx ~/.ssh/;
 fi
+$ADDNEWLINE && echo
