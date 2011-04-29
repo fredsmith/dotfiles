@@ -1,15 +1,8 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# Aliases
-alias grep='grep --color=auto'
-alias add='/usr/bin/ssh-add -t 18000 ~/.ssh/key.dsa ~/.ssh/nokia.rsa'
-alias lock='/usr/bin/ssh-add -D'
-alias ll='ls -l'
-alias la='ls -a'
-
+#Redhat specific
 if which rpm &> /dev/null; then
-	#Redhat specific
 	if [ "$LOGNAME" = "root" ]; then
 		alias yum='yum -y'
 	else
@@ -18,15 +11,18 @@ if which rpm &> /dev/null; then
 	fi
 fi
 
+#debian specific
 if which dpkg &> /dev/null; then
-	#debian specific
 	alias yum=aptitude
 fi
-
+# cross-distro, if not root, keep certain things in our path
+if ! [ "$LOGNAME" = "root" ]; then
+	alias service='sudo service'
+fi
 
 # environment
 export EDITOR=vim
-export PATH=~/bin/:$PATH
+export PATH=~/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin
 export TZ=US/Eastern
 
 # don't put duplicate lines in the history. See bash(1) for more options
@@ -98,4 +94,12 @@ ForwardAgent yes
 ServerAliveInterval 120" > ~/.ssh/config
 	chmod -R go-rwx ~/.ssh/;
 fi
+
 $ADDNEWLINE && echo
+
+# Aliases
+alias grep='grep --color=auto'
+alias add='/usr/bin/ssh-add -t 18000 ~/.ssh/key.dsa ~/.ssh/nokia.rsa'
+alias lock='/usr/bin/ssh-add -D'
+alias ll='ls -l'
+alias la='ls -a'
