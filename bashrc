@@ -107,7 +107,7 @@ else
 	alias grep='grep --color=auto'
 fi
 
-alias keychain=eval `keychain -q --eval`
+alias keychain='eval `keychain -q --eval`'
 alias add='/usr/bin/ssh-add -t 18000 ~/.ssh/key.dsa ~/.ssh/nokia.rsa'
 alias lock='/usr/bin/ssh-add -D'
 alias ll='ls -l'
