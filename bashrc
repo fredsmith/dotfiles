@@ -9,11 +9,13 @@ if which rpm &> /dev/null; then
 
 		alias yum='sudo yum -y'
 	fi
+	alias listfiles='rpm -q --filesbypkg'
 fi
 
 #debian specific
 if which dpkg &> /dev/null; then
 	alias yum=aptitude
+	alias listfiles='dpkg --listfiles'
 fi
 # cross-distro, if not root, keep certain things in our path
 if ! [ "$LOGNAME" = "root" ]; then
@@ -98,7 +100,11 @@ fi
 $ADDNEWLINE && echo
 
 # Aliases
-alias grep='grep --color=auto'
+if [ -f /usr/bin/gnue/grep ]; then
+	alias grep='/usr/bin/gnu/grep --color=auto'
+else
+	alias grep='grep --color=auto'
+fi
 alias add='/usr/bin/ssh-add -t 18000 ~/.ssh/key.dsa ~/.ssh/nokia.rsa'
 alias lock='/usr/bin/ssh-add -D'
 alias ll='ls -l'
