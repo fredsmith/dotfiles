@@ -67,9 +67,21 @@ if ! which vim &> /dev/null; then
 	alias vim=vi
 fi
 
+
+# ssh agent environment import
+if [ ! -n "${SSH_AUTH_SOCK:+x}" ]; then
+	if [ -f ~/.sshagent ]; then
+	    . ~/.sshagent
+	fi
+
+	(ps -p $SSH_AGENT_PID &> /dev/null) || (ssh-agent | grep -v echo > ~/.sshagent)
+
+	if [ -f ~/.sshagent ]; then
+	    . ~/.sshagent
+	fi
+fi
+
 # Configure ssh
-
-
 if [ ! -d ~/.ssh ]; then
 	echo -en "\033[36m[~/.ssh]\033[0m";
 	ADDNEWLINE=true
