@@ -113,7 +113,7 @@ fi
 $ADDNEWLINE && echo
 
 # Aliases
-if [ -f /usr/bin/gnue/grep ]; then
+if [ -f /usr/bin/gnu/grep ]; then
 	alias grep='/usr/bin/gnu/grep --color=auto'
 else
 	alias grep='grep --color=auto'
