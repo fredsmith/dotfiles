@@ -24,8 +24,9 @@ fi
 
 # environment
 export EDITOR=vim
-export PATH=~/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin
+export PATH=~/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/usr/libexec/git-core
 export TZ=US/Eastern
+
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
@@ -105,6 +106,8 @@ if [ -f /usr/bin/gnue/grep ]; then
 else
 	alias grep='grep --color=auto'
 fi
+
+alias keychain=eval `keychain -q --eval`
 alias add='/usr/bin/ssh-add -t 18000 ~/.ssh/key.dsa ~/.ssh/nokia.rsa'
 alias lock='/usr/bin/ssh-add -D'
 alias ll='ls -l'
