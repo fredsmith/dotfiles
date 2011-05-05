@@ -27,6 +27,10 @@ export EDITOR=vim
 export PATH=~/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/usr/libexec/git-core
 export TZ=US/Eastern
 
+# source proxy information
+if [ -f ~/.proxy ]; then
+	. ~/.proxy
+fi
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
