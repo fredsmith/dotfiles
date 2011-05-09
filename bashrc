@@ -128,3 +128,7 @@ alias lock='/usr/bin/ssh-add -D'
 alias ll='ls -l'
 alias la='ls -a'
 alias chrome='google-chrome --proxy-server=http://daprx00.americas.nokia.com:8080 --user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US) AppleWebKit/534.4 (KHTML, like Gecko) Chrome/8.0.552.200 Safari/534.10" &>/dev/null &'
+
+# functions
+
+function sshclear { if [ $1 -gt "0" ]; then REGEXP="${1}d"; sed -i".bak" $REGEXP ~/.ssh/known_hosts; fi }
