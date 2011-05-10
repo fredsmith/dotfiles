@@ -36,9 +36,11 @@ fi
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
-HISTCONTROL=ignoreboth
-
+export HISTCONTROL=ignoreboth
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000
 # append to the history file without overwriting, and write history out after every command execution
+export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S - '
 shopt -s histappend
 export PROMPT_COMMAND="history -a"
 
@@ -120,8 +122,10 @@ alias add='/usr/bin/ssh-add -t 18000 ~/.ssh/key.dsa ~/.ssh/nokia.rsa'
 alias lock='/usr/bin/ssh-add -D'
 alias ll='ls -l'
 alias la='ls -a'
-alias chrome='google-chrome --proxy-server=http://daprx00.americas.nokia.com:8080 --user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US) AppleWebKit/534.4 (KHTML, like Gecko) Chrome/8.0.552.200 Safari/534.10" &>/dev/null &'
+alias chrome='google-chrome --proxy-server=$HTTP_PROXY --user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US) AppleWebKit/534.4 (KHTML, like Gecko) Chrome/8.0.552.200 Safari/534.10" &>/dev/null &'
 
 # functions
 
 function sshclear { if [ $1 -gt "0" ]; then REGEXP="${1}d"; sed -i".bak" $REGEXP ~/.ssh/known_hosts; fi }
+function http { (exec 3<>/dev/tcp/$1/$2; echo -e "$3 $4 HTTP/1.0\r\n\r\n" >&3; cat <&3); }
+
