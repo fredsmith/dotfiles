@@ -76,7 +76,7 @@ fi
 
 # Configure ssh
 if which keychain &> /dev/null; then
-	keychain --inherit any --agents ssh --quick --quiet
+	eval `keychain --inherit any --agents ssh --quick --quiet --eval`
 fi
 
 if [ ! -d ~/.ssh ]; then
