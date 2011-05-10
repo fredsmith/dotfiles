@@ -1,5 +1,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
+export FULLNAME="Fred Smith"
+export EMAIL="fred.smith@fredsmith.org"
 
 #Redhat specific
 if which rpm &> /dev/null; then
@@ -53,8 +55,9 @@ ADDNEWLINE=false
 if [ ! -f ~/.gitconfig ]; then
 	if which git &> /dev/null; then
 		echo -en "\033[36m[Git]\033[0m";
-		git config --global user.name "Fred Smith"
-		git config --global user.email "fred.smith@fredsmith.org"
+		echo "[user]
+	name = $FULLNAME
+	email = $EMAIL" >> ~/.gitconfig
 		ADDNEWLINE=true
 	fi
 fi
@@ -71,21 +74,11 @@ if ! which vim &> /dev/null; then
 	alias vim=vi
 fi
 
-
-# ssh agent environment import
-if [ ! -n "${SSH_AUTH_SOCK:+x}" ]; then
-	if [ -f ~/.sshagent ]; then
-	    . ~/.sshagent
-	fi
-
-	(ps -p $SSH_AGENT_PID &> /dev/null) || (ssh-agent | grep -v echo > ~/.sshagent)
-
-	if [ -f ~/.sshagent ]; then
-	    . ~/.sshagent
-	fi
+# Configure ssh
+if which keychain &> /dev/null; then
+	keychain --inherit any --agents ssh --quick --quiet
 fi
 
-# Configure ssh
 if [ ! -d ~/.ssh ]; then
 	echo -en "\033[36m[~/.ssh]\033[0m";
 	ADDNEWLINE=true
