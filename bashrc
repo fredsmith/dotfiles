@@ -128,5 +128,7 @@ alias chrome='google-chrome --proxy-server=$HTTP_PROXY --user-agent="Mozilla/5.0
 
 function sshclear { if [ $1 -gt "0" ]; then REGEXP="${1}d"; sed -i".bak" $REGEXP ~/.ssh/known_hosts; fi }
 function http { (exec 3<>/dev/tcp/$1/$2; echo -e "$3 $4 HTTP/1.0\r\n\r\n" >&3; cat <&3); }
-function portcheck { (exec 3<>/dev/tcp/$1/$2) &>/dev/null; OPEN=$?; [ $OPEN -eq 0 ] && echo "open" || echo "closed"; return $OPEN; 
-}
+function portcheck { (exec 3<>/dev/tcp/$1/$2) &>/dev/null; OPEN=$?; [ $OPEN -eq 0 ] && echo "open" || echo "closed"; return $OPEN; }
+function dshload { unset HOSTLIST; INT=0; for HOST in `cat $1 | awk '{if ($2) { printf($2) } else { printf($1) } print "\n" }' | sort | uniq`; do HOSTLIST[$INT]=$HOST; INT=`expr $INT + 1`; done; }
+function dshlist { for HOST in ${HOSTLIST[*]}; do echo $HOST; done ;}
+function dsh { HOSTMASK=$1; DATETIME=`date '+%D %T'`; shift 1; for HOST in `dshlist | grep $HOSTMASK`; do (ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no -x $HOST "$@" | xargs -n 500 echo $DATETIME $HOST: >> /tmp/dsh.log )& done; ACTIVE=1; until [[ $ACTIVE = 0 ]]; do jobs -l > /dev/null; ACTIVE=`jobs -p | wc -l`; printf "\r%s active jobs" $ACTIVE; done; }
