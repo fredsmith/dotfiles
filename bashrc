@@ -19,10 +19,49 @@ if which dpkg &> /dev/null; then
 	alias yum=aptitude
 	alias listfiles='dpkg --listfiles'
 fi
-# cross-distro, if not root, keep certain things in our path
+export PROMPTCHAR="#"
+# cross-distro, if not root
 if ! [ "$LOGNAME" = "root" ]; then
 	alias service='sudo service'
+	export PROMPTCHAR="$"
+	if ! which root &> /dev/null; then
+		alias root="sudo -i"
+	fi
 fi
+
+# Get FQDN somehow
+HOSTNAMEVER=$(hostname --version 2>&1 | grep hostname | cut -f 2 -d ' ' | cut -f 1 -d '.')
+
+if [ $HOSTNAMEVER -gt 1 ]; then
+	export FQDN=$(hostname -A)
+else
+	export FQDN=$(hostname -f)
+fi
+
+# Set up environment-specific markers
+ENVDESIGNATOR=$(echo $FQDN | cut -f 2 -d '.')
+case "$ENVDESIGNATOR" in
+
+	pr)
+		TXT_COLOR="$(tput setaf 1)"
+		ENVPROMPT="$TXT_COLOR[PROD]"
+	;;
+	st)
+		TXT_COLOR="$(tput setaf 3)"
+		ENVPROMPT="$TXT_COLOR[STAGE]"
+	;;
+	si)
+		TXT_COLOR="$(tput setaf 3)"
+		ENVPROMPT="$TXT_COLOR[SI]"
+	;;
+	pt)
+		TXT_COLOR="$(tput setaf 3)"
+		ENVPROMPT="$TXT_COLOR[PERF]"
+	;;
+	*)
+		unset ENVDESIGNATOR
+	;;
+esac
 
 # environment
 export EDITOR=vim
@@ -45,7 +84,7 @@ shopt -s histappend
 export PROMPT_COMMAND="history -a"
 
 # set pretty prompt
-export PS1="\[\e]0;\u@\h: \w\a\]\[\033[36m\][\t] \[\033[1;33m\]\u\[\033[0m\]@\h:\[\033[36m\][\w]:\[\033[0m\]"
+export PS1="\[\e]0;\u@\h: \w\a\]\[\033[36m\][\t] \[\033[1;33m\]\u\[\033[0m\]@\h$ENVPROMPT\[\033[36m\][\w]$PROMPTCHAR\[\033[0m\] "
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -122,7 +161,7 @@ alias add='/usr/bin/ssh-add -t 18000 ~/.ssh/key.dsa ~/.ssh/nokia.rsa'
 alias lock='/usr/bin/ssh-add -D'
 alias ll='ls -l'
 alias la='ls -a'
-alias chrome='google-chrome --proxy-server=$HTTP_PROXY --user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US) AppleWebKit/534.4 (KHTML, like Gecko) Chrome/8.0.552.200 Safari/534.10" &>/dev/null &'
+alias chrome='google-chrome --proxy-pac-url=http://proxyconf.americas.nokia.com/proxy.pac --user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US) AppleWebKit/534.4 (KHTML, like Gecko) Chrome/8.0.552.200 Safari/534.10" &>/dev/null &'
 
 # functions
 
