@@ -30,9 +30,9 @@ if ! [ "$LOGNAME" = "root" ]; then
 fi
 
 # Get FQDN somehow
-HOSTNAMEVER=$(hostname --version 2>&1 | grep hostname | cut -f 2 -d ' ' | cut -f 1 -d '.')
+HOSTNAMEVER=$(hostname --version 2>&1 | grep hostname | cut -f 2 -d ' ' | cut -f 1 -d '.' | head -n 1)
 
-if [ $HOSTNAMEVER -gt 1 ]; then
+if [ $HOSTNAMEVER -gt 1 2>/dev/null ]; then
 	export FQDN=$(hostname -A)
 else
 	export FQDN=$(hostname -f)
@@ -161,6 +161,23 @@ alias add='/usr/bin/ssh-add -t 18000 ~/.ssh/key.dsa ~/.ssh/nokia.rsa'
 alias lock='/usr/bin/ssh-add -D'
 alias ll='ls -l'
 alias la='ls -a'
+
+#git
+
+alias ga='git add'
+alias gp='git push'
+alias gl='git log'
+alias gs='git status'
+alias gd='git diff'
+alias gm='git commit -m'
+alias gma='git commit -am'
+alias gb='git branch'
+alias gc='git checkout'
+alias gra='git remote add'
+alias grr='git remote rm'
+alias gpu='git pull'
+alias gcl='git clone'
+
 alias chrome='google-chrome --proxy-pac-url=http://proxyconf.americas.nokia.com/proxy.pac --user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US) AppleWebKit/534.4 (KHTML, like Gecko) Chrome/8.0.552.200 Safari/534.10" &>/dev/null &'
 
 # functions
