@@ -178,7 +178,8 @@ alias grr='git remote rm'
 alias gpu='git pull'
 alias gcl='git clone'
 
-alias chrome='google-chrome --proxy-pac-url=http://proxyconf.americas.nokia.com/proxy.pac --user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US) AppleWebKit/534.4 (KHTML, like Gecko) Chrome/8.0.552.200 Safari/534.10" &>/dev/null &'
+alias chrome='google-chrome --enable-plugins --proxy-pac-url=http://proxyconf.americas.nokia.com/proxy.pac --user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US) AppleWebKit/534.4 (KHTML, like Gecko) Chrome/8.0.552.200 Safari/534.10" &>/dev/null &'
+alias chromenoproxy='google-chrome --enable-plugins --user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US) AppleWebKit/534.4 (KHTML, like Gecko) Chrome/8.0.552.200 Safari/534.10" &>/dev/null &'
 
 # functions
 
