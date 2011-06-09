@@ -138,10 +138,10 @@ if [ ! -f ~/.ssh/authorized_keys ]; then
 	touch ~/.ssh/authorized_keys;
 fi
 
-if ! grep derf@azeroth.xicada.com ~/.ssh/authorized_keys > /dev/null; then
+if ! grep derf@derf.us ~/.ssh/authorized_keys > /dev/null; then
 	echo -en "\033[36m[~/.ssh/authorized_keys]\033[0m";
 	ADDNEWLINE=true
-	echo "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAxKz0Pa5oPXs26d4nf0BgP4c8HZR7MlJDBonktUQZcL0oJFBIgMHxtG5qvlnuP1wN+4fG3+ksTFvqDErPYUTcWNdQ230MtkH7hEX1CYMHVck8/ohooe5pd7+V/Xxqa3HxrfwPHPuP4sfwkVHYswYS+dx6P787O9IGkrh/Lw91eM5E04ub0+irDJJDuGXrjvZ6VC3rOUoZ5SB6mafwKsJGGLoyY4Gks5rFqTpZDervwxM18TKIPgqD43+GQce4wzLRYIa60yMMHpK4THOaet4HMPlr+Immt/OM71/ZubaPxG13XOq7t5JjKuejsJlo0cO4ycbFsy78dRcCOSnStHFQpw== derf@azeroth.xicada.com" >> ~/.ssh/authorized_keys
+	echo "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAxKz0Pa5oPXs26d4nf0BgP4c8HZR7MlJDBonktUQZcL0oJFBIgMHxtG5qvlnuP1wN+4fG3+ksTFvqDErPYUTcWNdQ230MtkH7hEX1CYMHVck8/ohooe5pd7+V/Xxqa3HxrfwPHPuP4sfwkVHYswYS+dx6P787O9IGkrh/Lw91eM5E04ub0+irDJJDuGXrjvZ6VC3rOUoZ5SB6mafwKsJGGLoyY4Gks5rFqTpZDervwxM18TKIPgqD43+GQce4wzLRYIa60yMMHpK4THOaet4HMPlr+Immt/OM71/ZubaPxG13XOq7t5JjKuejsJlo0cO4ycbFsy78dRcCOSnStHFQpw== derf@derf.us" >> ~/.ssh/authorized_keys
 	chmod -R go-rwx ~/.ssh/;
 fi
 
@@ -168,6 +168,7 @@ alias add='/usr/bin/ssh-add -t 18000 ~/.ssh/key.dsa ~/.ssh/nokia.rsa'
 alias lock='/usr/bin/ssh-add -D'
 alias ll='ls -l'
 alias la='ls -a'
+alias xi='ssh xicada'
 
 #git
 
@@ -185,7 +186,8 @@ alias grr='git remote rm'
 alias gpu='git pull'
 alias gcl='git clone'
 
-alias chrome='google-chrome --proxy-pac-url=http://proxyconf.americas.nokia.com/proxy.pac --user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US) AppleWebKit/534.4 (KHTML, like Gecko) Chrome/8.0.552.200 Safari/534.10" &>/dev/null &'
+alias chrome='google-chrome --enable-plugins --proxy-pac-url=http://proxyconf.americas.nokia.com/proxy.pac --user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US) AppleWebKit/534.4 (KHTML, like Gecko) Chrome/8.0.552.200 Safari/534.10" &>/dev/null &'
+alias chromenoproxy='google-chrome --enable-plugins --user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US) AppleWebKit/534.4 (KHTML, like Gecko) Chrome/8.0.552.200 Safari/534.10" &>/dev/null &'
 
 # functions
 
