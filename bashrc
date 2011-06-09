@@ -65,7 +65,7 @@ esac
 
 # environment
 export EDITOR=vim
-export PATH=~/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/usr/libexec/git-core
+export PATH=~/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/libexec/git-core
 export TZ=US/Eastern
 
 # source proxy information
@@ -103,6 +103,13 @@ if [ ! -f ~/.gitconfig ]; then
 	fi
 fi
 
+# Configure screen
+if [ ! -f ~/.screenrc ]; then
+	echo -en "\033[36m[Screen]\033[0m";
+	ADDNEWLINE=true
+	echo "hardstatus alwayslastline \"%?%{yk}%-Lw%?%{wb}%n*%f %t%?(%u)%?%?%{yk}%+Lw%?\"
+hardstatus ignore" > ~/.screenrc
+fi
 
 # Configure vim
 if [ ! -f ~/.vimrc ]; then
