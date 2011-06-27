@@ -47,16 +47,16 @@ case "$ENVDESIGNATOR" in
 		ENVPROMPT="$TXT_COLOR[PROD]\[\e[0m\]"
 	;;
 	st)
-		TXT_COLOR="$(tput setaf 3)"
-		ENVPROMPT="$TXT_COLOR[STAGE]"
+		TXT_COLOR="\[\e[1;33m\]"
+		ENVPROMPT="$TXT_COLOR[STAGE]\[\e[0m\]"
 	;;
 	si)
-		TXT_COLOR="$(tput setaf 3)"
-		ENVPROMPT="$TXT_COLOR[SI]"
+		TXT_COLOR="\[\e[1;36m\]"
+		ENVPROMPT="$TXT_COLOR[SI]\[\e[0m\]"
 	;;
 	pt)
-		TXT_COLOR="$(tput setaf 3)"
-		ENVPROMPT="$TXT_COLOR[PERF]"
+		TXT_COLOR="\[\e[1;32m\]"
+		ENVPROMPT="$TXT_COLOR[PERF]\[\e[0m\]"
 	;;
 	*)
 		unset ENVDESIGNATOR
