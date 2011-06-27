@@ -197,7 +197,7 @@ function portcheck { (exec 3<>/dev/tcp/$1/$2) &>/dev/null; OPEN=$?; [ $OPEN -eq 
 function dshload { unset HOSTLIST; INT=0; for HOST in `cat $1 | awk '{if ($2) { printf($2) } else { printf($1) } print "\n" }' | sort | uniq`; do HOSTLIST[$INT]=$HOST; INT=`expr $INT + 1`; done; }
 function dshlist { for HOST in ${HOSTLIST[*]}; do echo $HOST; done ;}
 function dsh { HOSTMASK=$1; DATETIME=`date '+%D %T'`; shift 1; for HOST in `dshlist | grep $HOSTMASK`; do (ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no -x $HOST "$@" | xargs -n 500 echo $DATETIME $HOST: >> /tmp/dsh.log )& done; ACTIVE=1; until [[ $ACTIVE = 0 ]]; do jobs -l > /dev/null; ACTIVE=`jobs -p | wc -l`; printf "\r%s active jobs" $ACTIVE; done; }
-function bashup { portcheck localhost 18080 > /dev/null && export curlopts='--socks5 localhost:18080'; curl $curlopts https://raw.github.com/fredsmith/dotfiles/master/bashrc > .bashrc; source .bashrc; }
+function bashup { portcheck localhost 18080 > /dev/null && export curlopts='--socks5 localhost:18080'; curl $curlopts --progress-bar https://raw.github.com/fredsmith/dotfiles/master/bashrc > .bashrc; source .bashrc; }
 
 # this has to go after delcaration of portcheck
 
