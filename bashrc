@@ -76,8 +76,12 @@ fi
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
 export HISTCONTROL=ignoreboth
-export HISTFILESIZE=1000000000
-export HISTSIZE=1000000
+#export HISTFILESIZE=1000000000
+#export HISTSIZE=1000000
+unset HISTFILESIZE
+export HISTFILESIZE
+unset HISTSIZE
+export HISTSIZE
 # append to the history file without overwriting, and write history out after every command execution
 export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S - '
 shopt -s histappend
