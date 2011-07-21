@@ -205,6 +205,8 @@ function dshlist { for HOST in ${HOSTLIST[*]}; do echo $HOST; done ;}
 function dsh { HOSTMASK=$1; DATETIME=`date '+%D %T'`; shift 1; for HOST in `dshlist | grep $HOSTMASK`; do (ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no -x $HOST "$@" | xargs -n 500 echo $DATETIME $HOST: >> /tmp/dsh.log )& done; ACTIVE=1; until [[ $ACTIVE = 0 ]]; do jobs -l > /dev/null; ACTIVE=`jobs -p | wc -l`; printf "\r%s active jobs" $ACTIVE; done; }
 function bashup { portcheck localhost 18080 > /dev/null && export curlopts='--socks5 localhost:18080'; curl $curlopts --progress-bar https://raw.github.com/fredsmith/dotfiles/master/bashrc > .bashrc; source .bashrc; }
 
+function makeenv { ssh $1 "mkdir ~/.ssh; ssh-add -L >> ~/.ssh/authorized_keys; chmod -R go-rwx ~/.ssh"; scp .bashrc $1:; }
+
 # this has to go after delcaration of portcheck
 
 if portcheck localhost 18080 > /dev/null; then
