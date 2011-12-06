@@ -3,6 +3,9 @@
 export FULLNAME="Fred Smith"
 export EMAIL="fred.smith@fredsmith.org"
 
+shopt -s autocd
+
+
 #Redhat specific
 if which rpm &> /dev/null; then
 	if [ "$LOGNAME" = "root" ]; then
