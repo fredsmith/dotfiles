@@ -3,25 +3,40 @@
 export FULLNAME="Fred Smith"
 export EMAIL="fred.smith@fredsmith.org"
 
+
+
+# bash modules
+
 shopt -s autocd
+shopt -s checkwinsize
 
 
 #Redhat specific
 if which rpm &> /dev/null; then
 	if [ "$LOGNAME" = "root" ]; then
 		alias yum='yum -y'
+		alias apt-get='yum -y'
 	else
 
 		alias yum='sudo yum -y'
+		alias apt-get='sudo yum -y'
 	fi
 	alias listfiles='rpm -q --filesbypkg'
 fi
 
 #debian specific
 if which dpkg &> /dev/null; then
-	alias yum=aptitude
+	if [ "$LOGNAME" = "root" ]; then
+		alias yum='aptitude'
+		alias apt-get='aptitude'
+	else
+
+		alias yum='sudo aptitude'
+		alias apt-get='sudo aptitude'
+	fi
 	alias listfiles='dpkg --listfiles'
 fi
+
 export PROMPTCHAR="#"
 # cross-distro, if not root
 if ! [ "$LOGNAME" = "root" ]; then
@@ -31,6 +46,10 @@ if ! [ "$LOGNAME" = "root" ]; then
 		alias root="sudo -i"
 	fi
 fi
+
+# bash completion for service
+complete -W "$(ls /etc/init.d/)" service
+complete -W "$(cat ~/.ssh/config | grep "Host \w" | cut -f 2 -d ' ')" ssh
 
 # Get FQDN somehow
 HOSTNAMEVER=$(hostname --version 2>&1 | grep hostname | cut -f 2 -d ' ' | cut -f 1 -d '.' | head -n 1)
@@ -96,7 +115,6 @@ export PS1="\[\e]0;\u@\h: \w\a\]\[\033[36m\][\t] \[\033[1;33m\]\u\[\033[0m\]@\h$
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 
-shopt -s checkwinsize
 ADDNEWLINE=false
 
 # Configure git
@@ -198,12 +216,12 @@ alias tm='tmux attach'
 
 alias decode='tr "A-Z" "a-z" | tr "a-d" "W-Z" | tr "e-z" "a-v" | tr "A-Z" "a-z"'
 alias encode='tr "A-Z" "a-z" | tr "w-z" "A-D" | tr "a-v" "e-z" | tr "A-Z" "a-z"'
-alias synergy='killall synergys; synergys; ssh -R 24800:localhost:24800 bsdhcp158179.americas.nokia.com "killall synergyc; synergyc -f -d ERROR localhost"'
 # functions
 
 function sshclear { if [ $1 -gt "0" ]; then REGEXP="${1}d"; sed -i".bak" $REGEXP ~/.ssh/known_hosts; fi }
 function http { (exec 3<>/dev/tcp/$1/$2; echo -e "$3 $4 HTTP/1.0\r\n\r\n" >&3; cat <&3); }
 function portcheck { (exec 3<>/dev/tcp/$1/$2) &>/dev/null; OPEN=$?; [ $OPEN -eq 0 ] && echo "open" || echo "closed"; return $OPEN; }
+function portscan { HOST=$1; STARTPORT=$(echo $2 | cut -f 1 -d '-'); ENDPORT=$(echo $2 | cut -f 2 -d '-'); for PORT in `seq $STARTPORT $ENDPORT`; do portcheck $HOST $PORT > /dev/null && echo $PORT; done }
 function dshload { unset HOSTLIST; INT=0; for HOST in `cat $1 | awk '{if ($2) { printf($2) } else { printf($1) } print "\n" }' | sort | uniq`; do HOSTLIST[$INT]=$HOST; INT=`expr $INT + 1`; done; }
 function dshlist { for HOST in ${HOSTLIST[*]}; do echo $HOST; done ;}
 function dsh { HOSTMASK=$1; DATETIME=`date '+%D %T'`; shift 1; for HOST in `dshlist | grep $HOSTMASK`; do (ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no -x $HOST "$@" | xargs -n 500 echo $DATETIME $HOST: >> /tmp/dsh.log )& done; ACTIVE=1; until [[ $ACTIVE = 0 ]]; do jobs -l > /dev/null; ACTIVE=`jobs -p | wc -l`; printf "\r%s active jobs" $ACTIVE; done; }
