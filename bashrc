@@ -191,6 +191,7 @@ fi
 
 alias add='/usr/bin/ssh-add -t 18000 ~/.ssh/*.*sa'
 alias lock='/usr/bin/ssh-add -D'
+alias list='/usr/bin/ssh-add -l'
 alias ll='ls -l'
 alias la='ls -a'
 alias xi='ssh xicada'
