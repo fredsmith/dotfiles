@@ -189,7 +189,7 @@ else
 	alias grep='grep --color=auto'
 fi
 
-alias add='/usr/bin/ssh-add -t 18000 ~/.ssh/key.rsa'
+alias add='/usr/bin/ssh-add -t 18000 ~/.ssh/*.*sa'
 alias lock='/usr/bin/ssh-add -D'
 alias ll='ls -l'
 alias la='ls -a'
@@ -217,6 +217,7 @@ alias tm='tmux attach'
 alias decode='tr "A-Z" "a-z" | tr "a-d" "W-Z" | tr "e-z" "a-v" | tr "A-Z" "a-z"'
 alias encode='tr "A-Z" "a-z" | tr "w-z" "A-D" | tr "a-v" "e-z" | tr "A-Z" "a-z"'
 # functions
+
 
 function sshclear { if [ $1 -gt "0" ]; then REGEXP="${1}d"; sed -i".bak" $REGEXP ~/.ssh/known_hosts; fi }
 function http { (exec 3<>/dev/tcp/$1/$2; echo -e "$3 $4 HTTP/1.0\r\n\r\n" >&3; cat <&3); }
