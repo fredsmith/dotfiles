@@ -255,13 +255,7 @@ function makeenv {
 # this has to go after delcaration of portcheck
 
 if portcheck localhost 18080 > /dev/null; then
-	#share the love
 	sshopts="$sshopts -R 18080:localhost:18080"
-fi
-
-if portcheck svni1.isource-nokia.nokia.com 443 > /dev/null; then
-	#share the love
-	sshopts="$sshopts -R 9443:svni1.isource-nokia.nokia.com:443"
 fi
 
 alias ssh="ssh $sshopts"
