@@ -107,7 +107,7 @@ export HISTSIZE
 # append to the history file without overwriting, and write history out after every command execution
 export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S - '
 shopt -s histappend
-export PROMPT_COMMAND="history -a;history -n"
+export PROMPT_COMMAND="history -a"
 
 # set pretty prompt
 export PS1="\[\e]0;\u@\h: \w\a\]\[\033[36m\][\t] \[\033[1;33m\]\u\[\033[0m\]@\h$ENVPROMPT\[\033[36m\][\w]$PROMPTCHAR\[\033[0m\] "
