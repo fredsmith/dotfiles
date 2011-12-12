@@ -128,20 +128,6 @@ if [ ! -f ~/.gitconfig ]; then
 	fi
 fi
 
-# Configure screen
-if [ ! -f ~/.screenrc ]; then
-	echo -en "\033[36m[Screen]\033[0m";
-	ADDNEWLINE=true
-	echo "hardstatus alwayslastline \"%?%{yk}%-Lw%?%{wb}%n*%f %t%?(%u)%?%?%{yk}%+Lw%?\"
-hardstatus ignore" > ~/.screenrc
-fi
-
-# Configure vim
-if [ ! -f ~/.vimrc ]; then
-	echo -en "\033[36m[Vim]\033[0m";
-	ADDNEWLINE=true
-	echo "syntax on" > ~/.vimrc
-fi
 
 if ! which vim &> /dev/null; then
 	alias vim=vi
