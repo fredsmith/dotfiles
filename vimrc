@@ -7,7 +7,7 @@ set showcmd                     " display incomplete commands
 filetype plugin indent on       " load file type plugins + indentation
 
 "" Whitespace
-set nowrap                      " don't wrap lines
+"set nowrap                      " don't wrap lines
 set tabstop=3 shiftwidth=3      " a tab is two spaces (change this to your linking)
 set ai
 set expandtab                   " use spaces, not tabs (remove this if you mostly use tabs)
