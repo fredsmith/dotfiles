@@ -245,8 +245,16 @@ function dload {
 }
 
 function bashup {
-	dload https://raw.github.com/fredsmith/dotfiles/master/bashrc ~/.bashrc 
-	source ~/.bashrc; 
+
+	dload https://raw.github.com/fredsmith/dotfiles/master/md5s ~/.md5s &&
+	md5sum --quiet -c ~/.md5s | grep FAILED | sed -e 's/:.*//' -e 's/^\.//' | 
+	while read FILE; do 
+		echo $FILE; 
+		dload https://raw.github.com/fredsmith/dotfiles/master/$FILE ~/.$FILE
+		if [ "$FILE" = "bashrc" ]; then
+			source ~/.bashrc; 
+		fi
+	done
 }
 
 function makeenv { 
