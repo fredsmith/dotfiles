@@ -246,7 +246,7 @@ function dload {
 
 function bashup {
 
-	cd
+	pushd ~ > /dev/null
 	dload https://raw.github.com/fredsmith/dotfiles/master/md5s ~/.md5s &&
 	md5sum --quiet -c ~/.md5s | grep FAILED | sed -e 's/:.*//' -e 's/^\.//' | 
 	while read FILE; do 
@@ -256,6 +256,7 @@ function bashup {
 			source ~/.bashrc; 
 		fi
 	done
+	popd > /dev/null
 }
 
 function makeenv { 
