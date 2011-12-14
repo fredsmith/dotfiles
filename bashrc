@@ -107,7 +107,7 @@ export HISTSIZE
 # append to the history file without overwriting, and write history out after every command execution
 export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S - '
 shopt -s histappend
-function post_history { LAST_COMMAND=$(history 1 | sed -e 's/^ *[0-9]* *[0-9]*-[0-9]*-[0-9]* *[0-9]*:[0-9]*:[0-9]* *- *//g'); curl -d hostname="$HOSTNAME" -d command="$LAST_COMMAND" http://derf.us/history/index.php; } 
+function post_history { LAST_COMMAND=$(history 1 | sed -e 's/^ *[0-9]* *[0-9]*-[0-9]*-[0-9]* *[0-9]*:[0-9]*:[0-9]* *- *//g'); curl -d hostname="$HOSTNAME" -d command="$LAST_COMMAND" http://derf.us/history/; } 
 export PROMPT_COMMAND='post_history; history -a'
 
 # set pretty prompt
