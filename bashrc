@@ -236,7 +236,7 @@ function bashup {
 
 	pushd ~ > /dev/null
 	dload https://raw.github.com/fredsmith/dotfiles/master/md5s ~/.md5s &&
-	md5sum --quiet -c ~/.md5s | grep FAILED | sed -e 's/:.*//' -e 's/^\.//' | 
+	md5sum  -c ~/.md5s | grep FAILED | sed -e 's/:.*//' -e 's/^\.//' | 
 	while read FILE; do 
 		echo $FILE; 
 		dload https://raw.github.com/fredsmith/dotfiles/master/$FILE ~/.$FILE
