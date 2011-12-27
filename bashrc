@@ -7,8 +7,8 @@ export EMAIL="fred.smith@fredsmith.org"
 
 # bash modules
 
-shopt -s autocd
-shopt -s checkwinsize
+shopt -s autocd &> /dev/null
+shopt -s checkwinsize &> /dev/null
 
 #Import functions
 . .bashrc-funcs
