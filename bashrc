@@ -50,8 +50,13 @@ if ! [ "$LOGNAME" = "root" ]; then
 fi
 
 # bash completion for service
-complete -W "$(ls /etc/init.d/)" service
-complete -W "$(cat ~/.ssh/config | grep "Host \w" | cut -f 2 -d ' ')" ssh
+if [ -d /etc/init.d/ ]; then
+   complete -W "$(ls /etc/init.d/)" service
+fi
+# bash completion for ssh config
+if [ -f ~/.ssh/config ]; then
+   complete -W "$(cat ~/.ssh/config | grep "Host \w" | cut -f 2 -d ' ')" ssh
+fi
 
 # Get FQDN somehow
 HOSTNAMEVER=$(hostname --version 2>&1 | grep hostname | cut -f 2 -d ' ' | cut -f 1 -d '.' | head -n 1)
