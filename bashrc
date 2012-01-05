@@ -184,7 +184,7 @@ alias list='/usr/bin/ssh-add -l'
 alias ll='ls -l'
 alias la='ls -a'
 alias xi='ssh xicada'
-alias ssudo='ssh -o StrictHostKeyChecking=no root@$HOSTNAME'
+alias ssudo='alias sudo=ssudo; ssh -o StrictHostKeyChecking=no root@$HOSTNAME'
 
 #git
 
