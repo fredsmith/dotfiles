@@ -12,7 +12,7 @@ set tabstop=3 shiftwidth=3
 set ai
 set expandtab                   
 set backspace=indent,eol,start  
-
+nnoremap <F8> :setl noai nocin nosi inde=<CR>
 
 set hlsearch                    
 set incsearch                   
