@@ -188,7 +188,9 @@ alias ssudo='alias sudo=ssudo; ssh -o StrictHostKeyChecking=no root@$HOSTNAME'
 
 #todo.txt
 
+export TODOTXT_DEFAULT_ACTION=ls
 alias t='~/bin/todo.sh -d ~/Documents/todo.cfg'
+
 
 
 
