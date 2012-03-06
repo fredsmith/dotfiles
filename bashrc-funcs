@@ -46,3 +46,10 @@ function makeenv {
 	ssh -o StrictHostKeyChecking=no $1 "mkdir ~/.ssh; ssh-add -L >> ~/.ssh/authorized_keys; chmod -R go-rwx ~/.ssh"; # pushing everything in ssh-agent to authorized-keys seems insecure, but I like the simplicity of it.   
 	scp .bashrc $1:; 
 }
+
+function getdropbox {
+   cd ~ && wget -O - http://www.dropbox.com/download?plat=lnx.x86_64 | tar xzf -
+   curl -o dropbox http://linux.dropbox.com/packages/dropbox.py
+   chmod +x dropbox
+   ~/.dropbox-dist/dropboxd&
+}
