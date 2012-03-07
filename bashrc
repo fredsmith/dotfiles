@@ -192,7 +192,10 @@ export TODOTXT_DEFAULT_ACTION=pv
 alias t='~/bin/todo.sh -d ~/Documents/Notes/todo.cfg'
 
 
+#gpg
 
+alias gpge='gpg --encrypt'
+alias gpgd='gpg --decrypt'
 
 
 #git
