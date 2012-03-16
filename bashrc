@@ -178,13 +178,17 @@ else
 	alias grep='grep --color=auto'
 fi
 
+#ssh stuff
 alias add='/usr/bin/ssh-add -t 18000 ~/.ssh/*.*sa'
 alias lock='/usr/bin/ssh-add -D'
 alias list='/usr/bin/ssh-add -l'
-alias ll='ls -l'
-alias la='ls -a'
 alias xi='ssh xicada'
 alias ssudo='alias sudo=ssudo; ssh -o StrictHostKeyChecking=no root@$HOSTNAME'
+
+#file management
+alias ll='ls -l'
+alias la='ls -a'
+
 
 #todo.txt
 
@@ -214,12 +218,23 @@ alias grr='git remote rm'
 alias gpu='git pull'
 alias gcl='git clone'
 
+#window managers
 alias screenrd='screen -rd'
 alias tm='tmux attach'
 
+
+#cipher
 alias decode='tr "A-Z" "a-z" | tr "a-d" "W-Z" | tr "e-z" "a-v" | tr "A-Z" "a-z"'
 alias encode='tr "A-Z" "a-z" | tr "w-z" "A-D" | tr "a-v" "e-z" | tr "A-Z" "a-z"'
 
+#web
+
+alias hackurl='elinks http://hackurls.com/'
+
+function google {
+   TERMS=$(echo $* | tr ' ' '+');
+   elinks "https://www.google.com/search?q=$TERMS"
+}
 
 
 
