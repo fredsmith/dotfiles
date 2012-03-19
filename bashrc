@@ -186,6 +186,7 @@ alias xi='ssh xicada'
 alias ssudo='alias sudo=ssudo; ssh -o StrictHostKeyChecking=no root@$HOSTNAME'
 
 #file management
+alias ls='ls --color=auto -p'
 alias ll='ls -l'
 alias la='ls -a'
 

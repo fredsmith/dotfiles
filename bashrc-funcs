@@ -3,6 +3,8 @@
 function post_history { LAST_COMMAND=$(history 1 | sed -e 's/^ *[0-9]* *[0-9]*-[0-9]*-[0-9]* *[0-9]*:[0-9]*:[0-9]* *- *//g'); curl -d hostname="$HOSTNAME" -d command="$LAST_COMMAND" http://derf.us/history/; } 
 function get_history {  echo -n "enter password: "; read -s HISTPASS; history -c; rm ~/.bash_history; curl -s http://derf.us/history/download.php?passwd=$HISTPASS > ~/.bash_history; history -r; }
 
+function rehash { pushd ~; . .bashrc; popd; }
+
 function sshclear { if [ $1 -gt "0" ]; then REGEXP="${1}d"; sed -i".bak" $REGEXP ~/.ssh/known_hosts; fi }
 function http { (exec 3<>/dev/tcp/$1/$2; echo -e "$3 $4 HTTP/1.0\r\n\r\n" >&3; cat <&3); }
 function portcheck { (exec 3<>/dev/tcp/$1/$2) &>/dev/null; OPEN=$?; [ $OPEN -eq 0 ] && echo "open" || echo "closed"; return $OPEN; }
