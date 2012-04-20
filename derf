@@ -1,0 +1,5 @@
+#! /bin/bash
+
+. /net/yum/admin/work/fred/bashrc-funcs
+. /net/yum/admin/work/fred/bashrc
+
