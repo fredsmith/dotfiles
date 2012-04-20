@@ -3,6 +3,7 @@
 export FULLNAME="Fred Smith"
 export EMAIL="fred.smith@fredsmith.org"
 
+CONFIGDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 
 # bash modules
@@ -11,7 +12,13 @@ shopt -s autocd &> /dev/null
 shopt -s checkwinsize &> /dev/null
 
 #Import functions
-. .bashrc-funcs
+if [ -f $CONFIGDIR/.bashrc-funcs ]; then
+   . $CONFIGDIR/.bashrc-funcs
+fi
+if [ -f $CONFIGDIR/bashrc-funcs ]; then
+   . $CONFIGDIR/bashrc-funcs
+fi
+
 
 #Redhat specific
 if which rpm &> /dev/null; then
@@ -93,7 +100,6 @@ case "$ENVDESIGNATOR" in
 esac
 
 # environment
-export EDITOR=vim
 export PATH=~/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/libexec/git-core
 export TZ=US/Eastern
 
@@ -120,7 +126,14 @@ export PS1="\[\e]0;\u@\h: \w\a\]\[\033[36m\][\t] \[\033[1;33m\]\u\[\033[0m\]@\h$
 
 ADDNEWLINE=false
 
-
+# VIM
+export EDITOR=vim
+if [ -f $CONFIGDIR/.vimrc ]; then
+   alias vim="vim -u $CONFIGDIR/.vimrc"
+fi
+if [ -f $CONFIGDIR/vimrc ]; then
+   alias vim="vim -u $CONFIGDIR/vimrc"
+fi
 if ! which vim &> /dev/null; then
 	alias vim=vi
 fi
@@ -147,6 +160,17 @@ alias xi='ssh xicada'
 alias ssudo='alias sudo=ssudo; ssh -o StrictHostKeyChecking=no root@$HOSTNAME'
 function grid { ssh grid-$1.grid; }
 function ibm { ssh ibm-$1.grid; }
+
+#tmux 
+if [ -f $CONFIGDIR/.tmux.conf ]; then
+   alias tmux="tmux -f $CONFIGDIR/.tmux.conf"
+fi
+if [ -f $CONFIGDIR/tmux.conf ]; then
+   alias tmux="tmux -f $CONFIGDIR/tmux.conf"
+fi
+alias tm='tmux attach'
+
+
 
 
 #file management
@@ -183,9 +207,15 @@ alias grr='git remote rm'
 alias gpu='git pull'
 alias gcl='git clone'
 
-#window managers
+#screen
+if [ -f $CONFIGDIR/.screenrc ]; then
+   alias screen="screen -c $CONFIGDIR/.screenrc"
+fi
+if [ -f $CONFIGDIR/screenrc ]; then
+   alias screen="screen -c $CONFIGDIR/screenrc"
+fi
 alias screenrd='screen -rd'
-alias tm='tmux attach'
+
 
 
 #cipher
