@@ -120,17 +120,6 @@ export PS1="\[\e]0;\u@\h: \w\a\]\[\033[36m\][\t] \[\033[1;33m\]\u\[\033[0m\]@\h$
 
 ADDNEWLINE=false
 
-# Configure git
-if [ ! -f ~/.gitconfig ]; then
-	if which git &> /dev/null; then
-		echo -en "\033[36m[Git]\033[0m";
-		echo "[user]
-	name = $FULLNAME
-	email = $EMAIL" >> ~/.gitconfig
-		ADDNEWLINE=true
-	fi
-fi
-
 
 if ! which vim &> /dev/null; then
 	alias vim=vi
@@ -141,35 +130,7 @@ if which keychain &> /dev/null; then
 	eval `keychain --inherit any --agents ssh --quick --quiet --eval`
 fi
 
-if [ ! -d ~/.ssh ]; then
-	echo -en "\033[36m[~/.ssh]\033[0m";
-	ADDNEWLINE=true
-	mkdir ~/.ssh/;
-	chmod -R go-rwx ~/.ssh/;
-fi
 
-if [ ! -f ~/.ssh/authorized_keys ]; then
-	touch ~/.ssh/authorized_keys;
-fi
-
-if ! grep derf@derf.us ~/.ssh/authorized_keys > /dev/null; then
-	echo -en "\033[36m[~/.ssh/authorized_keys]\033[0m";
-	ADDNEWLINE=true
-	echo "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAxKz0Pa5oPXs26d4nf0BgP4c8HZR7MlJDBonktUQZcL0oJFBIgMHxtG5qvlnuP1wN+4fG3+ksTFvqDErPYUTcWNdQ230MtkH7hEX1CYMHVck8/ohooe5pd7+V/Xxqa3HxrfwPHPuP4sfwkVHYswYS+dx6P787O9IGkrh/Lw91eM5E04ub0+irDJJDuGXrjvZ6VC3rOUoZ5SB6mafwKsJGGLoyY4Gks5rFqTpZDervwxM18TKIPgqD43+GQce4wzLRYIa60yMMHpK4THOaet4HMPlr+Immt/OM71/ZubaPxG13XOq7t5JjKuejsJlo0cO4ycbFsy78dRcCOSnStHFQpw== derf@derf.us" >> ~/.ssh/authorized_keys
-	chmod -R go-rwx ~/.ssh/;
-fi
-
-
-if [ ! -f ~/.ssh/config ]; then
-	echo -en "\033[36m[~/.ssh/config]\033[0m";
-	ADDNEWLINE=true
-	echo "Host *
-ForwardAgent yes
-ServerAliveInterval 120" > ~/.ssh/config
-	chmod -R go-rwx ~/.ssh/;
-fi
-
-$ADDNEWLINE && echo
 
 # Aliases
 if [ -f /usr/bin/gnu/grep ]; then
@@ -184,6 +145,9 @@ alias lock='/usr/bin/ssh-add -D'
 alias list='/usr/bin/ssh-add -l'
 alias xi='ssh xicada'
 alias ssudo='alias sudo=ssudo; ssh -o StrictHostKeyChecking=no root@$HOSTNAME'
+function grid { ssh grid-$1.grid; }
+function ibm { ssh ibm-$1.grid; }
+
 
 #file management
 alias ls='ls --color=auto -p'
