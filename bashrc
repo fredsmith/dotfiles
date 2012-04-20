@@ -65,39 +65,6 @@ if [ -f ~/.ssh/config ]; then
    complete -W "$(cat ~/.ssh/config | grep "Host \w" | cut -f 2 -d ' ')" ssh
 fi
 
-# Get FQDN somehow
-HOSTNAMEVER=$(hostname --version 2>&1 | grep hostname | cut -f 2 -d ' ' | cut -f 1 -d '.' | head -n 1)
-
-if [ $HOSTNAMEVER -gt 1 2>/dev/null ]; then
-	export FQDN=$(hostname -A)
-else
-	export FQDN=$(hostname -f)
-fi
-
-# Set up environment-specific markers
-ENVDESIGNATOR=$(echo $FQDN | cut -f 2 -d '.')
-case "$ENVDESIGNATOR" in
-
-	pr)
-		TXT_COLOR="\[\e[1;31m\]"
-		ENVPROMPT="$TXT_COLOR[PROD]\[\e[0m\]"
-	;;
-	st)
-		TXT_COLOR="\[\e[1;33m\]"
-		ENVPROMPT="$TXT_COLOR[STAGE]\[\e[0m\]"
-	;;
-	si)
-		TXT_COLOR="\[\e[1;36m\]"
-		ENVPROMPT="$TXT_COLOR[SI]\[\e[0m\]"
-	;;
-	pt)
-		TXT_COLOR="\[\e[1;32m\]"
-		ENVPROMPT="$TXT_COLOR[PERF]\[\e[0m\]"
-	;;
-	*)
-		unset ENVDESIGNATOR
-	;;
-esac
 
 # environment
 export PATH=~/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/libexec/git-core
@@ -120,11 +87,23 @@ export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S - '
 shopt -s histappend
 export PROMPT_COMMAND='post_history; history -a'
 
-# set pretty prompt
-export PS1="\[\e]0;\u@\h: \w\a\]\[\033[36m\][\t] \[\033[1;33m\]\u\[\033[0m\]@\h$ENVPROMPT\[\033[36m\][\w]$PROMPTCHAR\[\033[0m\] "
+# yellow prompt
+#export PS1="\[\e]0;\u@\h: \w\a\]\[\033[36m\][\t] \[\033[1;33m\]\u\[\033[0m\]@\h$ENVPROMPT\[\033[36m\][\w]$PROMPTCHAR\[\033[0m\] "
 
+# blue prompt
+function set_prompt {
 
-ADDNEWLINE=false
+   TODO="";
+   if which todo.sh &> /dev/null; then
+      TODO_COUNT=$(t ls | wc -l)
+      TODO_COUNT=$(($TODO_COUNT - 2));
+      TODO="-[\[\e[0;34m\]T:\[\033[1;33m\]$TODO_COUNT\[\e[1;34m\]]-"
+   fi
+   #running this after every command is pretty expensive.  cache it maybe?
+   PS1="\n\[\e[1;34m\]┌[\[\e[0;34m\]\u@\h\[\e[1;34m\]]$TODO[\[\e[0;34m\]\t \d\[\e[1;34m\]]\[\e[1;34m\]\n└[\[\e[0;34m\]\w\[\e[1;34m\]] ⚡ \[\e[0m\]"
+}
+export PROMPT_COMMAND="set_prompt; $PROMPT_COMMAND"
+
 
 # VIM
 export EDITOR=vim
