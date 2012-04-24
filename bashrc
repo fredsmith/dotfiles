@@ -6,11 +6,9 @@ export EMAIL="fred.smith@fredsmith.org"
 CONFIGDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # source system profile scripts
-if [ -f /etc/profile.d/*.sh ]; then
-   for PROFILEFILE in /etc/profile.d/*.sh; do
-      source $PROFILEFILE;
-   done
-fi
+for PROFILEFILE in /etc/profile.d/*.sh; do
+   source $PROFILEFILE;
+done >/dev/null 2>&1
 
 # bash modules
 
