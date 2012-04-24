@@ -95,9 +95,11 @@ function set_prompt {
 
    TODO="";
    if which todo.sh &> /dev/null; then
-      TODO_COUNT=$(t ls | wc -l)
-      TODO_COUNT=$(($TODO_COUNT - 2));
-      TODO="-[\[\e[0;34m\]T:\[\033[1;33m\]$TODO_COUNT\[\e[1;34m\]]-"
+      TODOWORK_COUNT=$(t ls @work | wc -l)
+      TODOWORK_COUNT=$(($TODOWORK_COUNT - 2));
+      #TODOHOME_COUNT=$(t ls @home | wc -l)
+      #TODOHOME_COUNT=$(($TODOHOME_COUNT - 2));
+      TODO="-[\[\e[0;34m\]T:\[\033[1;33m\]$TODOWORK_COUNT\[\e[1;34m\]]-"
    fi
    #running this after every command is pretty expensive.  cache it maybe?
    PS1="\n\[\e[1;34m\]┌[\[\e[0;34m\]\u@\h\[\e[1;34m\]]$TODO[\[\e[0;34m\]\t \d\[\e[1;34m\]]\[\e[1;34m\]\n└[\[\e[0;34m\]\w\[\e[1;34m\]] ⚡ \[\e[0m\]"
@@ -137,8 +139,8 @@ alias lock='/usr/bin/ssh-add -D'
 alias list='/usr/bin/ssh-add -l'
 alias xi='ssh xicada'
 alias ssudo='alias sudo=ssudo; ssh -o StrictHostKeyChecking=no root@$HOSTNAME'
-function grid { ssh grid-$1.grid; }
-function ibm { ssh ibm-$1.grid; }
+function grid { ssh -t grid-$1.grid "bash --rcfile /net/yum/admin/work/fred/bashrc"; }
+function ibm { ssh -t ibm-$1.grid "bash --rcfile /net/yum/admin/work/fred/bashrc"; }
 
 #tmux 
 if [ -f $CONFIGDIR/.tmux.conf ]; then
@@ -161,7 +163,9 @@ alias la='ls --color=auto -ak'
 #todo.txt
 
 export TODOTXT_DEFAULT_ACTION=pv
-alias t='~/bin/todo.sh -d ~/Documents/Notes/todo.cfg'
+export TODOTXT_AUTO_ARCHIVE=1
+export TODOTXT_CFG_FILE=~/Documents/Notes/todo.cfg
+alias t='~/bin/todo.sh'
 
 
 #gpg
