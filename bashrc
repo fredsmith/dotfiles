@@ -101,8 +101,18 @@ function set_prompt {
       #TODOHOME_COUNT=$(($TODOHOME_COUNT - 2));
       TODO="-[\[\e[0;34m\]T:\[\033[1;33m\]$TODOWORK_COUNT\[\e[1;34m\]]-"
    fi
+   GITPROMPT="";
+   GITSTATUS=$(git status --porcelain 2>&1)
+   if [[ $? -eq 0 ]]; then
+      GITPROMPT="-[\[\e[0;34m\]G:\[\033[1;32m\]✓\[\e[1;34m\]]-";
+      GITDIFF=$(echo $GITSTATUS | grep -v '^fatal' | grep -v '^$' | wc -l)
+      if [[ $GITDIFF -gt 0 ]]; then
+         GITPROMPT="-[\[\e[0;34m\]G:\[\033[1;31m\]✗ $GITDIFF\[\e[1;34m\]]-";
+      fi
+   fi
+
    #running this after every command is pretty expensive.  cache it maybe?
-   PS1="\n\[\e[1;34m\]┌[\[\e[0;34m\]\u@\h\[\e[1;34m\]]$TODO[\[\e[0;34m\]\t \d\[\e[1;34m\]]\[\e[1;34m\]\n└[\[\e[0;34m\]\w\[\e[1;34m\]] ⚡ \[\e[0m\]"
+   PS1="\n\[\e[1;34m\]┌[\[\e[0;34m\]\u@\h\[\e[1;34m\]]$TODO$GITPROMPT[\[\e[0;34m\]\t \d\[\e[1;34m\]]\[\e[1;34m\]\n└[\[\e[0;34m\]\w\[\e[1;34m\]] ⚡ \[\e[0m\]"
 }
 export PROMPT_COMMAND="set_prompt; $PROMPT_COMMAND"
 
