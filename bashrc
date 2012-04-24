@@ -5,6 +5,12 @@ export EMAIL="fred.smith@fredsmith.org"
 
 CONFIGDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# source system profile scripts
+if [ -f /etc/profile.d/*.sh ]; then
+   for PROFILEFILE in /etc/profile.d/*.sh; do
+      source $PROFILEFILE;
+   done
+fi
 
 # bash modules
 
@@ -67,7 +73,7 @@ fi
 
 
 # environment
-export PATH=$CONFIGDIR/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/libexec/git-core
+export PATH=$CONFIGDIR/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/libexec/git-core:/usr/lpp/mmfs/bin:/opt/SGE/bin/lx24-amd64
 export TZ=US/Eastern
 
 # source proxy information
