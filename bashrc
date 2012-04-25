@@ -189,7 +189,7 @@ alias gpgd='gpg --decrypt'
 
 
 #git
-[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
+[ -s "$CONFIGDIR/.scm_breeze/scm_breeze.sh" ] && source "$CONFIGDIR/.scm_breeze/scm_breeze.sh"
 
 #screen
 if [ -f $CONFIGDIR/.screenrc ]; then
