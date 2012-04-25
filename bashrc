@@ -122,15 +122,18 @@ export PROMPT_COMMAND="set_prompt; $PROMPT_COMMAND"
 
 
 # VIM
-export EDITOR=vim
 if [ -f $CONFIGDIR/.vimrc ]; then
    alias vim="vim -u $CONFIGDIR/.vimrc"
+   export EDITOR="vim -u $CONFIGDIR/.vimrc"
 fi
 if [ -f $CONFIGDIR/vimrc ]; then
    alias vim="vim -u $CONFIGDIR/vimrc"
+   export EDITOR="vim  -u $CONFIGDIR/vimrc"
+
 fi
 if ! which vim &> /dev/null; then
 	alias vim=vi
+   export EDITOR=vi
 fi
 
 # Configure ssh
