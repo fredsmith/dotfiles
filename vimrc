@@ -7,6 +7,8 @@ set showcmd
 filetype plugin indent on       
 
 set nu " Enable line numbers
+nmap <C-N><C-N> :set invnumber<CR>
+
 set ruler " Show the cursor position
 set tabstop=3 shiftwidth=3      
 set ai 
