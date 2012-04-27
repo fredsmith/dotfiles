@@ -116,7 +116,7 @@ function set_prompt {
    fi
 
    #running this after every command is pretty expensive.  cache it maybe?
-   PS1="\n\[\e[1;34m\]┌[\[\e[0;34m\]\u@\h\[\e[1;34m\]]$TODO$GITPROMPT[\[\e[0;34m\]\t \d\[\e[1;34m\]]\[\e[1;34m\]\n└[\[\e[0;34m\]\w\[\e[1;34m\]] ⚡ \[\e[0m\]"
+   PS1="\[\033[G\]\[\e[1;34m\]┌[\[\e[0;34m\]\u@\h\[\e[1;34m\]]$TODO$GITPROMPT[\[\e[0;34m\]\t \d\[\e[1;34m\]]\[\e[1;34m\]\n└[\[\e[0;34m\]\w\[\e[1;34m\]] ⚡ \[\e[0m\]"
 }
 export PROMPT_COMMAND="set_prompt; $PROMPT_COMMAND"
 
