@@ -181,8 +181,8 @@ alias la='ls --color=auto -ak'
 
 export TODOTXT_DEFAULT_ACTION=pv
 export TODOTXT_AUTO_ARCHIVE=1
-export TODOTXT_CFG_FILE=~/Documents/Notes/todo.cfg
-alias t='~/bin/todo.sh'
+export TODOTXT_CFG_FILE=$CONFIGDIR/Documents/Notes/todo.cfg
+alias t="$CONFIGDIR/bin/todo.sh"
 
 
 #gpg
