@@ -186,6 +186,10 @@ export TODOTXT_CFG_FILE=$CONFIGDIR/Documents/Notes/todo.cfg
 alias t="$CONFIGDIR/bin/todo.sh"
 alias today='t lsp A';
 alias tomorrow='t lsp B';
+function todo_edit {
+   source $TODOTXT_CFG_FILE;
+   $EDITOR $TODO_DIR/todo.txt
+}
 function todo_replace_all_priorities {
    t -p lsp $1 | grep -v '\-\-' | grep -v 'TODO' | print 1 | 
    while read TASK; do 
