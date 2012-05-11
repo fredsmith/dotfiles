@@ -99,11 +99,11 @@ function set_prompt {
 
    TODO="";
    if which todo.sh &> /dev/null; then
-      TODOWORK_COUNT=$(t ls @work | wc -l)
-      TODOWORK_COUNT=$(($TODOWORK_COUNT - 2));
-      #TODOHOME_COUNT=$(t ls @home | wc -l)
-      #TODOHOME_COUNT=$(($TODOHOME_COUNT - 2));
-      TODO="-[\[\e[0;34m\]T:\[\033[1;33m\]$TODOWORK_COUNT\[\e[1;34m\]]-"
+      TODOTODAYCOUNT=$(t lsp A | wc -l)
+      TODOTODAYCOUNT=$(($TODOTODAYCOUNT - 2));
+      TODOTOMORROWCOUNT=$(t lsp B | wc -l)
+      TODOTOMORROWCOUNT=$(($TODOTOMORROWCOUNT - 2));
+      TODO="-[\[\e[0;34m\]T:\[\033[1;33m\]$TODOTODAYCOUNT \033[1;32m\]$TODOTOMORROWCOUNT\[\e[1;34m\]]-"
    fi
    GITPROMPT="";
    GITSTATUS=$(git status --porcelain 2>&1)
@@ -119,7 +119,7 @@ function set_prompt {
    PS1="\[\033[G\]\[\e[1;34m\]┌[\[\e[0;34m\]\u@\h\[\e[1;34m\]]$TODO$GITPROMPT[\[\e[0;34m\]\t \d\[\e[1;34m\]]\[\e[1;34m\]\n└[\[\e[0;34m\]\w\[\e[1;34m\]] ⚡ \[\e[0m\]"
 }
 export PROMPT_COMMAND="set_prompt; $PROMPT_COMMAND"
-
+alias go_offline='unset PROMPT_COMMAND'
 
 # VIM
 if [ -f $CONFIGDIR/.vimrc ]; then
@@ -175,6 +175,7 @@ alias tm='tmux attach'
 alias ls='ls --color=auto -p'
 alias ll='ls --color=auto -alk'
 alias la='ls --color=auto -ak'
+alias lsb='lsb_release -a'
 
 
 #todo.txt
@@ -183,6 +184,20 @@ export TODOTXT_DEFAULT_ACTION=pv
 export TODOTXT_AUTO_ARCHIVE=1
 export TODOTXT_CFG_FILE=$CONFIGDIR/Documents/Notes/todo.cfg
 alias t="$CONFIGDIR/bin/todo.sh"
+alias today='t lsp A';
+alias tomorrow='t lsp B';
+function todo_replace_all_priorities {
+   t -p lsp $1 | grep -v '\-\-' | grep -v 'TODO' | print 1 | 
+   while read TASK; do 
+      t pri $TASK $2; 
+   done
+}
+function todo_done_with_today {
+   todo_replace_all_priorities B A
+   todo_replace_all_priorities C B
+   todo_replace_all_priorities D C
+   todo_replace_all_priorities E D
+}
 
 
 #gpg
