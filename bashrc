@@ -103,7 +103,7 @@ function set_prompt {
       TODOTODAYCOUNT=$(($TODOTODAYCOUNT - 2));
       TODOTOMORROWCOUNT=$(t lsp B | wc -l)
       TODOTOMORROWCOUNT=$(($TODOTOMORROWCOUNT - 2));
-      TODO="-[\[\e[0;34m\]T:\[\033[1;33m\]$TODOTODAYCOUNT \033[1;32m\]$TODOTOMORROWCOUNT\[\e[1;34m\]]-"
+      TODO="-[\[\e[0;34m\]T:\[\033[1;33m\]$TODOTODAYCOUNT\[\e[1;34m\]:\[\033[1;32m\]$TODOTOMORROWCOUNT\[\e[1;34m\]]-"
    fi
    GITPROMPT="";
    GITSTATUS=$(git status --porcelain 2>&1)
