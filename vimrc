@@ -4,7 +4,8 @@ syntax enable
 set encoding=utf-8
 
 set showcmd                     
-filetype plugin indent on       
+filetype off
+
 
 set nu " Enable line numbers
 nmap <C-N><C-N> :set invnumber<CR>
@@ -26,3 +27,13 @@ set smartcase
 
 set mouse=a " enable mouse in all modes
 set ttymouse=xterm  " set mouse type to xterm
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+Bundle 'scrooloose/nerdtree'
+
+filetype plugin indent on

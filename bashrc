@@ -4,6 +4,7 @@ export FULLNAME="Fred Smith"
 export EMAIL="fred.smith@fredsmith.org"
 
 CONFIGDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+export HOME=$CONFIGDIR
 
 # source system profile scripts
 for PROFILEFILE in /etc/profile.d/*.sh; do
