@@ -167,7 +167,11 @@ fi
 if [ -f $CONFIGDIR/tmux.conf ]; then
    alias tmux="tmux -f $CONFIGDIR/tmux.conf"
 fi
-alias tm='tmux attach'
+
+
+alias tnew="tmux new-window"
+alias tls="tmux ls"
+alias tm="tmux attach -t $*"
 
 
 
