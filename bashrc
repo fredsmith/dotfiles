@@ -158,6 +158,7 @@ alias list='/usr/bin/ssh-add -l'
 alias xi='ssh xicada'
 alias ssudo='alias sudo=ssudo; ssh -o StrictHostKeyChecking=no root@$HOSTNAME'
 function grid { ssh -t grid-$1.grid "bash --rcfile /net/yum/admin/work/fred/bashrc"; }
+function gpfs { ssh -t gpfs$1.grid "bash --rcfile /net/yum/admin/work/fred/bashrc"; }
 function ibm { ssh -t ibm-$1.grid "bash --rcfile /net/yum/admin/work/fred/bashrc"; }
 
 #tmux 
