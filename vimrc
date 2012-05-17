@@ -1,4 +1,4 @@
-set nocompatible
+set nocompatible   " Disable vi-compatibility
 colorscheme delek
 syntax enable
 set encoding=utf-8
@@ -39,6 +39,8 @@ Bundle 'gmarik/vundle'
 " Bundles
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-fugitive'
+Bundle 'Lokaltog/vim-powerline'
+
 filetype plugin indent on
 
 
@@ -54,3 +56,7 @@ let NERDTreeIgnore=['\.git','\.DS_Store','\.pdf', '.beam']
 
 " Toggle NERDTree with <leader>d
 map <silent> <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
+
+" Powerline
+set laststatus=2   " Always show the statusline
+set encoding=utf-8 " Necessary to show unicode glyphs
