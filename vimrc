@@ -1,5 +1,4 @@
 set nocompatible   " Disable vi-compatibility
-colorscheme delek
 syntax enable
 set encoding=utf-8
 
@@ -40,7 +39,7 @@ Bundle 'gmarik/vundle'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-powerline'
-
+Bundle 'nanotech/jellybeans.vim'
 filetype plugin indent on
 
 
@@ -60,3 +59,6 @@ map <silent> <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 " Powerline
 set laststatus=2   " Always show the statusline
 set encoding=utf-8 " Necessary to show unicode glyphs
+
+" Jellybeans
+colorscheme jellybeans
