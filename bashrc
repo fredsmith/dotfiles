@@ -192,6 +192,7 @@ export TODOTXT_CFG_FILE=$CONFIGDIR/Documents/Notes/todo.cfg
 alias t="$CONFIGDIR/bin/todo.sh"
 alias today='t lsp A';
 alias tomorrow='t lsp B';
+alias yesterday='t lsa | grep `date "+%Y-%m-%d" --date="yesterday"`'
 function todo_edit {
    source $TODOTXT_CFG_FILE;
    $EDITOR $TODO_DIR/todo.txt
