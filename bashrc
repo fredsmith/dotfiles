@@ -16,58 +16,11 @@ done >/dev/null 2>&1
 shopt -s autocd &> /dev/null
 shopt -s checkwinsize &> /dev/null
 
-#Import functions
-if [ -f $CONFIGDIR/.bashrc-funcs ]; then
-   . $CONFIGDIR/.bashrc-funcs
-fi
-if [ -f $CONFIGDIR/bashrc-funcs ]; then
-   . $CONFIGDIR/bashrc-funcs
-fi
-
-
-#Redhat specific
-if which rpm &> /dev/null; then
-	if [ "$LOGNAME" = "root" ]; then
-		alias yum='yum -y'
-		alias apt-get='yum -y'
-	else
-
-		alias yum='sudo yum -y'
-		alias apt-get='sudo yum -y'
-	fi
-	alias listfiles='rpm -q --filesbypkg'
-fi
-
-#debian specific
-if which dpkg &> /dev/null; then
-	if [ "$LOGNAME" = "root" ]; then
-		alias yum='aptitude'
-		alias apt-get='aptitude'
-	else
-
-		alias yum='sudo aptitude'
-		alias apt-get='sudo aptitude'
-	fi
-	alias listfiles='dpkg --listfiles'
-fi
-
-export PROMPTCHAR="#"
-# cross-distro, if not root
-if ! [ "$LOGNAME" = "root" ]; then
-	alias service='sudo service'
-	export PROMPTCHAR="$"
-	if ! which root &> /dev/null; then
-		alias root="sudo -i"
-	fi
-fi
-
-# bash completion for service
-if [ -d /etc/init.d/ ]; then
-   complete -W "$(ls /etc/init.d/)" service
-fi
-# bash completion for ssh config
-if [ -f ~/.ssh/config ]; then
-   complete -W "$(cat ~/.ssh/config | grep "Host \w" | cut -f 2 -d ' ')" ssh
+#Import ~/.bash modules
+if [ -d $CONFIGDIR/.bash ]; then
+   for BASHMODULE in  $CONFIGDIR/.bash/*; do
+      . $BASHMODULE;
+   done
 fi
 
 
@@ -75,182 +28,13 @@ fi
 export PATH=$CONFIGDIR/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/libexec/git-core:/usr/lpp/mmfs/bin:/opt/SGE/bin/lx24-amd64
 export TZ=US/Eastern
 
-# source proxy information
-if [ -f ~/.proxy ]; then
-	. ~/.proxy
-fi
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# ... or force ignoredups and ignorespace
-export HISTCONTROL=ignoreboth
-unset HISTFILESIZE
-export HISTFILESIZE
-unset HISTSIZE
-export HISTSIZE
-# append to the history file without overwriting, and write history out after every command execution
-export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S - '
-shopt -s histappend
-export PROMPT_COMMAND='post_history; history -a'
-
-# yellow prompt
-#export PS1="\[\e]0;\u@\h: \w\a\]\[\033[36m\][\t] \[\033[1;33m\]\u\[\033[0m\]@\h$ENVPROMPT\[\033[36m\][\w]$PROMPTCHAR\[\033[0m\] "
-
-# blue prompt
-function set_prompt {
-
-   TODO="";
-   if which todo.sh &> /dev/null; then
-      TODOTODAYCOUNT=$(t lsp A | wc -l)
-      TODOTODAYCOUNT=$(($TODOTODAYCOUNT - 2));
-      TODOTOMORROWCOUNT=$(t lsp B | wc -l)
-      TODOTOMORROWCOUNT=$(($TODOTOMORROWCOUNT - 2));
-      TODO="-[\[\e[0;34m\]T:\[\033[1;33m\]$TODOTODAYCOUNT\[\e[1;34m\]:\[\033[1;32m\]$TODOTOMORROWCOUNT\[\e[1;34m\]]-"
+# functions
+function rehash { 
+   if [ -f $CONFIGDIR/.bashrc ]; then
+      . $CONFIGDIR/.bashrc
    fi
-   GITPROMPT="";
-   GITSTATUS=$(git status --porcelain 2>&1)
-   if [[ $? -eq 0 ]]; then
-      GITPROMPT="-[\[\e[0;34m\]G:\[\033[1;32m\]✓\[\e[1;34m\]]-";
-      GITDIFF=$(echo $GITSTATUS | grep -v '^fatal' | grep -v '^$' | wc -l)
-      if [[ $GITDIFF -gt 0 ]]; then
-         GITPROMPT="-[\[\e[0;34m\]G:\[\033[1;31m\]✗ $GITDIFF\[\e[1;34m\]]-";
-      fi
+   if [ -f $CONFIGDIR/bashrc ]; then
+      . $CONFIGDIR/bashrc
    fi
-
-   #running this after every command is pretty expensive.  cache it maybe?
-   PS1="\[\033[G\]\[\e[1;34m\]┌[\[\e[0;34m\]\u@\h\[\e[1;34m\]]$TODO$GITPROMPT[\[\e[0;34m\]\t \d\[\e[1;34m\]]\[\e[1;34m\]\n└[\[\e[0;34m\]\w\[\e[1;34m\]] ⚡ \[\e[0m\]"
 }
-export PROMPT_COMMAND="set_prompt; $PROMPT_COMMAND"
-alias go_offline='unset PROMPT_COMMAND'
-
-# VIM
-if [ -f $CONFIGDIR/.vimrc ]; then
-   alias vim="vim -u $CONFIGDIR/.vimrc"
-   export EDITOR="vim -u $CONFIGDIR/.vimrc"
-fi
-if [ -f $CONFIGDIR/vimrc ]; then
-   alias vim="vim -u $CONFIGDIR/vimrc"
-   export EDITOR="vim  -u $CONFIGDIR/vimrc"
-
-fi
-if ! which vim &> /dev/null; then
-	alias vim=vi
-   export EDITOR=vi
-fi
-
-# Configure ssh
-if which keychain &> /dev/null; then
-	eval `keychain --inherit any --agents ssh --quick --quiet --eval`
-fi
-
-
-
-# Aliases
-if [ -f /usr/bin/gnu/grep ]; then
-	alias grep='/usr/bin/gnu/grep --color=auto'
-else
-	alias grep='grep --color=auto'
-fi
-
-#ssh stuff
-alias add='/usr/bin/ssh-add -t 18000 ~/.ssh/*.*sa'
-alias lock='/usr/bin/ssh-add -D'
-alias list='/usr/bin/ssh-add -l'
-alias xi='ssh xicada'
-alias ssudo='alias sudo=ssudo; ssh -o StrictHostKeyChecking=no root@$HOSTNAME'
-function grid { ssh -t grid-$1.grid "bash --rcfile /net/yum/admin/work/fred/bashrc"; }
-function gpfs { ssh -t gpfs$1.grid "bash --rcfile /net/yum/admin/work/fred/bashrc"; }
-function ibm { ssh -t ibm-$1.grid "bash --rcfile /net/yum/admin/work/fred/bashrc"; }
-
-#tmux 
-if [ -f $CONFIGDIR/.tmux.conf ]; then
-   alias tmux="tmux -f $CONFIGDIR/.tmux.conf"
-fi
-if [ -f $CONFIGDIR/tmux.conf ]; then
-   alias tmux="tmux -f $CONFIGDIR/tmux.conf"
-fi
-
-
-alias tnew="tmux new-window"
-alias tls="tmux ls"
-alias tm="tmux attach -t $*"
-
-
-
-
-#file management
-alias ls='ls --color=auto -p'
-alias ll='ls --color=auto -alk'
-alias la='ls --color=auto -ak'
-alias lsb='lsb_release -a'
-
-
-#todo.txt
-
-export TODOTXT_DEFAULT_ACTION=pv
-export TODOTXT_AUTO_ARCHIVE=1
-export TODOTXT_CFG_FILE=$CONFIGDIR/Documents/Notes/todo.cfg
-alias t="$CONFIGDIR/bin/todo.sh"
-alias today='t lsp A';
-alias tomorrow='t lsp B';
-alias yesterday='t lsa | grep `date "+%Y-%m-%d" --date="yesterday"`'
-function todo_edit {
-   source $TODOTXT_CFG_FILE;
-   $EDITOR $TODO_DIR/todo.txt
-}
-function todo_replace_all_priorities {
-   t -p lsp $1 | grep -v '\-\-' | grep -v 'TODO' | print 1 | 
-   while read TASK; do 
-      t pri $TASK $2; 
-   done
-}
-function todo_done_with_today {
-   todo_replace_all_priorities B A
-   todo_replace_all_priorities C B
-   todo_replace_all_priorities D C
-   todo_replace_all_priorities E D
-}
-
-
-#gpg
-
-alias gpge='gpg --encrypt'
-alias gpgd='gpg --decrypt'
-
-
-#git
-[ -s "$CONFIGDIR/.scm_breeze/scm_breeze.sh" ] && source "$CONFIGDIR/.scm_breeze/scm_breeze.sh"
-
-#screen
-if [ -f $CONFIGDIR/.screenrc ]; then
-   alias screen="screen -c $CONFIGDIR/.screenrc"
-fi
-if [ -f $CONFIGDIR/screenrc ]; then
-   alias screen="screen -c $CONFIGDIR/screenrc"
-fi
-alias screenrd='screen -rd'
-
-
-
-#cipher
-alias decode='tr "A-Z" "a-z" | tr "a-d" "W-Z" | tr "e-z" "a-v" | tr "A-Z" "a-z"'
-alias encode='tr "A-Z" "a-z" | tr "w-z" "A-D" | tr "a-v" "e-z" | tr "A-Z" "a-z"'
-
-#web
-
-alias hackurl='elinks http://hackurls.com/'
-
-function google {
-   TERMS=$(echo $* | tr ' ' '+');
-   elinks "https://www.google.com/search?q=$TERMS"
-}
-
-
-
-# this has to go after delcaration of portcheck
-
-if portcheck localhost 18080 > /dev/null; then
-	sshopts="$sshopts -R 18080:localhost:18080"
-fi
-
-alias ssh="ssh $sshopts"
-
