@@ -1,0 +1,28 @@
+#Redhat specific
+if which rpm &> /dev/null; then
+	if [ "$LOGNAME" = "root" ]; then
+		alias yum='yum -y'
+		alias apt-get='yum -y'
+	else
+
+		alias yum='sudo yum -y'
+		alias apt-get='sudo yum -y'
+	fi
+	alias listfiles='rpm -q --filesbypkg'
+fi
+
+#debian specific
+if which dpkg &> /dev/null; then
+	if [ "$LOGNAME" = "root" ]; then
+		alias yum='aptitude'
+		alias apt-get='aptitude'
+	else
+
+		alias yum='sudo aptitude'
+		alias apt-get='sudo aptitude'
+	fi
+	alias listfiles='dpkg --listfiles'
+fi
+
+alias lsb='lsb_release -a'
+

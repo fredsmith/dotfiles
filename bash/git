@@ -1,0 +1,17 @@
+function git_prompt {
+
+   GITPROMPT="";
+   GITSTATUS=$(git status --porcelain 2>&1)
+   if [[ $? -eq 0 ]]; then
+      GITPROMPT="-[\[\e[0;34m\]G:\[\033[1;32m\]✓\[\e[1;34m\]]-";
+      GITDIFF=$(echo $GITSTATUS | grep -v '^fatal' | grep -v '^$' | wc -l)
+      if [[ $GITDIFF -gt 0 ]]; then
+         GITPROMPT="-[\[\e[0;34m\]G:\[\033[1;31m\]✗ $GITDIFF\[\e[1;34m\]]-";
+      fi
+   fi
+   echo $GITPROMPT;
+}
+
+#scm_breeze
+[ -s "$CONFIGDIR/.scm_breeze/scm_breeze.sh" ] && source "$CONFIGDIR/.scm_breeze/scm_breeze.sh"
+

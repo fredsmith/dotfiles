@@ -1,0 +1,27 @@
+
+# auto-start keychain
+if which keychain &> /dev/null; then
+	eval `keychain --inherit any --agents ssh --quick --quiet --eval`
+fi
+
+
+# bash completion for ssh config
+if [ -f ~/.ssh/config ]; then
+   complete -W "$(cat ~/.ssh/config | grep "Host \w" | cut -f 2 -d ' ')" ssh
+fi
+
+
+# functions
+function sshclear { if [ $1 -gt "0" ]; then REGEXP="${1}d"; sed -i".bak" $REGEXP ~/.ssh/known_hosts; fi }
+
+#aliases
+
+#ssh agent
+alias add='/usr/bin/ssh-add -t 18000 ~/.ssh/*.*sa'
+alias lock='/usr/bin/ssh-add -D'
+alias list='/usr/bin/ssh-add -l'
+
+
+#host specific commands
+alias xi='ssh xicada'
+

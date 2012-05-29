@@ -1,0 +1,18 @@
+
+## super-prompt
+#
+
+# variables
+export PROMPT_COMMAND="set_prompt; $PROMPT_COMMAND"
+
+#functions
+
+function set_prompt {
+
+   TODO=$(todo_prompt)
+   
+   GITPROMPT=$(git_prompt);
+   #running this after every command is pretty expensive.  cache it maybe?
+   PS1="\[\033[G\]\[\e[1;34m\]┌[\[\e[0;34m\]\u@\h\[\e[1;34m\]]$TODO$GITPROMPT[\[\e[0;34m\]\t \d\[\e[1;34m\]]\[\e[1;34m\]\n└[\[\e[0;34m\]\w\[\e[1;34m\]] ⚡ \[\e[0m\]"
+}
+

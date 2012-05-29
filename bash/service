@@ -1,0 +1,10 @@
+# cross-distro, if not root
+if ! [ "$LOGNAME" = "root" ]; then
+	alias service='sudo service'
+fi
+
+# bash completion for service
+if [ -d /etc/init.d/ ]; then
+   complete -W "$(ls /etc/init.d/)" service
+fi
+

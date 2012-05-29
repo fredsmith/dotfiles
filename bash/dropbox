@@ -1,0 +1,8 @@
+
+function getdropbox {
+   cd ~ && wget -O - http://www.dropbox.com/download?plat=lnx.x86_64 | tar xzf -
+   curl -o dropbox http://linux.dropbox.com/packages/dropbox.py
+   chmod +x dropbox
+   ~/.dropbox-dist/dropboxd&
+}
+

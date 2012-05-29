@@ -1,0 +1,2 @@
+#sudo replacement
+alias ssudo='alias sudo=ssudo; ssh -o StrictHostKeyChecking=no root@$HOSTNAME'

@@ -1,0 +1,5 @@
+#gpg
+
+alias gpge='gpg --encrypt'
+alias gpgd='gpg --decrypt'
+

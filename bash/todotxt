@@ -1,0 +1,50 @@
+
+###todo.txt
+
+# variables
+export TODOTXT_DEFAULT_ACTION=pv
+export TODOTXT_AUTO_ARCHIVE=1
+export TODOTXT_CFG_FILE=$CONFIGDIR/Documents/Notes/todo.cfg
+
+# aliases 
+
+alias t="$CONFIGDIR/bin/todo.sh"
+alias today='t lsp A';
+alias tomorrow='t lsp B';
+alias yesterday='t lsa | grep `date "+%Y-%m-%d" --date="yesterday"`'
+
+
+## Functions
+# prompt
+function todo_prompt {
+
+   TODO="";
+   if which todo.sh &> /dev/null; then
+      TODOTODAYCOUNT=$(t lsp A | wc -l)
+      TODOTODAYCOUNT=$(($TODOTODAYCOUNT - 2));
+      TODOTOMORROWCOUNT=$(t lsp B | wc -l)
+      TODOTOMORROWCOUNT=$(($TODOTOMORROWCOUNT - 2));
+      TODO="-[\[\e[0;34m\]T:\[\033[1;33m\]$TODOTODAYCOUNT\[\e[1;34m\]:\[\033[1;32m\]$TODOTOMORROWCOUNT\[\e[1;34m\]]-"
+   fi
+  echo "$TODO";
+}
+
+
+function todo_edit {
+   source $TODOTXT_CFG_FILE;
+   $EDITOR $TODO_DIR/todo.txt
+}
+
+function todo_replace_all_priorities {
+   t -p lsp $1 | grep -v '\-\-' | grep -v 'TODO' | print 1 | 
+   while read TASK; do 
+      t pri $TASK $2; 
+   done
+}
+
+function todo_done_with_today {
+   todo_replace_all_priorities B A
+   todo_replace_all_priorities C B
+   todo_replace_all_priorities D C
+   todo_replace_all_priorities E D
+}
