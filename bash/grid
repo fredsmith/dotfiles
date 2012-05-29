@@ -2,4 +2,6 @@
 function grid { ssh -t grid-$1.grid "bash --rcfile /net/yum/admin/work/fred/bashrc"; }
 function gpfs { ssh -t gpfs$1.grid "bash --rcfile /net/yum/admin/work/fred/bashrc"; }
 function ibm { ssh -t ibm-$1.grid "bash --rcfile /net/yum/admin/work/fred/bashrc"; }
+function uk { ssh -t $1.uk.grid "bash --rcfile /net/yum/admin/work/fred/bashrc"; }
+
 
