@@ -36,6 +36,10 @@ if [ -d $CONFIGDIR/bash ]; then
    done
 fi
 
+#Secrets
+if [ -f $HOME/.secrets ]; then
+   source $HOME/.secrets;
+fi
 
 
 # functions
