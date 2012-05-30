@@ -1,5 +1,9 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
+
+# environment
+export PATH=~/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/libexec/git-core:/usr/lpp/mmfs/bin:/opt/SGE/bin/lx24-amd64
+export TZ=US/Eastern
 export FULLNAME="Fred Smith"
 export EMAIL="fred.smith@fredsmith.org"
 
@@ -32,10 +36,6 @@ if [ -d $CONFIGDIR/bash ]; then
    done
 fi
 
-
-# environment
-export PATH=~/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/libexec/git-core:/usr/lpp/mmfs/bin:/opt/SGE/bin/lx24-amd64
-export TZ=US/Eastern
 
 
 # functions
