@@ -1,12 +1,6 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# environment
-export PATH=~/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/libexec/git-core:/usr/lpp/mmfs/bin:/opt/SGE/bin/lx24-amd64
-export TZ=US/Eastern
-export FULLNAME="Fred Smith"
-export EMAIL="fred.smith@fredsmith.org"
-
 # set home to be wherever .bashrc is
 export HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -23,6 +17,12 @@ fi
 for PROFILEFILE in /etc/profile.d/*.sh; do
    source $PROFILEFILE;
 done >/dev/null 2>&1
+
+# environment
+export TZ=US/Eastern
+export FULLNAME="Fred Smith"
+export EMAIL="fred.smith@fredsmith.org"
+export PATH=~/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/libexec/git-core:/usr/lpp/mmfs/bin:/opt/SGE/bin/lx24-amd64
 
 # bash modules
 
