@@ -1,1 +1,3 @@
-Bashrc with components that configure ssh, vim, git, etc. for redhat, debian and maemo
+Fred Smith's ~/dotfiles directory.   
+
+Mostly a standard dotfiles directory, with some magic to automatically find home depending on where bashrc is located, as well as automatically setting config files for commands like tmux, vim, screen, etc without having to copy or link them out of ~/dotfiles.
