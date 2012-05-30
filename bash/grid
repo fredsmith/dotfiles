@@ -1,7 +1,19 @@
 
-function grid { ssh -t grid-$1.grid "bash --rcfile /net/yum/admin/work/fred/.bashrc"; }
-function gpfs { ssh -t gpfs$1.grid "bash --rcfile /net/yum/admin/work/fred/.bashrc"; }
-function ibm { ssh -t ibm-$1.grid "bash --rcfile /net/yum/admin/work/fred/.bashrc"; }
-function uk { ssh -t $1.uk.grid "bash --rcfile /net/yum/admin/work/fred/.bashrc"; }
+function gridssh { 
+   HOST=$1; 
+   shift;
+   if [ $# -gt 0 ]; then
+      ssh $HOST $@;
+   else
+      ssh -t $HOST "bash --rcfile /net/yum/admin/work/fred/.bashrc"; 
+   fi
+}
+
+
+
+function grid { HOST="grid-$1.grid"; shift; gridssh $HOST $@; }
+function gpfs { HOST="gpfs$1.grid"; shift; gridssh $HOST $@; }
+function ibm { HOST="ibm-$1.grid"; shift; gridssh $HOST $@; }
+function uk { HOST="$1.uk.grid"; shift; gridssh $HOST $@; }
 
 
