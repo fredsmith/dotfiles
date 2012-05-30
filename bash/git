@@ -11,6 +11,13 @@ function git_prompt {
    fi
    echo $GITPROMPT;
 }
+if which git &> /dev/null; then
+   export GIT_AUTHOR_NAME=$FULLNAME;
+   export GIT_AUTHOR_EMAIL=$EMAIL;
+   export GIT_COMMITTER_NAME=$FULLNAME;
+   export GIT_COMMITTER_EMAIL=$EMAIL;
+fi
+
 
 #scm_breeze
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
