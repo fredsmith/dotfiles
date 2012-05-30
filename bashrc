@@ -32,7 +32,7 @@ shopt -s checkwinsize &> /dev/null
 #Import ~/.bash modules
 if [ -d $CONFIGDIR/bash ]; then
    for BASHMODULE in  $CONFIGDIR/bash/*; do
-      . $BASHMODULE;
+      source $BASHMODULE;
    done
 fi
 
