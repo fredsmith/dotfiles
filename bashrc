@@ -22,6 +22,11 @@ if [ -d $CONFIGDIR/.bash ]; then
       . $BASHMODULE;
    done
 fi
+if [ -d $CONFIGDIR/bash ]; then
+   for BASHMODULE in  $CONFIGDIR/bash/*; do
+      . $BASHMODULE;
+   done
+fi
 
 
 # environment
