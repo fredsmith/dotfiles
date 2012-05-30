@@ -4,11 +4,11 @@
 # variables
 export TODOTXT_DEFAULT_ACTION=pv
 export TODOTXT_AUTO_ARCHIVE=1
-export TODOTXT_CFG_FILE=$CONFIGDIR/Documents/Notes/todo.cfg
+export TODOTXT_CFG_FILE=$HOME/Documents/Notes/todo.cfg
 
 # aliases 
 
-alias t="$CONFIGDIR/bin/todo.sh"
+alias t="$HOME/bin/todo.sh"
 alias yesterday='t lsa | grep `date "+%Y-%m-%d" --date="yesterday"`'
 
 

@@ -1,9 +1,6 @@
 #screen
-if [ -f $CONFIGDIR/.screenrc ]; then
-   alias screen="screen -c $CONFIGDIR/.screenrc"
-fi
-if [ -f $CONFIGDIR/screenrc ]; then
-   alias screen="screen -c $CONFIGDIR/screenrc"
+if [ -f $CONFIGDIR/screen/screenrc ]; then
+   alias screen="screen -c $CONFIGDIR/screen/screenrc"
 fi
 alias screenrd='screen -rd'
 

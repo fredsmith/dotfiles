@@ -3,8 +3,17 @@
 export FULLNAME="Fred Smith"
 export EMAIL="fred.smith@fredsmith.org"
 
-CONFIGDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-export HOME=$CONFIGDIR
+# set home to be wherever .bashrc is
+export HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# set configdir to be ~/[.]dotfiles
+export CONFIGDIR=$HOME;
+if [ -d $HOME/dotfiles ]; then
+   export CONFIGDIR="$HOME/dotfiles";
+else if [-d $HOME/.dotfiles ]; then
+   export CONFIGDIR="$HOME/.dotfiles";
+fi
+fi
 
 # source system profile scripts
 for PROFILEFILE in /etc/profile.d/*.sh; do
@@ -17,11 +26,6 @@ shopt -s autocd &> /dev/null
 shopt -s checkwinsize &> /dev/null
 
 #Import ~/.bash modules
-if [ -d $CONFIGDIR/.bash ]; then
-   for BASHMODULE in  $CONFIGDIR/.bash/*; do
-      . $BASHMODULE;
-   done
-fi
 if [ -d $CONFIGDIR/bash ]; then
    for BASHMODULE in  $CONFIGDIR/bash/*; do
       . $BASHMODULE;
@@ -30,7 +34,7 @@ fi
 
 
 # environment
-export PATH=$CONFIGDIR/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/libexec/git-core:/usr/lpp/mmfs/bin:/opt/SGE/bin/lx24-amd64
+export PATH=~/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/libexec/git-core:/usr/lpp/mmfs/bin:/opt/SGE/bin/lx24-amd64
 export TZ=US/Eastern
 
 
