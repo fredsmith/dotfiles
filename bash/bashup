@@ -14,24 +14,8 @@ function dload {
 }
 
 function bashup {
-   DIRPREFIX="~/."
-   if [ -f $CONFIGDIR/.bashrc ]; then
-      DIRPREFIX="$CONFIGDIR/."
-   fi
-   if [ -f $CONFIGDIR/bashrc ]; then
-      DIRPREFIX="$CONFIGDIR/"
-   fi
-
 	pushd $CONFIGDIR > /dev/null
-	dload https://raw.github.com/fredsmith/dotfiles/master/md5s $DIRPREFIX""md5s &&
-	md5sum  -c $DIRPREFIX""md5s | grep FAILED | sed -e 's/:.*//' -e 's/^\.//' | 
-	while read FILE; do 
-		echo $FILE; 
-		dload https://raw.github.com/fredsmith/dotfiles/master/$FILE $DIRPREFIX""$FILE
-		if [ "$FILE" = "bashrc" ]; then
-			source $DIRPREFIX""bashrc; 
-		fi
-	done
+   git pull
 	popd > /dev/null
 }
 
