@@ -40,10 +40,7 @@ export TZ=US/Eastern
 
 # functions
 function rehash { 
-   if [ -f $CONFIGDIR/.bashrc ]; then
-      . $CONFIGDIR/.bashrc
-   fi
-   if [ -f $CONFIGDIR/bashrc ]; then
-      . $CONFIGDIR/bashrc
+   if [ -f $HOME/.bashrc ]; then
+      . $HOME/.bashrc
    fi
 }
