@@ -1,3 +1,4 @@
+#! /bin/bash
 
 function gridssh { 
    HOST=$1; 
@@ -15,5 +16,6 @@ function grid { HOST="grid-$1.grid"; shift; gridssh $HOST $@; }
 function gpfs { HOST="gpfs$1.grid"; shift; gridssh $HOST $@; }
 function ibm { HOST="ibm-$1.grid"; shift; gridssh $HOST $@; }
 function uk { HOST="$1.uk.grid"; shift; gridssh $HOST $@; }
+function snd { HOST="snd-$1.grid"; shift; gridssh $HOST $@; }
 
 
