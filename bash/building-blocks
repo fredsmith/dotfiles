@@ -1,3 +1,4 @@
+#! /bin/bash
 
 # Aliases
 if [ -f /usr/bin/gnu/grep ]; then
@@ -11,3 +12,5 @@ function portcheck { (exec 3<>/dev/tcp/$1/$2) &>/dev/null; OPEN=$?; [ $OPEN -eq 
 function portscan { HOST=$1; STARTPORT=$(echo $2 | cut -f 1 -d '-'); ENDPORT=$(echo $2 | cut -f 2 -d '-'); for PORT in `seq $STARTPORT $ENDPORT`; do portcheck $HOST $PORT > /dev/null && echo $PORT; done }
 
 function print { awk "{print \$$1}"; }
+
+function linecount { wc -l; }
