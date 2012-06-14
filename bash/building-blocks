@@ -14,3 +14,5 @@ function portscan { HOST=$1; STARTPORT=$(echo $2 | cut -f 1 -d '-'); ENDPORT=$(e
 function print { awk "{print \$$1}"; }
 
 function linecount { wc -l; }
+
+function sum { awk '{ sum+=$1 } END { print sum }'; }
