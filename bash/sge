@@ -27,6 +27,21 @@ function sge {
          waitingusers)  
             showwaiting | print 6 | sort | uniq -c | sort -rn | head
             ;;  
+         disable)
+            while read LINE; do
+               qmod -d $LINE; 
+            done
+            ;;
+         clearerrors)
+            while read LINE; do
+               qmod -cq $LINE; 
+            done
+            ;;
+         enable)
+            while read LINE; do
+               qmod -e $LINE; 
+            done
+            ;;
          *)  
             echo "usage:
             sge s                       show sge statistics
@@ -35,7 +50,11 @@ function sge {
             sge down                    show down nodes
             sge alarm                   show alarm status
             sge waiting                 show current waiting jobs
-            sge waitingusers            show top 10 waiting users";
+            sge waitingusers            show top 10 waiting users
+            sge disable                 read queues from stdin and disable
+            sge enable                  read queues from stdin and enable
+            sge clearerrors             read queues from stdin and clear errors
+            ";
             ;;  
       esac
 
