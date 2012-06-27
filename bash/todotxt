@@ -70,4 +70,10 @@ function todo_done_with_today {
    todo_replace_all_priorities D C
    todo_replace_all_priorities E D
 }
+function todo_home {
+   export TODO_LOCATION='@home';
+}
 
+function todo_work {
+   export TODO_LOCATION='@work';
+}
