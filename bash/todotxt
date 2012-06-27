@@ -1,3 +1,4 @@
+#! /bin/bash
 
 ###todo.txt
 
@@ -5,6 +6,7 @@
 export TODOTXT_DEFAULT_ACTION=pv
 export TODOTXT_AUTO_ARCHIVE=1
 export TODOTXT_CFG_FILE=$HOME/Documents/Notes/todo.cfg
+export TODO_LOCATION=$(todo_get_location);
 
 # aliases 
 
@@ -16,17 +18,17 @@ alias yesterday='t lsa | grep `date "+%Y-%m-%d" --date="yesterday"`'
 
 function today {
    if [ $# -gt 0 ]; then
-      t add "(A) $@";
+      t add "(A) $@ $TODO_LOCATION";
    else
-      t lsp A
+      t lsp A $TODO_LOCATION
    fi
 }
 
 function tomorrow {
    if [ $# -gt 0 ]; then
-      t add "(B) $@";
+      t add "(B) $@ $TODO_LOCATION";
    else
-      t lsp B
+      t lsp B $TODO_LOCATION
    fi
 }
 
@@ -35,9 +37,9 @@ function todo_prompt {
 
    TODO="";
    if which todo.sh &> /dev/null; then
-      TODOTODAYCOUNT=$(t lsp A | wc -l)
+      TODOTODAYCOUNT=$(t lsp A $TODO_LOCATION | wc -l)
       TODOTODAYCOUNT=$(($TODOTODAYCOUNT - 2));
-      TODOTOMORROWCOUNT=$(t lsp B | wc -l)
+      TODOTOMORROWCOUNT=$(t lsp B $TODO_LOCATION | wc -l)
       TODOTOMORROWCOUNT=$(($TODOTOMORROWCOUNT - 2));
       TODO="-[\[\e[0;34m\]T:\[\033[1;33m\]$TODOTODAYCOUNT\[\e[1;34m\]:\[\033[1;32m\]$TODOTOMORROWCOUNT\[\e[1;34m\]]-"
    fi
@@ -51,7 +53,7 @@ function todo_edit {
 }
 
 function todo_replace_all_priorities {
-   t -p lsp $1 | grep -v '\-\-' | grep -v 'TODO' | print 1 | 
+   t -p lsp $1 $TODO_LOCATION | grep -v '\-\-' | grep -v 'TODO' | print 1 | 
    while read TASK; do 
       t pri $TASK $2; 
    done
@@ -62,4 +64,10 @@ function todo_done_with_today {
    todo_replace_all_priorities C B
    todo_replace_all_priorities D C
    todo_replace_all_priorities E D
+}
+
+function todo_get_location {
+   hostname -f | grep nuance > /dev/null && echo "@work" ||
+   echo "@home"
+
 }
