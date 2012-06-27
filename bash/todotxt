@@ -1,6 +1,11 @@
 #! /bin/bash
 
 ###todo.txt
+function todo_get_location {
+   hostname -f | grep nuance > /dev/null && echo "@work" ||
+   echo "@home"
+
+}
 
 # variables
 export TODOTXT_DEFAULT_ACTION=pv
@@ -66,8 +71,3 @@ function todo_done_with_today {
    todo_replace_all_priorities E D
 }
 
-function todo_get_location {
-   hostname -f | grep nuance > /dev/null && echo "@work" ||
-   echo "@home"
-
-}
