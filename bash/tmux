@@ -2,8 +2,8 @@
 if [ -f $CONFIGDIR/.tmux.conf ]; then
    alias tmux="tmux -f $CONFIGDIR/.tmux.conf"
 fi
-if [ -f $CONFIGDIR/tmux.conf ]; then
-   alias tmux="tmux -f $CONFIGDIR/tmux.conf"
+if [ -f $CONFIGDIR/tmux/tmux.conf ]; then
+   alias tmux="tmux -f $CONFIGDIR/tmux/tmux.conf"
 fi
 
 
