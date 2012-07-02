@@ -30,6 +30,9 @@ set mouse=a " enable mouse in all modes
 set ttymouse=xterm  " set mouse type to xterm
 
 " Vundle
+
+" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+"
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -38,11 +41,15 @@ Bundle 'gmarik/vundle'
 " Bundles
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-powerline'
+Bundle 'Lokaltog/vim-powerline' 
+" https://github.com/Lokaltog/vim-powerline/wiki/Patched-fonts
 Bundle 'nanotech/jellybeans.vim'
-"Bundle 'myusuf3/numbers.vim' "requires vim 7.3
-filetype plugin indent on
+"requires vim 7.3
+Bundle 'myusuf3/numbers.vim' 
+nnoremap <F3> :NumbersToggle<CR>
 
+
+filetype plugin indent on
 
 " quit NERDTree after opening a file
 let NERDTreeQuitOnOpen=1
