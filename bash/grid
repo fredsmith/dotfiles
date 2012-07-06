@@ -2,12 +2,15 @@
 
 function gridssh { 
    HOST=$1; 
+   SHORTHOST=$(echo $1 | sed -e 's/\.grid//');
+   settitle $SHORTHOST
    shift;
    if [ $# -gt 0 ]; then
       ssh $HOST $@;
    else
       ssh -t $HOST "bash --rcfile /net/yum/admin/work/fred/.bashrc"; 
    fi
+   settitle bash
 }
 
 
