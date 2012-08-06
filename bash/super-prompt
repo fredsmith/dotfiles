@@ -16,3 +16,8 @@ function set_prompt {
    PS1="\[\033[G\]\[\e[1;34m\]┌[\[\e[0;34m\]\u@\h\[\e[1;34m\]]$TODO$GITPROMPT[\[\e[0;34m\]\t \d\[\e[1;34m\]]\[\e[1;34m\]\n└[\[\e[0;34m\]\w\[\e[1;34m\]] ⚡ \[\e[0m\]"
 }
 
+function prompt_off {
+   unset PROMPT_COMMAND; 
+   export PS1="[\u@\h \W]\$"
+}
+
