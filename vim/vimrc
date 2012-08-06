@@ -40,14 +40,15 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 " Bundles
 Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-fugitive'
+Bundle 'matschaffer/netrw-v142'
 Bundle 'Lokaltog/vim-powerline' 
 " https://github.com/Lokaltog/vim-powerline/wiki/Patched-fonts
 Bundle 'nanotech/jellybeans.vim'
 "requires vim 7.3
 Bundle 'myusuf3/numbers.vim' 
 nnoremap <F3> :NumbersToggle<CR>
-
 
 filetype plugin indent on
 
