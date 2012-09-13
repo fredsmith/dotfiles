@@ -15,6 +15,13 @@ set ai
 set expandtab                   
 set backspace=indent,eol,start  
 
+" set list
+" set listchars=
+" set listchars+=tab:»\ 
+" set listchars+=extends:› 
+" set listchars+=precedes:‹ 
+" set listchars+=nbsp:· 
+" set listchars+=trail:·
 
 " Paste Mode
 nnoremap <F8> :set invpaste paste?<CR>
