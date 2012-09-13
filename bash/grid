@@ -21,4 +21,4 @@ function ibm { HOST="ibm-$1.grid"; shift; gridssh $HOST $@; }
 function uk { HOST="$1.uk.grid"; shift; gridssh $HOST $@; }
 function snd { HOST="snd-$1.grid"; shift; gridssh $HOST $@; }
 
-
+function unv_lookup { grep $1 /net/yum/admin/vm_configs/master.latest; }
