@@ -27,6 +27,9 @@ function sge {
          waitingusers)  
             showwaiting | print 6 | sort | uniq -c | sort -rn | head
             ;;  
+         idle)
+            showquiesed
+            ;;
          disable)
             while read LINE; do
                qmod -d $LINE; 
@@ -47,6 +50,7 @@ function sge {
             sge s                       show sge statistics
             sge enabled                 show enabled queues
             sge disabled                show disabled queues
+            sge idle                    show idle (quiesed) nodes
             sge down                    show down nodes
             sge alarm                   show alarm status
             sge waiting                 show current waiting jobs
