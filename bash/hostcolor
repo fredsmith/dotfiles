@@ -5,7 +5,7 @@ shortname=${shortname//[aeiou]/}
 hostname_crc=$(echo $HOSTNAME | tr 'A-Z' 'a-z' | cksum)
 hostname_crc=${hostname_crc%% *}
 hostcolor_a=$(( (0x${hostname_crc} + 1) % 2 ))
-hostcolor_b=$(( 0x${hostname_crc} % 8 + 30 ))
+hostcolor_b=$(( (0x${hostname_crc} + 4) % 8 + 30 ))
 # PS1="\[\e[33;1m\]\u@\[\e[${hostcolor_a};${hostcolor_b}m\]${shortname}:\[\e[0m\]\w"'\$ '
 # PS2='\[\e[31;1m\]>\[\e[0m\]'
 
