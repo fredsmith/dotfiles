@@ -1,0 +1,5 @@
+#! /bin/bash
+
+# bind ctrl-r/s to up/down
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'

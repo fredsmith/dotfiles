@@ -1,23 +1,45 @@
-
+#! /bin/bash
 ## super-prompt
 #
 
-# variables
-export PROMPT_COMMAND="set_prompt; $PROMPT_COMMAND"
+#variables
+
 
 #functions
 
-function set_prompt {
 
-   TODO=$(todo_prompt)
-   
-   GITPROMPT=$(git_prompt);
-   #running this after every command is pretty expensive.  cache it maybe?
-   PS1="\[\033[G\]\[\e[1;34m\]┌[\[\e[0;34m\]\u@\h\[\e[1;34m\]]$TODO$GITPROMPT[\[\e[0;34m\]\t \d\[\e[1;34m\]]\[\e[1;34m\]\n└[\[\e[0;34m\]\w\[\e[1;34m\]] ⚡ \[\e[0m\]"
+prompt () {
+   [[ $# = 1 ]] || exit 255
+   mode="$1"
+
+   case "$mode" in
+   none)
+      export PROMPT_COMMAND='prompt none; history -a';
+      export PS1="\$ "
+      ;;
+   basic)
+      export PROMPT_COMMAND='prompt basic; post_history; history -a';
+      #PS1=$BASICPS1
+      PS1="[\u@$hostcolor\h\[\e[0m\] \w]\$ "
+      ;;
+   offline)
+      export PROMPT_COMMAND='prompt offline; history -a';
+      TODO=$(todo_prompt)
+      GITPROMPT=$(git_prompt);
+      #running this after every command is pretty expensive.  cache it maybe?
+      #PS1=$SUPERPS1
+      PS1="\[\033[G\]\[\e[1;34m\]┌[\[\e[0;34m\]\u@$hostcolor\h\[\e[1;34m\]]$TODO$GITPROMPT\[\033[1;31m\][OFFLINE]\[\e[0;34m\][\t \d\[\e[1;34m\]]\[\e[1;34m\]\n└[\[\e[0;34m\]\w\[\e[1;34m\]] ⚡ \[\e[0m\]"
+      ;;
+   super)
+      export PROMPT_COMMAND='prompt super; post_history; history -a';
+      TODO=$(todo_prompt 2> /dev/null)
+      GITPROMPT=$(git_prompt 2> /dev/null);
+      #running this after every command is pretty expensive.  cache it maybe?
+      #PS1=$SUPERPS1
+      PS1="\[\033[G\]\[\e[1;34m\]┌[\[\e[0;34m\]\u@$hostcolor\h\[\e[1;34m\]]$TODO$GITPROMPT\[\e[0;34m\][\t \d\[\e[1;34m\]]\[\e[1;34m\]\n└[\[\e[0;34m\]\w\[\e[1;34m\]] ⚡ \[\e[0m\]"
+      
+      ;;
+   esac
 }
 
-function prompt_off {
-   unset PROMPT_COMMAND; 
-   export PS1="[\u@\h \W]\$"
-}
-
+prompt super
