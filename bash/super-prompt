@@ -20,7 +20,8 @@ prompt () {
    basic)
       export PROMPT_COMMAND='prompt basic; post_history; history -a';
       #PS1=$BASICPS1
-      PS1="[\u@$hostcolor\h\[\e[0m\] \w]\$ "
+      PS1="[\u@$hostcolor\h\[\e[0m\] \w]\$ ";
+      portcheck derf.us 80 &> /dev/null || prompt offline
       ;;
    offline)
       export PROMPT_COMMAND='prompt offline; history -a';
@@ -37,7 +38,7 @@ prompt () {
       #running this after every command is pretty expensive.  cache it maybe?
       #PS1=$SUPERPS1
       PS1="\[\033[G\]\[\e[1;34m\]┌[\[\e[0;34m\]\u@$hostcolor\h\[\e[1;34m\]]$TODO$GITPROMPT\[\e[0;34m\][\t \d\[\e[1;34m\]]\[\e[1;34m\]\n└[\[\e[0;34m\]\w\[\e[1;34m\]] ⚡ \[\e[0m\]"
-      
+      portcheck derf.us 80 &> /dev/null || prompt offline
       ;;
    esac
 }
