@@ -1,3 +1,5 @@
+#! /bin/bash
+
 ## History-db
 
 # Variables
@@ -12,12 +14,21 @@ export HISTSIZE
 # append to the history file without overwriting, and write history out after every command execution
 export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S - '
 shopt -s histappend
-export PROMPT_COMMAND='post_history; history -a'
 
 #aliases
-alias go_offline='unset PROMPT_COMMAND'
 
 # functions
 
-function post_history { LAST_COMMAND=$(history 1 | sed -e 's/^ *[0-9]* *[0-9]*-[0-9]*-[0-9]* *[0-9]*:[0-9]*:[0-9]* *- *//g'); curl -d hostname="$HOSTNAME" -d command="$LAST_COMMAND" http://derf.us/history/; } 
-function get_history {  echo -n "enter password: "; read -s HISTPASS; history -c; rm ~/.bash_history; curl -s http://derf.us/history/download.php?passwd=$HISTPASS > ~/.bash_history; history -r; }
+function post_history { 
+   LAST_COMMAND=$(history 1 | sed -e 's/^ *[0-9]* *[0-9]*-[0-9]*-[0-9]* *[0-9]*:[0-9]*:[0-9]* *- *//g'); 
+   curl -d hostname="$HOSTNAME" -d command="$LAST_COMMAND" http://derf.us/history/; 
+} 
+
+function get_history {  
+   echo -n "enter password: "; 
+   read -s HISTPASS; 
+   history -c; 
+   rm ~/.bash_history; 
+   curl -s http://derf.us/history/download.php?passwd=$HISTPASS > ~/.bash_history; 
+   history -r; 
+}
