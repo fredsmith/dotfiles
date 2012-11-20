@@ -21,7 +21,7 @@ done >/dev/null 2>&1
 # environment
 export TZ=US/Eastern
 export FULLNAME="Fred Smith"
-export EMAIL="fred.smith@fredsmith.org"
+export EMAIL="fred.smith@nuance.com"
 export PATH=~/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/libexec/git-core:/usr/lpp/mmfs/bin:/opt/SGE/bin/lx24-amd64
 
 # bash modules
@@ -44,7 +44,9 @@ fi
 
 # functions
 function rehash { 
+   set -x
    if [ -f $HOME/.bashrc ]; then
       . $HOME/.bashrc
    fi
+   set +x
 }
