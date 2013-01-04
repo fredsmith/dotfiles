@@ -11,7 +11,12 @@ function sge {
             ;;  
          disabled)  
             showdisabled
-            ;; 
+            ;;
+         explainerrors)
+            for QUEUE in `showdisabled | grep 'E$' | cut -f 1 -d '.'`; do
+               qstat -f -explain E -q $QUEUE
+            done
+            ;;
          down)
             shownodes | grep DOWN
             ;;
@@ -40,6 +45,9 @@ function sge {
                qmod -cq $LINE; 
             done
             ;;
+         clearallerrors)
+            sge down | print 1 | sed -e 's/grid/grid@grid/' | sge clearerrors
+            ;;
          enable)
             while read LINE; do
                qmod -e $LINE; 
@@ -52,12 +60,14 @@ function sge {
             sge disabled                show disabled queues
             sge idle                    show idle (quiesed) nodes
             sge down                    show down nodes
+            sge explainerrors           list all error state causes
             sge alarm                   show alarm status
             sge waiting                 show current waiting jobs
             sge waitingusers            show top 10 waiting users
             sge disable                 read queues from stdin and disable
             sge enable                  read queues from stdin and enable
             sge clearerrors             read queues from stdin and clear errors
+            sge clearallerrors          clear all error states from all queues
             ";
             ;;  
       esac
