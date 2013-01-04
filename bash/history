@@ -1,0 +1,29 @@
+#! /bin/bash
+
+## History
+
+# Variables
+
+# don't put duplicate lines in the history. See bash(1) for more options
+# ... or force ignoredups and ignorespace
+export HISTCONTROL=ignoreboth
+unset HISTFILESIZE
+export HISTFILESIZE
+unset HISTSIZE
+export HISTSIZE
+# append to the history file without overwriting, and write history out after every command execution
+export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S - '
+shopt -s histappend
+
+# save multi-line commands as a single command with semi-colons
+
+shopt -s cmdhist
+
+# set histfile explicitly to make sure it gets written to the remapped homedir
+export HISTFILE="$HOME/.bash_history"
+
+history -n
+
+#aliases
+
+# functions
