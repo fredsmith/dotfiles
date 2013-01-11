@@ -1,59 +1,25 @@
 #! /bin/bash
 
 
-function sge {
+function gpfsd {
       case "$1" in
-         s)  
-            showstat2
+         waiters)  
+           shift;
+           if [ $1 -gt 0 ]; then
+              TIMEOUT=$1;
+           else
+              TIMEOUT='5';
+           fi
+
+            mmlsnode -N waiters -L -s $TIMEOUT
             ;;  
-         enabled)  
-            showenabled
+         getstate)  
+            mmgetstate -a
             ;;  
-         disabled)  
-            showdisabled
-            ;; 
-         down)
-            shownodes | grep DOWN
-            ;;
-         notok)
-            shownodes | grep -v OK
-            ;;
-         alarm)  
-            showalarm
-            ;;  
-         waiting)  
-            showwaiting
-            ;;  
-         waitingusers)  
-            showwaiting | print 6 | sort | uniq -c | sort -rn | head
-            ;;  
-         disable)
-            while read LINE; do
-               qmod -d $LINE; 
-            done
-            ;;
-         clearerrors)
-            while read LINE; do
-               qmod -cq $LINE; 
-            done
-            ;;
-         enable)
-            while read LINE; do
-               qmod -e $LINE; 
-            done
-            ;;
          *)  
             echo "usage:
-            sge s                       show sge statistics
-            sge enabled                 show enabled queues
-            sge disabled                show disabled queues
-            sge down                    show down nodes
-            sge alarm                   show alarm status
-            sge waiting                 show current waiting jobs
-            sge waitingusers            show top 10 waiting users
-            sge disable                 read queues from stdin and disable
-            sge enable                  read queues from stdin and enable
-            sge clearerrors             read queues from stdin and clear errors
+            gpfsd waiters                  show gpfs waiting threads
+            gpfsd getstate                 show cluster state
             ";
             ;;  
       esac

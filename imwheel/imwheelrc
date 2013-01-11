@@ -1,0 +1,9 @@
+"^google-chrome$"
+# Flip between browser tabs
+None, Left, Control_L|Page_Up
+None, Right, Control_L|Page_Down
+# back
+None, Thumb1, Alt_L|Left
+# Forward
+None, Thumb2, Alt_L|Right
+
