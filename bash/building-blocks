@@ -16,3 +16,5 @@ function print { awk "{print \$$1}"; }
 function linecount { wc -l; }
 
 function sum { awk '{ sum+=$1 } END { print sum }'; }
+
+function timestamp { date +'%Y-%m-%d-%H%M'; }

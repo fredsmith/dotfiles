@@ -1,0 +1,29 @@
+#! /bin/bash
+
+
+function gpfsd {
+      case "$1" in
+         waiters)  
+           shift;
+           if [ $1 -gt 0 ]; then
+              TIMEOUT=$1;
+           else
+              TIMEOUT='5';
+           fi
+
+            mmlsnode -N waiters -L -s $TIMEOUT
+            ;;  
+         getstate)  
+            mmgetstate -a
+            ;;  
+         *)  
+            echo "usage:
+            gpfsd waiters                  show gpfs waiting threads
+            gpfsd getstate                 show cluster state
+            ";
+            ;;  
+      esac
+
+
+
+}
