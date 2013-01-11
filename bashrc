@@ -50,3 +50,5 @@ function rehash {
    fi
    set +x
 }
+
+cd
