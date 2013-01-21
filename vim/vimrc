@@ -9,6 +9,10 @@ filetype off
 set nu " Enable line numbers, map Ctrl-N twice to toggle them
 nmap <C-N><C-N> :set invnumber<CR>
 
+" w!! to write out as root
+" http://www.reddit.com/r/vim/comments/16w481/what_is_your_vimrc_and_why_do_you_like_it/
+cmap w!! w !sudo tee % >/dev/null
+
 set ruler " Show the cursor position
 set tabstop=3 shiftwidth=3      
 set ai 
