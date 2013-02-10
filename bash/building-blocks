@@ -18,3 +18,11 @@ function linecount { wc -l; }
 function sum { awk '{ sum+=$1 } END { print sum }'; }
 
 function timestamp { date +'%Y-%m-%d-%H%M'; }
+
+function random { 
+   COUNT=$#; 
+   INDEX=$(expr $RANDOM % $COUNT); 
+   (( INDEX+=1 )); 
+   eval "echo \$$INDEX"; 
+}
+
