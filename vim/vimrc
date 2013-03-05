@@ -57,6 +57,7 @@ Bundle 'matschaffer/netrw-v142'
 Bundle 'Lokaltog/vim-powerline' 
 " https://github.com/Lokaltog/vim-powerline/wiki/Patched-fonts
 Bundle 'nanotech/jellybeans.vim'
+Bundle 'airblade/vim-gitgutter'
 "requires vim 7.3
 Bundle 'myusuf3/numbers.vim' 
 nnoremap <F3> :NumbersToggle<CR>
