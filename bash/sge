@@ -33,7 +33,7 @@ function sge {
             showwaiting | print 6 | sort | uniq -c | sort -rn | head
             ;;  
          idle)
-            showquiesed
+            qstat -qs d -f | grep "BIP" | grep ' 0/0' | print 1 | cut -f 2 -d '@' | cut -f 1 -d '.'
             ;;
          disable)
             while read LINE; do
