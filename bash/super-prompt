@@ -44,4 +44,4 @@ prompt () {
    esac
 }
 
-prompt super
+prompt basic
