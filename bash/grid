@@ -21,9 +21,10 @@ function ibm { HOST="ibm-$1.grid"; shift; gridssh $HOST $@; }
 function dqa { HOST="dqa-$1.grid"; shift; gridssh $HOST $@; }
 function uk { HOST="$1.uk.grid"; shift; gridssh $HOST $@; }
 function snd { HOST="snd-$1.grid"; shift; gridssh $HOST $@; }
-function nrg5 { HOST="$1.nrg5.us.grid"; shift; gridssh $HOST $@; }
-function nrg1 { HOST="$1.nrg1.us.grid"; shift; gridssh $HOST $@; }
+function nrg5 { HOST="nrg5-$1.nrg5.us.grid"; shift; gridssh $HOST $@; }
+function nrg1 { HOST="nrg1-$1.nrg1.us.grid"; shift; gridssh $HOST $@; }
 function infra { HOST="$1.infra.us.grid"; shift; gridssh $HOST $@; }
 function hadoop1 { HOST="hadoop1-$1.grid"; shift; gridssh $HOST $@; }
-
+function app { HOST="app-$1.grid"; shift; gridssh $HOST $@; }
+function nrc { HOST="$1.nrc1.us.grid"; shift; gridssh $HOST $@; }
 function unv_lookup { grep $1 /net/yum/admin/vm_configs/master.latest; }
