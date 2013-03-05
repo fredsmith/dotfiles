@@ -1,7 +1,7 @@
 #! /bin/bash
 
 
-function sge {
+function func_sge {
       case "$1" in
          s)  
             showstat2
@@ -20,6 +20,13 @@ function sge {
          down)
             shownodes | grep DOWN
             ;;
+         whatson)
+            if [ "$2" == "" ]; then
+               qstat -u \* | grep $HOSTNAME
+            else
+               qstat -u \* | grep $2
+            fi
+            ;;
          notok)
             shownodes | grep -v OK
             ;;
@@ -37,7 +44,11 @@ function sge {
             ;;
          disable)
             while read LINE; do
-               qmod -d $LINE; 
+               if echo $LINE | grep "@"; then
+                  qmod -d $LINE; 
+               else
+                  qmod -d \*@$LINE;
+              fi
             done
             ;;
          clearerrors)
@@ -60,6 +71,8 @@ function sge {
             sge disabled                show disabled queues
             sge idle                    show idle (quiesed) nodes
             sge down                    show down nodes
+            sge whatson <hostname>      show which jobs are running on a host
+                                        (default localhost)
             sge explainerrors           list all error state causes
             sge alarm                   show alarm status
             sge waiting                 show current waiting jobs
@@ -73,5 +86,11 @@ function sge {
       esac
 
 
+
+}
+
+function sge {
+
+   func_sge $@
 
 }
