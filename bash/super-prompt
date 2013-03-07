@@ -23,7 +23,7 @@ prompt () {
       ;;
    basic)
       export PROMPT_COMMAND='prompt basic; post_history; history -a';
-      PS1="[\u@$hostcolor\h\[\e[0m\] \w]\\\$ ";
+      PS1="[\u@\[$hostcolor\]\h\[\e[0m\] \w]\\\$ ";
       portcheck derf.us 80 &> /dev/null || prompt basicoffline
       ;;
    offline)
