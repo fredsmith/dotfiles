@@ -15,15 +15,15 @@ prompt () {
    case "$mode" in
    none)
       export PROMPT_COMMAND='prompt none; history -a';
-      export PS1="\$ "
+      export PS1="\\\$ "
       ;;
    basicoffline)
-      export PROMPT_COMMAND='prompt basicoffline; post_history; history -a';
-      PS1="[\u@$hostcolor\h\[\e[0m\] \[\033[1;31m\][OFFLINE]\[\e[0m\] \w]\$ ";
+      export PROMPT_COMMAND='prompt basicoffline; history -a';
+      PS1="[\u@$hostcolor\h\[\e[0m\] \[\033[1;31m\][OFFLINE]\[\e[0m\] \w]\\\$ ";
       ;;
    basic)
       export PROMPT_COMMAND='prompt basic; post_history; history -a';
-      PS1="[\u@$hostcolor\h\[\e[0m\] \w]\$ ";
+      PS1="[\u@$hostcolor\h\[\e[0m\] \w]\\\$ ";
       portcheck derf.us 80 &> /dev/null || prompt basicoffline
       ;;
    offline)
