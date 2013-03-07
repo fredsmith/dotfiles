@@ -19,7 +19,7 @@ prompt () {
       ;;
    basicoffline)
       export PROMPT_COMMAND='prompt basicoffline; history -a';
-      PS1="[\u@$hostcolor\h\[\e[0m\] \[\033[1;31m\][OFFLINE]\[\e[0m\] \w]\\\$ ";
+      PS1="[\u@\[$hostcolor\]\h\[\e[0m\] \[\033[1;31m\][OFFLINE]\[\e[0m\] \w]\\\$ ";
       ;;
    basic)
       export PROMPT_COMMAND='prompt basic; post_history; history -a';
@@ -31,14 +31,14 @@ prompt () {
       TODO=$(todo_prompt)
       GITPROMPT=$(git_prompt);
       #running this after every command is pretty expensive.  cache it maybe?
-      PS1="\[\033[G\]\[\e[1;34m\]┌[\[\e[0;34m\]\u@$hostcolor\h\[\e[1;34m\]]$TODO$GITPROMPT\[\033[1;31m\][OFFLINE]\[\e[0;34m\][\t \d\[\e[1;34m\]]\[\e[1;34m\]\n└[\[\e[0;34m\]\w\[\e[1;34m\]] ⚡ \[\e[0m\]"
+      PS1="\[\033[G\]\[\e[1;34m\]┌[\[\e[0;34m\]\u@\[$hostcolor\]\h\[\e[1;34m\]]$TODO$GITPROMPT\[\033[1;31m\][OFFLINE]\[\e[0;34m\][\t \d\[\e[1;34m\]]\[\e[1;34m\]\n└[\[\e[0;34m\]\w\[\e[1;34m\]] ⚡ \[\e[0m\]"
       ;;
    super)
       export PROMPT_COMMAND='prompt super; post_history; history -a';
       TODO=$(todo_prompt 2> /dev/null)
       GITPROMPT=$(git_prompt 2> /dev/null);
       #running this after every command is pretty expensive.  cache it maybe?
-      PS1="\[\033[G\]\[\e[1;34m\]┌[\[\e[0;34m\]\u@$hostcolor\h\[\e[1;34m\]]$TODO$GITPROMPT\[\e[0;34m\][\t \d\[\e[1;34m\]]\[\e[1;34m\]\n└[\[\e[0;34m\]\w\[\e[1;34m\]] ⚡ \[\e[0m\]"
+      PS1="\[\033[G\]\[\e[1;34m\]┌[\[\e[0;34m\]\u@\[$hostcolor\]\h\[\e[1;34m\]]$TODO$GITPROMPT\[\e[0;34m\][\t \d\[\e[1;34m\]]\[\e[1;34m\]\n└[\[\e[0;34m\]\w\[\e[1;34m\]] ⚡ \[\e[0m\]"
       portcheck derf.us 80 &> /dev/null || prompt offline
       ;;
    esac
