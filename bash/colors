@@ -1,0 +1,13 @@
+#! /bin/bash
+
+red=$(      tput setaf 1|| tput AF 1    )
+green=$(    tput setaf 2|| tput AF 2    )
+yellow=$(   tput setaf 3|| tput AF 3    )
+blue=$(     tput setaf 4|| tput AF 4    )
+magenta=$(  tput setaf 5|| tput AF 5    )
+cyan=$(     tput setaf 6|| tput AF 6    )
+white=$(    tput setaf 7|| tput AF 7    )
+default=$(  tput sgr0                   )
+bold=$(     tput bold   || tput md      )
+stout=$(    tput smso   || tput so      )
+estout=$(   tput rmso   || tput se      )
