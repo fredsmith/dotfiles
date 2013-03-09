@@ -35,16 +35,16 @@ if [ -z "$SCREEN_COLORS" ]; then
         screen-*color-bce)
             echo "Unknown terminal $TERM. Falling back to 'screen-bce'."
             export TERM=screen-bce
-            ;;
+            ;;
         *-88color)
             echo "Unknown terminal $TERM. Falling back to 'xterm-88color'."
             export TERM=xterm-88color
-            ;;
+            ;;
         *-256color)
             echo "Unknown terminal $TERM. Falling back to 'xterm-256color'."
             export TERM=xterm-256color
-            ;;
-    esac
+            ;;
+        esac
     SCREEN_COLORS=`tput colors`
 fi
 if [ -z "$SCREEN_COLORS" ]; then
@@ -52,15 +52,15 @@ if [ -z "$SCREEN_COLORS" ]; then
         gnome*|xterm*|konsole*|aterm|[Ee]term)
             echo "Unknown terminal $TERM. Falling back to 'xterm'."
             export TERM=xterm
-            ;;
+            ;;
         rxvt*)
             echo "Unknown terminal $TERM. Falling back to 'rxvt'."
             export TERM=rxvt
-            ;;
+            ;;
         screen*)
             echo "Unknown terminal $TERM. Falling back to 'screen'."
             export TERM=screen
-            ;;
-    esac
+            ;;
+        esac
     SCREEN_COLORS=`tput colors`
 fi
