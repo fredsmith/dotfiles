@@ -1,6 +1,12 @@
+#! /bin/bash
+
 function dload {
 	URL=$1
 	DEST=$2 
+   if [ "$DEST" == "" ]; then
+      DEST=$(echo $URL | sed -e 's/.*\///')
+   fi
+
 		( 
 			which curl &> /dev/null && 
 			curl $curlopts --progress-bar $URL > $DEST.tmp && 
