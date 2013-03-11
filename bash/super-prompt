@@ -45,18 +45,18 @@ prompt () {
       ;;
    offline-multi)
       export PROMPT_COMMAND='prompt offline; history -a';
-      TODO=$(todo_prompt)
+      #TODO=$(todo_prompt)
       GITPROMPT=$(git_prompt);
       #running this after every command is pretty expensive.  cache it maybe?
-      PS1="$bold$blue┌[$default$blue\u@$hostcolor\h$bold$blue]$TODO$GITPROMPT$bold$blue[$default$red""OFFLINE$bold$blue]-[$default$blue\t \d$bold]\n$default$bold$blue└[$default$blue\w$bold$blue] \\\$ $default"
+      PS1="$bold$blue┌[$default$blue\u@$hostcolor\h$bold$blue]-$GITPROMPT$bold$blue[$default$red""OFFLINE$bold$blue]-[$default$blue\t \d$bold]\n$default$bold$blue└[$default$blue\w$bold$blue] \\\$ $default"
       ;;
    super-multi)
       export PROMPT_COMMAND='prompt super; post_history; history -a';
-      TODO=$(todo_prompt 2> /dev/null)
+      #TODO=$(todo_prompt 2> /dev/null)
       GITPROMPT=$(git_prompt 2> /dev/null);
       #running this after every command is pretty expensive.  cache it maybe?
-      PS1="$bold$blue┌[$default$blue\u@$hostcolor\h$bold$blue]$TODO$GITPROMPT$bold$blue[$default$blue\t \d$bold]\n$default$bold$blue└[$default$blue\w$bold$blue] \\\$ $default"
-      portcheck derf.us 80 &> /dev/null || prompt offline-multi
+      PS1="$bold$blue┌[$default$blue\u@$hostcolor\h$bold$blue]-$GITPROMPT$bold$blue[$default$blue\t \d$bold]\n$default$bold$blue└[$default$blue\w$bold$blue] \\\$ $default"
+      portcheck derf.us 80 &> /dev/null || prompt offline
       ;;
    *)
       ;;
