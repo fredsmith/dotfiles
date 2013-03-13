@@ -8,10 +8,10 @@ function git_prompt {
    GITPROMPT="";
    GITSTATUS=$(git status --porcelain 2>&1)
    if [[ $? -eq 0 ]]; then
-      GITPROMPT="$blue$bold-[$default$blue""G:$green✓$blue$bold]-";
+      GITPROMPT="$blue$bold-[$default$blue""G:$green✓$blue$bold]-$default";
       GITDIFF=$(echo $GITSTATUS | grep -v '^fatal' | grep -v '^$' | wc -l)
       if [[ $GITDIFF -gt 0 ]]; then
-         GITPROMPT="$blue$bold-[$default$blue""G:$red""✗ $GITDIFF$blue$bold]-";
+         GITPROMPT="$blue$bold-[$default$blue""G:$red""✗ $GITDIFF$blue$bold]-$default";
       fi
    fi
    echo $GITPROMPT;
