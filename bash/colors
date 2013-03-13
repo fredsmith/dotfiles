@@ -1,13 +1,24 @@
 #! /bin/bash
 
 red=$(      tput setaf 1|| tput AF 1    )
+red="\[$red\]"
 green=$(    tput setaf 2|| tput AF 2    )
+green="\[$green\]"
 yellow=$(   tput setaf 3|| tput AF 3    )
+yellow="\[$yellow\]";
 blue=$(     tput setaf 4|| tput AF 4    )
+blue="\[$blue\]"
 magenta=$(  tput setaf 5|| tput AF 5    )
+magenta="\[$magenta\]"
 cyan=$(     tput setaf 6|| tput AF 6    )
+cyan="\[$cyan\]"
 white=$(    tput setaf 7|| tput AF 7    )
+white="\[$white\]"
 default=$(  tput sgr0                   )
+default="\[$default\]"
 bold=$(     tput bold   || tput md      )
+bold="\[$bold\]"
 stout=$(    tput smso   || tput so      )
+stout="\[$stout\]"
 estout=$(   tput rmso   || tput se      )
+estout="\[$stout\]"
