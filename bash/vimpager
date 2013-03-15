@@ -1,0 +1,10 @@
+#! /bin/bash
+
+if [ -f ~/bin/vimpager ]; then
+   export PAGER=~/bin/vimpager
+else 
+   export PAGER=less
+fi
+
+alias less=$PAGER
+alias zless=$PAGER
