@@ -19,6 +19,12 @@ function linecount { wc -l; }
 
 function sum { awk '{ sum+=$1 } END { print sum }'; }
 
+function div { awk "BEGIN {print $1 / $2}"; }
+function mult { awk "BEGIN {print $1 * $2}"; }
+function subt { awk "BEGIN {print $1 - $2}"; }
+function addit { awk "BEGIN {print $1 + $2}"; }
+
+
 function timestamp { date +'%Y-%m-%d-%H%M'; }
 
 function random { 
