@@ -7,10 +7,12 @@ function func_sge {
             showstat2
             ;;  
          enabled)  
-            showenabled
+            #showenabled
+            qstat -f | grep "BIP" | grep -v 'd$'
             ;;  
          disabled)  
-            showdisabled
+            #showdisabled
+            qstat -f | grep "BIP" | grep 'd$'
             ;;
          explainerrors)
             for QUEUE in `showdisabled | grep 'E$' | cut -f 1 -d '.'`; do
@@ -18,7 +20,8 @@ function func_sge {
             done
             ;;
          down)
-            shownodes | grep DOWN
+            #shownodes | grep DOWN
+            qstat -f -explain a | grep -e 'au$' -e 'auE' | print 1 | cut -f 2 -d '@' | cut -f 1 -d '.'
             ;;
          whatson)
             if [ "$2" == "" ]; then
@@ -53,15 +56,19 @@ function func_sge {
             ;;
          clearerrors)
             while read LINE; do
-               qmod -cq $LINE; 
+               qmod -cq \*@$LINE; 
             done
             ;;
          clearallerrors)
-            sge down | print 1 | sed -e 's/grid/grid@grid/' | sge clearerrors
+            sge down | print 1 | sge clearerrors
             ;;
          enable)
             while read LINE; do
-               qmod -e $LINE; 
+               if echo $LINE | grep "@"; then
+                  qmod -e $LINE; 
+               else
+                  qmod -e \*@$LINE;
+              fi
             done
             ;;
          *)  
