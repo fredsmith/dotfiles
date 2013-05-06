@@ -1,0 +1,21 @@
+#! /bin/bash
+
+function healthbar { 
+   # TODO: optionally limit to less than full width of screen
+   COLS=$(subt `tput cols` 2); # screen width minus 2
+   HEALTHYPIPS=$(mult $COLS .$1); # number of pips to draw to cover a percent of the screen
+   echo -n "["; # brackets are cool
+   tput setaf 2; # green
+   for INT in `seq 1 $HEALTHYPIPS`; do 
+      echo -n "|"; #pip
+   done; 
+   tput setaf 1; # red
+   REMAINING=$(subt $COLS $HEALTHYPIPS); # how many columns do we have left on the screen
+   for INT in `seq 1 $REMAINING`; do 
+      echo -n "|"; #pip
+   done; 
+   tput setaf 8; # white
+   echo "]"; # brackets
+}
+
+# TODO: yaml config file parser and executor.
