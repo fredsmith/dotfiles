@@ -15,10 +15,13 @@ function post_history {
 } 
 
 function get_history {  
+   if ! [ -f $HISTFILE ]; then
+      HISTFILE='~/.bash_history'
+   fi
    echo -n "enter password: "; 
    read -s HISTPASS; 
    history -c; 
-   rm ~/.bash_history; 
-   curl -s http://derf.us/history/download.php?passwd=$HISTPASS > ~/.bash_history; 
+   rm $HISTFILE; 
+   curl -s http://derf.us/history/download.php?passwd=$HISTPASS > $HISTFILE; 
    history -r; 
 }
