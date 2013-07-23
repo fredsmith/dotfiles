@@ -15,13 +15,18 @@ function func_sge {
             qstat -f | grep "BIP" | grep 'd$'
             ;;
          explainerrors)
-            for QUEUE in `showdisabled | grep 'E$' | cut -f 1 -d '.'`; do
-               qstat -f -explain E -q $QUEUE
+            for QUEUE in `sge errors`; do
+               qstat -f -explain E -q \*@$QUEUE
             done
             ;;
          down)
             #shownodes | grep DOWN
             qstat -f -explain a | grep -e 'au$' -e 'auE' | print 1 | cut -f 2 -d '@' | cut -f 1 -d '.'
+            ;;
+         errors)
+            #shownodes | grep DOWN
+            #qstat -f -explain a | grep -e 'au$' -e 'auE' | print 1 | cut -f 2 -d '@' | cut -f 1 -d '.'
+            qstat -f | grep 'E$' | print 1 | cut -f 2 -d '@' | cut -f 1 -d '.'
             ;;
          whatson)
             if [ "$2" == "" ]; then
@@ -60,7 +65,7 @@ function func_sge {
             done
             ;;
          clearallerrors)
-            sge down | print 1 | sge clearerrors
+            sge errors | print 1 | sge clearerrors
             ;;
          enable)
             while read LINE; do
