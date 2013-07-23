@@ -1,0 +1,14 @@
+#! /bin/bash
+
+function 3par_add_me {
+   if ! [[ "$#" -eq "1" ]]; then
+      echo "please provide a host name";
+      return 1;
+   fi
+
+   SHOSTNAME=$(hostname -s); 
+   ssh 3paradm@$1 "createhost $SHOSTNAME"
+   for WWN in `cat /sys/class/fc_host/host*/port_name | sed -e 's/0x//' -e 'y/[a-z]/\[A-Z\]/'`; do 
+      ssh 3paradm@$1 "createhost -add $SHOSTNAME $WWN"; 
+   done
+}
