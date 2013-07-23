@@ -1,5 +1,23 @@
 #! /bin/bash
 
+# Aliases
+
+
+# Functions
+
+function griddu { 
+   /bin/pwd | sed -e 's/\/gpfs\///' -e 's/\// /' | { 
+      read FS DIRECTORY; 
+      export $FS
+      ssh grid-info1 grep -m 1 "$DIRECTORY," /var/www/html/reports/grid/rpt_bydirectory.$FS.out; 
+   } | sed -e 's/,/ /g' | {
+      read ORIGPATH FAKEINODES INODES FAKEBYTES BYTES;
+      GBYTES=$(div $BYTES 1073741824);
+      REALDIR=$(/bin/pwd);
+      echo "$REALDIR: $INODES Files, $GBYTES GB";
+   }
+}   
+   
 function gridssh { 
    HOST=$1; 
    SHORTHOST=$(echo $1 | sed -e 's/\.grid//');
