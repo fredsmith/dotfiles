@@ -20,6 +20,9 @@ function griddu {
    
 function gridssh { 
    HOST=$1; 
+   if [[ `hostname -f` =~ "nuance.com" ]]; then
+      HOST=$(echo $1 | sed -e 's/\.grid/\.grid\.nuance\.com/');
+   fi
    SHORTHOST=$(echo $1 | sed -e 's/\.grid//');
    settitle $SHORTHOST
    shift;
