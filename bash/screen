@@ -1,3 +1,5 @@
+#! /bin/bash
+
 #screen
 if [ -f $CONFIGDIR/screen/screenrc ]; then
    alias screen="screen -c $CONFIGDIR/screen/screenrc"

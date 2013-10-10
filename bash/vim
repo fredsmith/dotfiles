@@ -1,4 +1,6 @@
-# VIM
+#! /bin/bash
+
+## VIM
 if [ -f $CONFIGDIR/vim/vimrc ]; then
    alias vim="vim -u $CONFIGDIR/vim/vimrc"
    export EDITOR="vim -u $CONFIGDIR/vim/vimrc"
