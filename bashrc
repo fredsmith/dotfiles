@@ -1,5 +1,10 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
+fd=0   # stdin
+if ! [[ -t "$fd" || -p /dev/stdin ]]; then
+   return
+fi
+#set -x
 
 # set home to be wherever .bashrc is
 export HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
