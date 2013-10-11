@@ -54,13 +54,13 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-fugitive'
 Bundle 'matschaffer/netrw-v142'
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Bundle 'bling/vim-airline'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'airblade/vim-gitgutter'
 "requires vim 7.3
 Bundle 'myusuf3/numbers.vim' 
-nnoremap <F3> :NumbersToggle<CR>
 Bundle 'tpope/vim-markdown'
+Bundle 'altercation/vim-colors-solarized'
 
 filetype plugin indent on
 
@@ -77,11 +77,16 @@ let NERDTreeIgnore=['\.git','\.DS_Store','\.pdf', '.beam']
 " Toggle NERDTree with <leader>d
 map <silent> <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 
-" Powerline
 set laststatus=2   " Always show the statusline
 set encoding=utf-8 " Necessary to show unicode glyphs
-let g:Powerline_symbols = 'fancy'
 
+" Airline
+let g:airline_powerline_fonts = 1
 
-" Jellybeans
-colorscheme jellybeans
+" Solarized
+syntax enable
+set background=dark
+colorscheme solarized
+
+" Numbers
+nnoremap <F3> :NumbersToggle<CR>

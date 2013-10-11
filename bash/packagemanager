@@ -1,3 +1,5 @@
+#! /bin/bash
+
 #Redhat specific
 if which rpm &> /dev/null; then
 	if [ "$LOGNAME" = "root" ]; then

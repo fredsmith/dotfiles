@@ -1,0 +1,5 @@
+#! /bin/bash
+
+knife() {
+  bundle exec knife "$@"
+}

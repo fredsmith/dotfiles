@@ -1,3 +1,5 @@
+#! /bin/bash
+
 # cross-distro, if not root
 if ! [ "$LOGNAME" = "root" ]; then
 	alias service='sudo service'

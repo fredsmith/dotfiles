@@ -1,0 +1,31 @@
+#! /bin/bash
+
+
+function func_mcs {
+      case "$1" in
+         lscredit)
+            if [ "$2" == "" ]; then
+               USERNAME=$(whoami);
+            else
+               USERNAME=$2;
+            fi
+            ssh -q mcs.infra.us.grid.nuance.com "/opt/mam/bin/gbalance -u $USERNAME --show Name,Allocated,Available"
+            ;;
+         *)  
+            echo "usage:
+            mcs lscredit <username>    show credits
+            mcs lsnode <username>      show nodes by user
+            mcs adduser <username>     add a user
+            ";
+            ;;  
+      esac
+
+
+
+}
+
+function mcs {
+
+   func_mcs $@
+
+}

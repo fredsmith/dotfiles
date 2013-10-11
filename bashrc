@@ -21,8 +21,8 @@ done >/dev/null 2>&1
 # environment
 export TZ=US/Eastern
 export FULLNAME="Fred Smith"
-export EMAIL="fred.smith@nuance.com"
-export PATH=~/bin/:$PATH:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/libexec/git-core:/usr/lpp/mmfs/bin:/opt/SGE/bin/lx24-amd64
+export EMAIL="fred@getsatisfaction.com"
+export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:$PATH:/sbin:/usr/sbin:/usr/libexec/git-core:$HOME/.rvm/bin 
 
 # bash modules
 

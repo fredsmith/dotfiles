@@ -3,29 +3,14 @@
 
 #functions
 
-function git_prompt {
-
-   GITPROMPT="";
-   GITSTATUS=$(git status --porcelain 2>&1)
-   if [[ $? -eq 0 ]]; then
-      GITPROMPT="$blue$bold-[$default$blue""G:$green✓$blue$bold]-$default";
-      GITDIFF=$(echo $GITSTATUS | grep -v '^fatal' | grep -v '^$' | wc -l)
-      if [[ $GITDIFF -gt 0 ]]; then
-         GITPROMPT="$blue$bold-[$default$blue""G:$red""✗ $GITDIFF$blue$bold]-$default";
-      fi
-   fi
-   echo $GITPROMPT;
-}
-if which git &> /dev/null; then
-   export GIT_AUTHOR_NAME=$FULLNAME;
-   export GIT_AUTHOR_EMAIL=$EMAIL;
-   export GIT_COMMITTER_NAME=$FULLNAME;
-   export GIT_COMMITTER_EMAIL=$EMAIL;
-fi
-
-
-#scm_breeze
-[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
-
 
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
+alias gpp='git pull && git push'
+alias gco='git checkout'
+alias br='git checkout -b'
+alias gpo='git push origin $__GIT_BRANCH'
+alias gtfo='git reset --hard'
+alias gs='git status'
+alias gush="git push"
+alias gull="git pull"
+alias gcm="git commit"

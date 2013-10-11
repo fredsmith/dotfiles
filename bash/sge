@@ -14,14 +14,22 @@ function func_sge {
             #showdisabled
             qstat -f | grep "BIP" | grep 'd$'
             ;;
+         rescheduledisabled)  
+            sge disabled | print 1 | cut -f 2 -d '@' | cut -f 1 -d '.' | sge reschedule
+            ;;
          explainerrors)
-            for QUEUE in `showdisabled | grep 'E$' | cut -f 1 -d '.'`; do
-               qstat -f -explain E -q $QUEUE
+            for QUEUE in `sge errors`; do
+               qstat -f -explain E -q \*@$QUEUE
             done
             ;;
          down)
             #shownodes | grep DOWN
             qstat -f -explain a | grep -e 'au$' -e 'auE' | print 1 | cut -f 2 -d '@' | cut -f 1 -d '.'
+            ;;
+         errors)
+            #shownodes | grep DOWN
+            #qstat -f -explain a | grep -e 'au$' -e 'auE' | print 1 | cut -f 2 -d '@' | cut -f 1 -d '.'
+            qstat -f | grep 'E$' | print 1 | cut -f 2 -d '@' | cut -f 1 -d '.'
             ;;
          whatson)
             if [ "$2" == "" ]; then
@@ -54,13 +62,22 @@ function func_sge {
               fi
             done
             ;;
+         reschedule)
+            while read LINE; do
+               if echo $LINE | grep "@"; then
+                  qmod -rq $LINE; 
+               else
+                  qmod -rq \*@$LINE;
+              fi
+            done
+            ;;
          clearerrors)
             while read LINE; do
                qmod -cq \*@$LINE; 
             done
             ;;
          clearallerrors)
-            sge down | print 1 | sge clearerrors
+            sge errors | print 1 | sge clearerrors
             ;;
          enable)
             while read LINE; do
@@ -76,6 +93,7 @@ function func_sge {
             sge s                       show sge statistics
             sge enabled                 show enabled queues
             sge disabled                show disabled queues
+            sge rescheduledisabled      reschedule all jobs on disabled queues
             sge idle                    show idle (quiesed) nodes
             sge down                    show down nodes
             sge whatson <hostname>      show which jobs are running on a host
@@ -85,6 +103,7 @@ function func_sge {
             sge waiting                 show current waiting jobs
             sge waitingusers            show top 10 waiting users
             sge disable                 read queues from stdin and disable
+            sge reschedule              read queues from stdin and reschedule all jobs
             sge enable                  read queues from stdin and enable
             sge clearerrors             read queues from stdin and clear errors
             sge clearallerrors          clear all error states from all queues
