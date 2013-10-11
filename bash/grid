@@ -29,6 +29,7 @@ function gridssh {
    if [ $# -gt 0 ]; then
       ssh $HOST $@;
    else
+#      ssh -t $HOST "bash --rcfile /net/grid-repo1.grid.nuance.com/admin/work/fred/.bashrc"; 
       ssh -t $HOST "bash --rcfile /net/yum/admin/work/fred/.bashrc"; 
    fi
    settitle bash
