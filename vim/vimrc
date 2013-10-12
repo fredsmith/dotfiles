@@ -61,6 +61,7 @@ Bundle 'airblade/vim-gitgutter'
 Bundle 'myusuf3/numbers.vim' 
 Bundle 'tpope/vim-markdown'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'ivyl/vim-bling'
 
 filetype plugin indent on
 
