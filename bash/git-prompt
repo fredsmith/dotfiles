@@ -40,7 +40,7 @@ git_prompt() {
     # Test whether we are in a git repo
     if [ "$__GIT_BRANCH" != "" ] ; then
 	__gitStatus                             # Run git status function
-	__PROMPT="$__PROMPT $blue[G:"    # Open bracket
+	__PROMPT="$blue[Git:"    # Open bracket
 
 	# Set correct color for branch name and append name
 	if [ $__GIT_AHEAD != 0 ] ; then
@@ -58,14 +58,14 @@ git_prompt() {
 	    __PROMPT="$__PROMPT !"
 	fi
 
-	__PROMPT="$__PROMPT$blue]$default"     # Close bracket
+	__PROMPT="$__PROMPT$blue]$default-"     # Close bracket
 	#__PROMPT="$__PROMPT]"     # Close bracket
     fi
 
     #__PROMPT="$__PROMPT\$\[\033[0m\]"           # Add \$ and reset color
     #__PROMPT="$__PROMPT\[\033[0m\]\$"           # Add \$ and reset color
 
-    echo "$__PROMPT "                     # Set prompt
+    echo "$__PROMPT"                     # Set prompt
 }
 
 # Export prompt command and other environment variables
