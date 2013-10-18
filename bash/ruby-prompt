@@ -1,0 +1,10 @@
+#! /bin/bash
+
+# Logic for determining the contents and setting the prompt
+rvm_prompt() {
+   if [ -f .rvmrc ]; then
+      RVMENV=$(rvm current);
+      echo "[$blue""RVM:$default$RVMENV$default]-"
+   fi
+}
+
