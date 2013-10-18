@@ -64,3 +64,13 @@ if [ -z "$SCREEN_COLORS" ]; then
         esac
     SCREEN_COLORS=`tput colors`
 fi
+
+
+
+# solarized pallete for dircolors
+if [[ $TERM =~ .*256.* ]]; then
+   if [ -f $CONFIGDIR/dircolors/dircolors.256dark ]; then
+      eval `dircolors $CONFIGDIR/dircolors/dircolors.256dark`;
+   fi
+fi
+
