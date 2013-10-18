@@ -4,6 +4,7 @@ if [ -f $CONFIGDIR/ack/ackrc ]; then
    export ACKRC=$CONFIGDIR/ack/ackrc
 fi
 
-if [ -f `which ack-grep` ]; then
+if which ack-grep &> /dev/null; then
    alias ack=ack-grep
 fi
+
