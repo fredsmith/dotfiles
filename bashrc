@@ -27,7 +27,7 @@ done >/dev/null 2>&1
 export TZ=US/Eastern
 export FULLNAME="Fred Smith"
 export EMAIL="fred@getsatisfaction.com"
-export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:$PATH:/sbin:/usr/sbin:/usr/libexec/git-core:$HOME/.rvm/bin 
+export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:$PATH:/sbin:/usr/sbin:$HOME/.rvm/bin 
 
 # bash modules
 
