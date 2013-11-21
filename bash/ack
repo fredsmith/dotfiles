@@ -3,8 +3,11 @@
 if [ -f $CONFIGDIR/ack/ackrc ]; then
    export ACKRC=$CONFIGDIR/ack/ackrc
 fi
-
-if which ack-grep &> /dev/null; then
-   alias ack=ack-grep
+if which ag &> /dev/null; then
+   alias ack=ag
+else 
+   if which ack-grep &> /dev/null; then
+      alias ack=ack-grep
+   fi
 fi
 
