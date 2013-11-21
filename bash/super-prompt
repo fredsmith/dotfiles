@@ -39,7 +39,7 @@ prompt () {
       export PROMPT_COMMAND='prompt super-single; post_history; history -a';
       #TODO=$(todo_prompt 2> /dev/null)
       GITPROMPT=$(git_prompt 2> /dev/null);
-      RVMPROMPT=$(rvm_prompt 2> /dev/null);
+      #RVMPROMPT=$(rvm_prompt 2> /dev/null);
       ONLINEPROMPT=""
       #running this after every command is pretty expensive.  cache it maybe?
       PS1="$bold$blue[$default$blue\u@$hostcolor\h$bold$blue]$GITPROMPT$RVMPROMPT$ONLINEPROMPT$bold$blue[$default$blue\t$bold]-[$default$blue\w$bold$blue] \\\$ $default"
