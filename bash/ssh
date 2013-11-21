@@ -25,6 +25,6 @@ alias list='/usr/bin/ssh-add -l'
 
 
 #host specific commands
-alias xi='ssh xicada'
 alias mi='ssh mimas'
+alias io='ssh io'
 
