@@ -1,0 +1,5 @@
+#! /bin/bash
+
+export SATISFACTION_HOME=~/workspace/satisfaction
+export SATISFACTION_TOOLS=~/workspace/tools
+export PATH=$PATH:$SATISFACTION_TOOLS/bin
