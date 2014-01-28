@@ -6,6 +6,7 @@ fi
 if which ag &> /dev/null; then
    alias ack=ag
 else 
+   alias ag=ack
    if which ack-grep &> /dev/null; then
       alias ack=ack-grep
    fi
