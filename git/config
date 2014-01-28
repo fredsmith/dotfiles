@@ -1,0 +1,7 @@
+[user]
+	name = Fred Smith
+	email = fred.smith@fredsmith.org
+[push]
+	default = simple
+[alias]
+  gr = log --pretty=\"format:%h %an %s\" --graph

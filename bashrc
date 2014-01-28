@@ -18,6 +18,8 @@ else if [-d $HOME/.dotfiles ]; then
 fi
 fi
 
+export XDG_CONFIG_HOME=$CONFIGDIR
+
 # source system profile scripts
 for PROFILEFILE in /etc/profile.d/*.sh; do
    source $PROFILEFILE;
