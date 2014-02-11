@@ -55,5 +55,5 @@ function gsfnmultissh {
 }
 
 function staging { HOST="staging-$1.staging.gsfn.us"; shift; gsfnmultissh $HOST $@; }
-function west2 { HOST="west2-$1.prod.gsfn.us"; shift; gsfnmultissh $HOST $@; }
-function east1 { HOST="east1-$1.prod.gsfn.us"; shift; gsfnssh $HOST $@; }
+function west2 { HOST="west2-$1.west2.prod.gsfn.us"; shift; gsfnmultissh $HOST $@; }
+function east1 { HOST="east1-$1.east1.prod.gsfn.us"; shift; gsfnssh $HOST $@; }
