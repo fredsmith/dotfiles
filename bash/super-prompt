@@ -60,7 +60,7 @@ prompt () {
       RVMPROMPT=$(rvm_prompt 2> /dev/null);
       #running this after every command is pretty expensive.  cache it maybe?
       PS1="$bold$blue┌[$default$blue\u@$hostcolor\h$bold$blue]-$GITPROMPT$bold$blue[$default$blue\t \d$bold]\n$default$bold$blue└[$default$blue\w$bold$blue] \\\$ $default"
-      portcheck derf.us 80 &> /dev/null || prompt offline
+      portcheck derf.us 80 &> /dev/null || prompt offline-multi
       ;;
    *)
       ;;
