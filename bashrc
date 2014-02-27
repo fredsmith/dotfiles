@@ -51,11 +51,9 @@ fi
 
 # functions
 function rehash { 
-   set -x
    if [ -f $HOME/.bashrc ]; then
       . $HOME/.bashrc
    fi
-   set +x
 }
 
 cd

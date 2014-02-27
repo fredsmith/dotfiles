@@ -2,7 +2,7 @@
 
 function healthbar { 
    # TODO: optionally limit to less than full width of screen
-   COLS=$(subt `tput cols` 2); # screen width minus 2
+   COLS=$(subt `tput cols` 10); # screen width minus 2
    HEALTHYPIPS=$(mult $COLS .$1); # number of pips to draw to cover a percent of the screen
    echo -n "["; # brackets are cool
    tput setaf 2; # green
@@ -19,3 +19,16 @@ function healthbar {
 }
 
 # TODO: yaml config file parser and executor.
+function spinner {
+    local pid=$1
+    local delay=0.75
+    local spinstr='|/-\'
+    while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
+        local temp=${spinstr#?}
+        printf " [%c]  " "$spinstr"
+        local spinstr=$temp${spinstr%"$temp"}
+        sleep $delay
+        printf "\b\b\b\b\b\b"
+    done
+    printf "    \b\b\b\b"
+}

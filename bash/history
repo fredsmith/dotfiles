@@ -6,7 +6,7 @@
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
-export HISTCONTROL=ignoreboth
+export HISTCONTROL=ignorespace
 unset HISTFILESIZE
 export HISTFILESIZE
 unset HISTSIZE

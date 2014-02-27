@@ -14,7 +14,7 @@ nmap <C-N><C-N> :set invnumber<CR>
 cmap w!! w !sudo tee % >/dev/null
 
 set ruler " Show the cursor position
-set tabstop=3 shiftwidth=3      
+set tabstop=2 shiftwidth=2      
 set ai 
 set expandtab                   
 set backspace=indent,eol,start  
@@ -64,6 +64,8 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'ivyl/vim-bling'
 "Bundle 'mileszs/ack.vim'
 Bundle 'rking/ag.vim'
+"Bundle 'xolox/vim-misc'
+"Bundle 'xolox/vim-notes'
 
 filetype plugin indent on
 
@@ -93,3 +95,6 @@ colorscheme solarized
 
 " Numbers
 nnoremap <F3> :NumbersToggle<CR>
+
+" Notes
+"let g:notes_directories = ['~/Documents/Notes']
