@@ -1,7 +1,9 @@
 #! /bin/bash
 
 # init rbenv
-eval "$(rbenv init -)"
+if which rbenv &> /dev/null; then
+  eval "$(rbenv init -)"
+fi
 
 # includes
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
@@ -11,4 +13,6 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 
 #aliases
 
-alias rake="bundle exec rake"
+if which bundle &> /dev/null; then
+  alias rake="bundle exec rake"
+fi
