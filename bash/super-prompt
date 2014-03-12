@@ -8,33 +8,25 @@ DEFAULTPROMPT="super-single"
 
 #functions
 
-beep_if_long_time_past() {
-    LAST_COMMAND_TIME=$(date -d "`history 1 | cut -f 2-4 -d ' '`" '+%s');
-    LAST_COMMAND_DURATION=$(($(date +%s) - ${LAST_COMMAND_TIME}))
-    LAST_COMMAND=$(history 1 | sed -e 's/^ *[0-9]* *[0-9]*-[0-9]*-[0-9]* *[0-9]*:[0-9]*:[0-9]* *- *//g');
-    [[ ${LAST_COMMAND_DURATION} -gt 20 ]] && { echo "time: ${LAST_COMMAND_DURATION} seconds" ; notify-send -t 30 "${LAST_COMMAND} done after ${LAST_COMMAND_DURATION} seconds!"; }
-}
-
-
 prompt () {
    [[ $# = 1 ]] && mode="$1" || mode=$DEFAULTPROMPT
 
    case "$mode" in
    none)
-      export PROMPT_COMMAND='prompt none; beep_if_long_time_past; history -a';
+      export PROMPT_COMMAND='prompt none; history -a';
       export PS1="\\\$ "
       ;;
    basicoffline)
-      export PROMPT_COMMAND='prompt basicoffline; beep_if_long_time_past; history -a';
+      export PROMPT_COMMAND='prompt basicoffline; history -a';
       PS1="[\u@$hostcolor\h$default [$red""OFFLINE$default] \w]\\\$ ";
       ;;
    basic)
-      export PROMPT_COMMAND='prompt basic; post_history; beep_if_long_time_past; history -a';
+      export PROMPT_COMMAND='prompt basic; post_history; history -a';
       PS1="[\u@$hostcolor\h$default \w]\\\$ ";
       portcheck derf.us 80 &> /dev/null || prompt basicoffline
       ;;
    offline-single)
-      export PROMPT_COMMAND='prompt offline-single; beep_if_long_time_past; history -a';
+      export PROMPT_COMMAND='prompt offline-single; history -a';
       TODO=$(todo_prompt)
       GITPROMPT=$(git_prompt);
       RVMPROMPT=$(rvm_prompt 2> /dev/null);
@@ -43,7 +35,7 @@ prompt () {
       PS1="$bold$blue[$default$blue\u@$hostcolor\h$bold$blue]$GITPROMPT$ONLINEPROMPT$bold$blue[$default$blue\t$bold]-[$default$blue\w$bold$blue] \\\$ $default"
       ;;
    super-single)
-      export PROMPT_COMMAND='prompt super-single; post_history; beep_if_long_time_past; history -a';
+      export PROMPT_COMMAND='prompt super-single; post_history; history -a';
       #TODO=$(todo_prompt 2> /dev/null)
       GITPROMPT=$(git_prompt 2> /dev/null);
       #RVMPROMPT=$(rvm_prompt 2> /dev/null);
@@ -53,7 +45,7 @@ prompt () {
       portcheck derf.us 80 &> /dev/null || prompt offline-single
       ;;
    offline-multi)
-      export PROMPT_COMMAND='prompt offline-multi; beep_if_long_time_past; history -a';
+      export PROMPT_COMMAND='prompt offline-multi; history -a';
       #TODO=$(todo_prompt)
       GITPROMPT=$(git_prompt);
       RVMPROMPT=$(rvm_prompt 2> /dev/null);
@@ -61,7 +53,7 @@ prompt () {
       PS1="$bold$blue┌[$default$blue\u@$hostcolor\h$bold$blue]-$GITPROMPT$bold$blue[$default$red""OFFLINE$bold$blue]-[$default$blue\t \d$bold]\n$default$bold$blue└[$default$blue\w$bold$blue] \\\$ $default"
       ;;
    super-multi)
-      export PROMPT_COMMAND='prompt super-multi; post_history; beep_if_long_time_past; history -a';
+      export PROMPT_COMMAND='prompt super-multi; post_history; history -a';
       #TODO=$(todo_prompt 2> /dev/null)
       GITPROMPT=$(git_prompt 2> /dev/null);
       RVMPROMPT=$(rvm_prompt 2> /dev/null);
