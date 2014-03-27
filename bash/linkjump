@@ -17,9 +17,15 @@ if [[ -d ~/links ]]; then
   function j {
      if [[ $# -eq 1 ]]; then
         if [[ -L ~/links/$1 ]]; then
-          pushd ~/links/$1
-        else
-          pushd ~/links/*$1*
+          REALDIR=$(pushd ~/links/$1 > /dev/null && /bin/pwd -P && popd > /dev/null;)
+          if [[ $? -eq 0 ]]; then
+            pushd $REALDIR
+          fi
+          else
+          REALDIR=$(pushd ~/links/*$1* > /dev/null && /bin/pwd -P && popd > /dev/null;)
+          if [[ $? -eq 0 ]]; then
+            pushd $REALDIR
+          fi
         fi
      else
        ls ~/links/
