@@ -1,0 +1,30 @@
+#! /bin/bash
+
+### linkjump
+
+if [[ -d ~/links ]]; then
+
+  # autocomplete
+  complete -W "$(cd ~/links; ls -1)" j
+
+  # variables
+
+  # aliases 
+  alias jb=popd
+
+
+  ## Functions
+  function j {
+     if [[ $# -eq 1 ]]; then
+        if [[ -L ~/links/$1 ]]; then
+          pushd ~/links/$1
+        else
+          pushd ~/links/*$1*
+        fi
+     else
+       ls ~/links/
+     fi
+  }
+
+fi
+
