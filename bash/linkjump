@@ -28,7 +28,10 @@ if [[ -d ~/links ]]; then
           fi
         fi
      else
+       echo "available links:"
        ls ~/links/
+       echo "link stack:"
+       dirs
      fi
   }
 
