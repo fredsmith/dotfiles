@@ -70,4 +70,3 @@ git_prompt() {
 
 # Export prompt command and other environment variables
 export CLICOLOR=1
-export PROMPT_COMMAND=__prompt

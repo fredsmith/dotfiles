@@ -1,0 +1,41 @@
+#! /bin/bash
+
+### linkjump
+
+if [[ -d ~/links ]]; then
+
+  # autocomplete
+  complete -W "$(cd ~/links; ls -1)" j
+
+  # variables
+
+  # aliases 
+  alias jb=popd
+
+
+  ## Functions
+  function j {
+     if [[ $# -eq 1 ]]; then
+        if [[ -L ~/links/$1 ]]; then
+          REALDIR=$(pushd ~/links/$1 > /dev/null && /bin/pwd -P && popd > /dev/null;)
+          if [[ $? -eq 0 ]]; then
+            pushd $REALDIR
+          fi
+        else
+          REALDIR=$(pushd ~/links/*$1* > /dev/null && /bin/pwd -P && popd > /dev/null;)
+          if [[ $? -eq 0 ]]; then
+            pushd $REALDIR
+          fi
+        fi
+     else
+       echo "available links:"
+       ls ~/links/
+       echo "link stack:"
+       dirs
+     fi
+  }
+
+else
+  mkdir -p ~/links
+fi
+
