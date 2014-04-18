@@ -12,14 +12,22 @@ if [ -f ~/.ssh/config ]; then
    complete -W "$(cat ~/.ssh/config | grep "Host \w" | cut -f 2 -d ' ')" ssh
 fi
 
+complete -W "$(ls ~/.ssh/*.*sa | sed -e 's/.*\///' | cut -f 1 -d '.')" add
+
 
 # functions
 function sshclear { if [ $1 -gt "0" ]; then REGEXP="${1}d"; sed -i".bak" $REGEXP ~/.ssh/known_hosts; fi }
+function add { 
+  FILELIST="$HOME/.ssh/key.rsa"
+  for ARG in $*; do
+    FILELIST="$FILELIST $HOME/.ssh/$ARG.*sa";
+  done
+  ssh-add $FILELIST
+}
 
 #aliases
 
 #ssh agent
-alias add='/usr/bin/ssh-add -t 18000 ~/.ssh/*.*sa'
 alias lock='/usr/bin/ssh-add -D'
 alias list='/usr/bin/ssh-add -l'
 
