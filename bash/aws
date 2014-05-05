@@ -1,0 +1,20 @@
+#! /bin/bash
+
+### Amazon Web Services
+
+if [[ -d ~/workspace/aws-creds ]]; then
+
+  #functions
+  function setawsenv {
+    source ~/workspace/aws-creds/$1.txt
+    echo "AWS set to $1"
+  }
+  complete -W "$(ls ~/workspace/aws-creds/*.txt | sed -e 's/.*\///' | cut -f 1 -d '.')" setawsenv
+
+fi
+
+if which aws &> /dev/null; then
+  if which aws_completer &> /dev/null; then
+    complete -C aws_completer aws
+  fi
+fi
