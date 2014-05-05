@@ -1,6 +1,15 @@
 #! /bin/bash
 
-if [ -f ~/Documents/Projects/ansible/derf/ansible.cfg ]; then
-   export ANSIBLE_CONFIG=~/Documents/Projects/ansible/derf/ansible.cfg
-fi
+#if [ -f ~/Documents/Projects/ansible/derf/ansible.cfg ]; then
+#   export ANSIBLE_CONFIG=~/Documents/Projects/ansible/derf/ansible.cfg
+#fi
+
+# environment
+
+# aliases
+
+alias ansible-playbook="ansible-playbook \$ANSIBLE_EXTRA_VARS"
+
+# functions
+
 
