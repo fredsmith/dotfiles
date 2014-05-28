@@ -7,6 +7,7 @@
   gr = log --pretty=\"format:%h %an %s\" --graph
   forcepush = push --force origin HEAD
   newpush = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\""
+  undo = reset --soft HEAD~1
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
