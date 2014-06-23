@@ -11,6 +11,10 @@ DEFAULTPROMPT="super-single"
 prompt () {
    [[ $# = 1 ]] && mode="$1" || mode=$DEFAULTPROMPT
 
+   if [[ -z "$PROMPT_PLUGINS" ]]; then
+      PROMPT_PLUGINS="git_prompt";
+   fi
+
    case "$mode" in
    none)
       export PROMPT_COMMAND='prompt none; history -a';
@@ -27,38 +31,41 @@ prompt () {
       ;;
    offline-single)
       export PROMPT_COMMAND='prompt offline-single; history -a';
-      TODO=$(todo_prompt)
-      GITPROMPT=$(git_prompt);
-      RVMPROMPT=$(rvm_prompt 2> /dev/null);
+      PLUGIN_OUTPUT=$(for PLUGIN in $PROMPT_PLUGINS; do
+        PLUGIN_OUT=$($PLUGIN 2> /dev/null);
+        echo -n $PLUGIN_OUT;
+      done);
       ONLINEPROMPT="$bold$blue[$default$red""OFFLINE$bold$blue]-"
       #running this after every command is pretty expensive.  cache it maybe?
-      PS1="$bold$blue[$default$blue\u@$hostcolor\h$bold$blue]$GITPROMPT$ONLINEPROMPT$bold$blue[$default$blue\t$bold]-[$default$blue\w$bold$blue] \\\$ $default"
+      PS1="$bold$blue[$default$blue\u@$hostcolor\h$bold$blue]$PLUGIN_OUTPUT$ONLINEPROMPT$bold$blue[$default$blue\t$bold]-[$default$blue\w$bold$blue] \\\$ $default"
       ;;
    super-single)
       export PROMPT_COMMAND='prompt super-single; post_history; history -a';
-      #TODO=$(todo_prompt 2> /dev/null)
-      GITPROMPT=$(git_prompt 2> /dev/null);
-      #RVMPROMPT=$(rvm_prompt 2> /dev/null);
-      ONLINEPROMPT=""
+      PLUGIN_OUTPUT=$(for PLUGIN in $PROMPT_PLUGINS; do
+        PLUGIN_OUT=$($PLUGIN 2> /dev/null);
+        echo -n $PLUGIN_OUT;
+      done);
       #running this after every command is pretty expensive.  cache it maybe?
-      PS1="$bold$blue[$default$blue\u@$hostcolor\h$bold$blue]$GITPROMPT$RVMPROMPT$ONLINEPROMPT$bold$blue[$default$blue\t$bold]-[$default$blue\w$bold$blue] \\\$ $default"
+      PS1="$bold$blue[$default$blue\u@$hostcolor\h$bold$blue]$PLUGIN_OUTPUT$bold$blue[$default$blue\t$bold]-[$default$blue\w$bold$blue] \\\$ $default"
       portcheck derf.us 80 &> /dev/null || prompt offline-single
       ;;
    offline-multi)
       export PROMPT_COMMAND='prompt offline-multi; history -a';
-      #TODO=$(todo_prompt)
-      GITPROMPT=$(git_prompt);
-      RVMPROMPT=$(rvm_prompt 2> /dev/null);
+      PLUGIN_OUTPUT=$(for PLUGIN in $PROMPT_PLUGINS; do
+        PLUGIN_OUT=$($PLUGIN 2> /dev/null);
+        echo -n $PLUGIN_OUT;
+      done);
       #running this after every command is pretty expensive.  cache it maybe?
-      PS1="$bold$blue┌[$default$blue\u@$hostcolor\h$bold$blue]-$GITPROMPT$bold$blue[$default$red""OFFLINE$bold$blue]-[$default$blue\t \d$bold]\n$default$bold$blue└[$default$blue\w$bold$blue] \\\$ $default"
+      PS1="$bold$blue┌[$default$blue\u@$hostcolor\h$bold$blue]-$PLUGIN_OUTPUT$bold$blue[$default$red""OFFLINE$bold$blue]-[$default$blue\t \d$bold]\n$default$bold$blue└[$default$blue\w$bold$blue] \\\$ $default"
       ;;
    super-multi)
       export PROMPT_COMMAND='prompt super-multi; post_history; history -a';
-      #TODO=$(todo_prompt 2> /dev/null)
-      GITPROMPT=$(git_prompt 2> /dev/null);
-      RVMPROMPT=$(rvm_prompt 2> /dev/null);
+      PLUGIN_OUTPUT=$(for PLUGIN in $PROMPT_PLUGINS; do
+        PLUGIN_OUT=$($PLUGIN 2> /dev/null);
+        echo -n $PLUGIN_OUT;
+      done);
       #running this after every command is pretty expensive.  cache it maybe?
-      PS1="$bold$blue┌[$default$blue\u@$hostcolor\h$bold$blue]-$GITPROMPT$bold$blue[$default$blue\t \d$bold]\n$default$bold$blue└[$default$blue\w$bold$blue] \\\$ $default"
+      PS1="$bold$blue┌[$default$blue\u@$hostcolor\h$bold$blue]-$PLUGIN_OUTPUT$bold$blue[$default$blue\t \d$bold]\n$default$bold$blue└[$default$blue\w$bold$blue] \\\$ $default"
       portcheck derf.us 80 &> /dev/null || prompt offline-multi
       ;;
    *)
