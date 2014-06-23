@@ -35,6 +35,13 @@ if [[ -d ~/links ]]; then
      fi
   }
 
+  function linkjump_prompt {
+      DIRSCOUNT=$(expr $(dirs | wc -w) - 1);
+      if [[ $DIRSCOUNT > 0 ]]; then
+          echo -n "$default[L:$blue$DIRSCOUNT$default]-"
+      fi
+  }
+  export PROMPT_PLUGINS="$PROMPT_PLUGINS linkjump_prompt";
 else
   mkdir -p ~/links
 fi

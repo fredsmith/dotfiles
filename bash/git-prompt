@@ -68,5 +68,7 @@ git_prompt() {
     echo "$__PROMPT"                     # Set prompt
 }
 
+export PROMPT_PLUGINS="$PROMPT_PLUGINS git_prompt";
+
 # Export prompt command and other environment variables
 export CLICOLOR=1
