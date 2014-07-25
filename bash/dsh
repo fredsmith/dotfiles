@@ -17,5 +17,22 @@ function dshload {
    fi
 
 }
-function dshlist { for HOST in ${HOSTLIST[*]}; do echo $HOST; done ;}
-function dsh { HOSTMASK=$1; DATETIME=`date '+%D %T'`; shift 1; for HOST in `dshlist | grep $HOSTMASK`; do (ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no -x $HOST "$@" | xargs -n 500 echo $DATETIME $HOST: >> /tmp/dsh.log )& done; ACTIVE=1; until [[ $ACTIVE = 0 ]]; do jobs -l > /dev/null; ACTIVE=`jobs -p | wc -l`; printf "\r%s active jobs" $ACTIVE; done; }
+function dshlist { 
+  cat ~/.ssh/config | grep "^Host" | sed -e 's/^Host //'
+}
+
+function dsh { 
+  HOSTMASK=$1; 
+  shift 1; 
+  for HOST in `dshlist | grep $HOSTMASK`; do 
+    (ssh -q -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -x $HOST "$@" | xargs -n 500 echo "$HOST:" | tee -a /tmp/dsh.log )&
+  done; 
+  ACTIVE=1; 
+  until [[ $ACTIVE = 0 ]]; do 
+    jobs -l > /dev/null; 
+    ACTIVE=`jobs -p | wc -l`; 
+    #printf "\r%s active jobs" $ACTIVE; 
+  done; 
+}
+
+complete -W "$(cat ~/.ssh/config | grep "^Host" | sed -e 's/^Host //')" dsh
