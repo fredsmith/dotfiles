@@ -7,6 +7,7 @@
   gr = log --pretty=\"format:%h %an %s\" --graph
   forcepush = push --force origin HEAD
   newpush = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\""
+  pull-request = "!hub pull-request -m \"$(git log -1 --pretty=%B)\""
   undo = reset --soft HEAD~1
   discard = checkout --
 [filter "media"]
