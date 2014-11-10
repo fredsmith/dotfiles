@@ -3,6 +3,9 @@
 	email = fred.smith@fredsmith.org
 [push]
 	default = simple
+[branch]
+    autosetupmerge = true
+    autosetuprebase = always
 [alias]
   gr = log --pretty=\"format:%h %an %s\" --graph
   forcepush = push --force origin HEAD
