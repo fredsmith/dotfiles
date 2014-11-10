@@ -22,6 +22,7 @@ else if [-d $HOME/.dotfiles ]; then
    ln -s $CONFIGDIR/bashrc ~/.bashrc
    mv ~/.profile ~/.profile.old
    ln -s $CONFIGDIR/profile ~/.profile
+   . ~/bashrc
 fi
 fi
 
