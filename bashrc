@@ -15,6 +15,13 @@ if [ -d $HOME/dotfiles ]; then
    export CONFIGDIR="$HOME/dotfiles";
 else if [-d $HOME/.dotfiles ]; then
    export CONFIGDIR="$HOME/.dotfiles";
+ else
+   export CONFIGDIR="$HOME/dotfiles";
+   git clone https://github.com/fredsmith/dotfiles $CONFIGDIR
+   mv ~/.bashrc ~/.bashrc.old
+   ln -s $CONFIGDIR/bashrc ~/.bashrc
+   mv ~/.profile ~/.profile.old
+   ln -s $CONFIGDIR/profile ~/.profile
 fi
 fi
 
@@ -28,7 +35,7 @@ done >/dev/null 2>&1
 # environment
 export TZ=US/Eastern
 export FULLNAME="Fred Smith"
-export EMAIL="fred@getsatisfaction.com"
+export EMAIL="fred.smith@fredsmith.org"
 export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:$PATH:/sbin:/usr/sbin:$HOME/.rvm/bin 
 
 # bash modules
@@ -58,5 +65,3 @@ function rehash {
 
 cd
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
