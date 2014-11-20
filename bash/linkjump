@@ -19,12 +19,12 @@ if [[ -d ~/links ]]; then
         if [[ -L ~/links/$1 ]]; then
           REALDIR=$(pushd ~/links/$1 > /dev/null && /bin/pwd -P && popd > /dev/null;)
           if [[ $? -eq 0 ]]; then
-            pushd $REALDIR
+            pushd "$REALDIR"
           fi
         else
           REALDIR=$(pushd ~/links/*$1* > /dev/null && /bin/pwd -P && popd > /dev/null;)
           if [[ $? -eq 0 ]]; then
-            pushd $REALDIR
+            pushd "$REALDIR"
           fi
         fi
      else
