@@ -13,6 +13,7 @@
   pull-request = "!hub pull-request -m \"$(git log -1 --pretty=%B)\""
   undo = reset --soft HEAD~1
   discard = checkout --
+  commitnewbranchandpr = "!commitnewbranchandpr() { ARGS=$@; BRANCHNAME=$(echo $ARGS | sed -e 's/ /_/g'); git checkout -b derf/$BRANCHNAME; git commit -a -m \"$ARGS\"; git newpush; git pull-request;}; commitnewbranchandpr"
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
