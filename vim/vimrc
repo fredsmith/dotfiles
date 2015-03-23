@@ -67,6 +67,7 @@ Bundle 'rking/ag.vim'
 "Bundle 'xolox/vim-misc'
 "Bundle 'xolox/vim-notes'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'scrooloose/syntastic'
 
 filetype plugin indent on
 
