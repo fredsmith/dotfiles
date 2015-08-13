@@ -1,0 +1,43 @@
+#! /bin/bash
+
+function multisshlist { 
+  cat ~/.ssh/config | grep "^Host" | sed -e 's/^Host //'
+}
+
+function multissh { 
+   HOST=$1;
+   shift;
+   MULTARGS=$@;
+   SHORTHOST=$(echo $HOST | sed -e 's/\..*//');
+   settitle $SHORTHOST;
+   HOSTLIST=$(multisshlist | grep $HOST);
+   if [[ `echo "$HOSTLIST" | grep -v "^$" | wc -l` -eq "0" ]]; then
+      ssh $HOST $MULTARGS;
+   else 
+      if [[ `echo "$HOSTLIST" | grep -v "^$" | wc -l` -eq "1" ]]; then
+         ssh $HOST $MULTARGS;
+      else 
+         if [[ -z "$TMUX" ]]; then tmux -l new-session -s "$SHORTHOST" "source ${BASH_SOURCE[0]}; multissh $HOST $MULTARGS"; return; fi
+         if [[ `echo "$HOSTLIST" | grep -v "^$" | wc -l` -gt "1" ]]; then
+            FIRST=true
+            for HOST in $HOSTLIST; do
+               if $FIRST; then
+                  echo $HOST;
+                  tmux new-window -n $SHORTHOST "source ${BASH_SOURCE[0]}; ssh $HOST $MULTARGS";
+                  FIRST=false;
+               else
+                  echo $HOST;
+                  tmux split-window -h "source ${BASH_SOURCE[0]}; ssh $HOST $MULTARGS";
+               fi
+            done
+            tmux select-layout tiled;
+         else
+            echo "HOSTLIST malformed: $HOSTLIST"
+         fi
+     fi
+   fi
+   settitle bash;
+}
+
+
+complete -W "$(cat ~/.ssh/config | grep "^Host" | sed -e 's/^Host //')" multish
