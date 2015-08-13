@@ -16,6 +16,7 @@
   commitnewbranchandpr = "!commitnewbranchandpr() { ARGS=$@; BRANCHNAME=$(echo $ARGS | sed -e 's/ /_/g'); git checkout -b derf/$BRANCHNAME; git commit -a -m \"$ARGS\"; git newpush; git pull-request;}; commitnewbranchandpr"
   wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
   summary = !git log $(git log -1 --merges --pretty=format:%H)..HEAD --oneline
+  fixup = commit --amend
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
