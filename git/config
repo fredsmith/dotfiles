@@ -1,6 +1,6 @@
 [user]
 	name = Fred Smith
-	email = fred.smith@fredsmith.org
+	email = derf@edx.org
 [push]
 	default = simple
 [branch]
@@ -8,6 +8,7 @@
     autosetuprebase = always
 [alias]
   gr = log --pretty=\"format:%h %an %s\" --graph
+  s = status
   forcepush = push --force origin HEAD
   newpush = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\""
   pull-request = "!hub pull-request -m \"$(git log -1 --pretty=%B)\""
@@ -17,6 +18,7 @@
   wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
   summary = !git log $(git log -1 --merges --pretty=format:%H)..HEAD --oneline
   fixup = commit --amend
+  branches = for-each-ref --sort='-authordate:iso8601' --format=' %(authordate:relative)%09%(refname:short)' refs/heads
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
