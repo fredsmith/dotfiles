@@ -19,6 +19,7 @@
   summary = !git log $(git log -1 --merges --pretty=format:%H)..HEAD --oneline
   fixup = commit --amend
   branches = for-each-ref --sort='-authordate:iso8601' --format=' %(authordate:relative)%09%(refname:short)' refs/heads
+  br = checkout -b
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
