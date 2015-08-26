@@ -6,3 +6,11 @@ if [[ -s /usr/local/bin/virtualenvwrapper.sh ]]; then
   source /usr/local/bin/virtualenvwrapper.sh
 fi
 
+virtualenv_prompt() {
+  if ! [ -z "$VIRTUAL_ENV" ]; then
+    echo -n "[VE:$(basename $VIRTUAL_ENV)]-";
+  fi
+}   
+
+
+export PROMPT_PLUGINS="virtualenv_prompt $PROMPT_PLUGINS";
