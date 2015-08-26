@@ -60,9 +60,8 @@ fi
 # functions
 function rehash { 
    if [ -f $HOME/.bashrc ]; then
+     unset PROMPT_PLUGINS
       . $HOME/.bashrc
    fi
 }
-
-cd
 
