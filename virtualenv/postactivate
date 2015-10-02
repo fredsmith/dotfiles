@@ -1,0 +1,8 @@
+#!/usr/local/bin/bash
+# This hook is sourced after every virtualenv is activated.
+if [[ -L $VIRTUAL_ENV/$VIRTUALENVWRAPPER_PROJECT_FILENAME ]]; then
+  REALDIR=$(pushd $VIRTUAL_ENV/working > /dev/null && /bin/pwd -P && popd > /dev/null;);
+  if [[ $? -eq 0 ]]; then
+    pushd "$REALDIR";
+  fi;
+fi

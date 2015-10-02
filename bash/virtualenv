@@ -2,9 +2,12 @@
 
 # init virtualenvwrapper
 if [[ -s /usr/local/bin/virtualenvwrapper.sh ]]; then
-  export WORKON_HOME=$HOME/.virtualenvs
+  export WORKON_HOME="$HOME/.virtualenvs"
+  export VIRTUALENVWRAPPER_PROJECT_FILENAME="working"
+  export VIRTUALENVWRAPPER_HOOK_DIR="$CONFIGDIR/virtualenv"
   source /usr/local/bin/virtualenvwrapper.sh
 fi
+export PROJECT_HOME="$HOME/workspace"
 
 virtualenv_prompt() {
   if ! [ -z "$VIRTUAL_ENV" ]; then
@@ -15,3 +18,7 @@ virtualenv_prompt() {
 
 
 export PROMPT_PLUGINS="virtualenv_prompt $PROMPT_PLUGINS";
+
+alias w='workon'
+complete -o default -o nospace -F _virtualenvs w
+alias de='deactivate'
