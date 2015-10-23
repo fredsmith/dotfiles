@@ -66,11 +66,13 @@ Bundle 'ivyl/vim-bling'
 Bundle 'rking/ag.vim'
 "Bundle 'xolox/vim-misc'
 "Bundle 'xolox/vim-notes'
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
 Bundle 'jamessan/vim-gnupg'
+Bundle 'davidhalter/jedi-vim'
+Bundle 'ervandew/supertab'
 
 filetype plugin indent on
 
