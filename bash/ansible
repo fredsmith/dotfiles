@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 #if [ -f ~/Documents/Projects/ansible/derf/ansible.cfg ]; then
 #   export ANSIBLE_CONFIG=~/Documents/Projects/ansible/derf/ansible.cfg

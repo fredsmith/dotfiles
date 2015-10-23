@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 function mailme {
   $@ 2>&1 | mail -s "$@ on $HOSTNAME" $EMAIL 

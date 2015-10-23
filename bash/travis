@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 if [ -f /Users/derf/.travis/travis.sh ]; then
   source /Users/derf/.travis/travis.sh

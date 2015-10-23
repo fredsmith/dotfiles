@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 # Function for determining current git branch (if any)
 # Gracefully fails if not in a git repo and returns nothing.

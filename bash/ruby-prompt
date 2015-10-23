@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 # Logic for determining the contents and setting the prompt
 rvm_prompt() {

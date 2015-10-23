@@ -1,11 +1,11 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 # init virtualenvwrapper
-if [[ -s /usr/local/bin/virtualenvwrapper.sh ]]; then
+if which virtualenvwrapper.sh &> /dev/null; then
   export WORKON_HOME="$HOME/.virtualenvs"
   export VIRTUALENVWRAPPER_PROJECT_FILENAME="working"
   export VIRTUALENVWRAPPER_HOOK_DIR="$CONFIGDIR/virtualenv"
-  source /usr/local/bin/virtualenvwrapper.sh
+  source `which virtualenvwrapper.sh`
 fi
 export PROJECT_HOME="$HOME/workspace"
 

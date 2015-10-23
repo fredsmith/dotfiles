@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 # cross-distro, if not root
 if ! [ "$LOGNAME" = "root" ]; then

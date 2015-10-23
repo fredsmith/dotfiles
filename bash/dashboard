@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 function healthbar { 
    # TODO: optionally limit to less than full width of screen

@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 # init rbenv
 if which rbenv &> /dev/null; then

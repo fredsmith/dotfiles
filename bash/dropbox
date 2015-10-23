@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 function getdropbox {
    cd ~ && wget -O - http://www.dropbox.com/download?plat=lnx.x86_64 | tar xzf -

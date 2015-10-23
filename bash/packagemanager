@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 #Redhat specific
 if which rpm &> /dev/null; then

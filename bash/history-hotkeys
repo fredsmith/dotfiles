@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 # bind ctrl-r/s to up/down
 bind '"\e[A": history-search-backward'

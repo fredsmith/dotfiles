@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 if [ -f ~/bin/vimpager ]; then
    export PAGER=~/bin/vimpager

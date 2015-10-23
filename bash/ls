@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 alias ls='ls --color=auto -p'
 alias ll='ls --color=auto -alk'

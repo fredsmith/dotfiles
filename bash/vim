@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 ## VIM
 if [ -f $CONFIGDIR/vim/vimrc ]; then
