@@ -97,7 +97,7 @@ let g:airline_powerline_fonts = 1
 
 " Solarized
 syntax enable
-set background=dark
+" set background=dark
 colorscheme solarized
 
 " Numbers
