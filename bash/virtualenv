@@ -12,7 +12,7 @@ export PROJECT_HOME="$HOME/workspace"
 virtualenv_prompt() {
   if ! [ -z "$VIRTUAL_ENV" ]; then
     echo -n "[VE:$(basename $VIRTUAL_ENV)]-";
-    settitle $(basename $VIRTUAL_ENV);
+    #settitle $(basename $VIRTUAL_ENV);
   fi
 }   
 
