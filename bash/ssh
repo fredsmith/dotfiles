@@ -10,6 +10,7 @@ fi
 # bash completion for ssh config
 if [ -f ~/.ssh/config ]; then
    complete -W "$(cat ~/.ssh/config | grep "Host \w" | cut -f 2 -d ' ')" ssh
+   complete -W "$(cat ~/.ssh/config | grep "Host \w" | cut -f 2 -d ' ')" sshow
 fi
 
 complete -W "$(ls ~/.ssh/*.*sa | sed -e 's/.*\///' | cut -f 1 -d '.')" add
@@ -23,6 +24,12 @@ function add {
     FILELIST="$FILELIST $HOME/.ssh/$ARG.*sa";
   done
   ssh-add $FILELIST
+}
+
+function sshow {
+  for ARG in $*; do
+    grep -A 1 $ARG ~/.ssh/config
+  done
 }
 
 #aliases
