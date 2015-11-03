@@ -35,8 +35,8 @@ function sshow {
 #aliases
 
 #ssh agent
-alias lock='/usr/bin/ssh-add -D'
-alias list='/usr/bin/ssh-add -l'
+alias lock='ssh-add -D'
+alias list='ssh-add -l'
 
 
 #host specific commands
