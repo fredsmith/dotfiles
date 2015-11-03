@@ -1,11 +1,11 @@
 [user]
-	name = Fred Smith
-	email = derf@edx.org
+  name = Fred Smith
+  email = derf@edx.org
 [push]
-	default = simple
+  default = simple
 [branch]
-    autosetupmerge = true
-    autosetuprebase = always
+  autosetupmerge = true
+  autosetuprebase = always
 [alias]
   gr = log --pretty=\"format:%h %an %s\" --graph
   s = status
@@ -21,11 +21,11 @@
   branches = for-each-ref --sort='-authordate:iso8601' --format=' %(authordate:relative)%09%(refname:short)' refs/heads
   br = checkout -b
 [filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
+  clean = git-media-clean %f
+  smudge = git-media-smudge %f
 [github]
-	user = fredsmith
+  user = fredsmith
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
