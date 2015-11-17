@@ -1,6 +1,9 @@
 #! /usr/bin/env bash
 
 #gpg
+if which gpg2 &> /dev/null; then
+  alias gpg='gpg2'
+fi
 
 alias gpge='gpg --encrypt'
 alias gpgd='gpg --decrypt'
