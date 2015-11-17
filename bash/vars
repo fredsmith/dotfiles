@@ -1,0 +1,13 @@
+#! /usr/bin/env bash
+
+VARSDIR="$HOME/vars/"
+
+function print { awk "{print \$$1}"; }
+
+function vars {
+  pushd $VARSDIR > /dev/null;
+  ag -f $@;
+  popd > /dev/null;
+}
+
+complete -W "$(cd $VARSDIR; cat *.yml | print 1 | grep ':$' | sed -e 's/:$//' | sort | uniq)" vars
