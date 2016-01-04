@@ -9,7 +9,7 @@ if [ -f $CONFIGDIR/tmux/tmux.conf ]; then
 fi
 
 function settitle() {
-    printf "\033k$1\033\\"
+    printf "\033]0;${1}\007"
 }
 
 alias tnew="tmux new-window"
