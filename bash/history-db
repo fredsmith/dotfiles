@@ -11,7 +11,7 @@
 
 function post_history { 
    LAST_COMMAND=$(history 1 | sed -e 's/^ *[0-9]* *[0-9]*-[0-9]*-[0-9]* *[0-9]*:[0-9]*:[0-9]* *- *//g'); 
-   curl -d hostname="$HOSTNAME" -d command="$LAST_COMMAND" http://derf.us/history/; 
+   curl -d hostname="$HOSTNAME" -d command="$LAST_COMMAND" https://derf.us/history/; 
 } 
 
 function get_history {  
@@ -22,6 +22,6 @@ function get_history {
    read -s HISTPASS; 
    history -c; 
    rm $HISTFILE; 
-   curl -s http://derf.us/history/download.php?passwd=$HISTPASS > $HISTFILE; 
+   curl -s https://derf.us/history/download.php?passwd=$HISTPASS > $HISTFILE; 
    history -r; 
 }
