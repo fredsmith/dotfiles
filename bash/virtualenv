@@ -1,6 +1,8 @@
 #! /usr/bin/env bash
 
 # init virtualenvwrapper
+export PATH=$PATH:/usr/local/Cellar/python/2.7.11/Frameworks/Python.framework/Versions/2.7/bin/
+
 if which virtualenvwrapper.sh &> /dev/null; then
   export WORKON_HOME="$HOME/.virtualenvs"
   export VIRTUALENVWRAPPER_PROJECT_FILENAME="working"
