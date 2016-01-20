@@ -33,3 +33,8 @@
 	helper = store
 [rerere]
 	enabled = true
+[merge]
+	conflictstyle = diff3
+	tool = vimdiff
+[mergetool]
+	prompt = false
