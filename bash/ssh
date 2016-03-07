@@ -13,7 +13,7 @@ if [ -f ~/.ssh/config ]; then
    complete -W "$(cat ~/.ssh/config 2>/dev/null | grep "Host \w" | cut -f 2 -d ' ')" sshow
 fi
 
-complete -W "$(ls ~/.ssh/*.*sa | sed -e 's/.*\///' | cut -f 1 -d '.')" add
+complete -W "$(ls ~/.ssh/*.*sa 2>/dev/null| sed -e 's/.*\///' | cut -f 1 -d '.')" add
 
 
 # functions
