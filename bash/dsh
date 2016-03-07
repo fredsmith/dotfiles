@@ -18,4 +18,4 @@ function dsh {
   done; 
 }
 
-complete -W "$(cat ~/.ssh/config | grep "^Host" | sed -e 's/^Host //')" dsh
+complete -W "$(cat ~/.ssh/config 2>/dev/null | grep "^Host" | sed -e 's/^Host //')" dsh

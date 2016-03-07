@@ -10,4 +10,4 @@ function vars {
   popd > /dev/null;
 }
 
-complete -W "$(cd $VARSDIR; cat *.yml | print 1 | grep ':$' | sed -e 's/:$//' | sort | uniq)" vars
+complete -W "$(cd $VARSDIR 2>/dev/null; cat *.yml 2>/dev/null | print 1 | grep ':$' | sed -e 's/:$//' | sort | uniq)" vars

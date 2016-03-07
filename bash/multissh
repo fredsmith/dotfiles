@@ -40,4 +40,4 @@ function multissh {
 }
 
 
-complete -W "$(cat ~/.ssh/config | grep "^Host" | sed -e 's/^Host //')" multish
+complete -W "$(cat ~/.ssh/config 2>/dev/null | grep "^Host" | sed -e 's/^Host //')" multissh
