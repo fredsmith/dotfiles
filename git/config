@@ -23,6 +23,7 @@
   br = checkout -b
   trash = "!git add . && git commit -m 'trash' && git reset --hard HEAD^"
   sc = "commit -S"
+  c = "commit -S"
 	alias = config --get-regexp ^alias\\.
 [filter "media"]
   clean = git-media-clean %f
