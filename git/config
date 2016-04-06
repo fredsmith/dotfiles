@@ -12,6 +12,7 @@
   s = status
   forcepush = push --force origin HEAD
   newpush = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\""
+  p = "push"
   pull-request = "!hub pull-request -m \"$(git log -1 --pretty=%B)\""
   undo = reset --soft HEAD~1
   discard = checkout --
@@ -24,6 +25,7 @@
   trash = "!git add . && git commit -m 'trash' && git reset --hard HEAD^"
   sc = "commit -S"
   c = "commit -S"
+  cam = "commit -S -a -m"
 	alias = config --get-regexp ^alias\\.
 [filter "media"]
   clean = git-media-clean %f
