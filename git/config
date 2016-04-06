@@ -1,6 +1,7 @@
 [user]
   name = Fred Smith
   email = derf@edx.org
+	signingkey = 7AD073C7
 [push]
   default = simple
 [branch]
