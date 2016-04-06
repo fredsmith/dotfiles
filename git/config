@@ -22,7 +22,8 @@
   branches = for-each-ref --sort='-authordate:iso8601' --format=' %(authordate:relative)%09%(refname:short)' refs/heads
   br = checkout -b
   trash = "!git add . && git commit -m 'trash' && git reset --hard HEAD^"
-  commit = commit -S
+  commit = "commit -S"
+	alias = config --get-regexp ^alias\\.
 [filter "media"]
   clean = git-media-clean %f
   smudge = git-media-smudge %f
