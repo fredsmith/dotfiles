@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 function dshlist { 
-  cat ~/.ssh/config | grep "^Host" | sed -e 's/^Host //'
+  for HOST in `cat ~/.ssh/config | grep --color=auto "^Host" | sed -e 's/^Host //' | singleline ' '`; do echo $HOST; done
 }
 
 function dsh { 
