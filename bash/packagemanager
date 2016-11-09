@@ -28,7 +28,6 @@ if which dpkg &> /dev/null; then
       alias apt-get='sudo apt-get'
     fi
 		alias yum='apt-get'
-		alias apt='apt-get'
 	fi
 	alias listfiles='dpkg --listfiles'
    function whatprovides() {
