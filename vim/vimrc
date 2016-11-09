@@ -74,6 +74,8 @@ Bundle 'jamessan/vim-gnupg'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'ervandew/supertab'
 Bundle 'terryma/vim-multiple-cursors'
+Bundle 'hashivim/vim-terraform'
+Bundle 'chase/vim-ansible-yaml'
 
 filetype plugin indent on
 
