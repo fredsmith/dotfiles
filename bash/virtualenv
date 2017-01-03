@@ -21,6 +21,5 @@ virtualenv_prompt() {
 
 export PROMPT_PLUGINS="virtualenv_prompt $PROMPT_PLUGINS";
 
-alias w='workon'
 complete -o default -o nospace -F _virtualenvs w
 alias de='deactivate'
