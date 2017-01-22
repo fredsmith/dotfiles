@@ -15,4 +15,7 @@
 # If you want to use XFCE config tools...
 #
 #xfce-mcs-manager &
-conky
+#
+
+feh --bg-scale Documents/wallpapers/Sydney_harbor_night.png
+conky -c dotfiles/conky/conky.conf
