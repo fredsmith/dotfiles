@@ -26,6 +26,7 @@ if which dpkg &> /dev/null; then
 		  alias apt-get='sudo aptitude'
     else
       alias apt-get='sudo apt-get'
+      alias apt='sudo apt'
     fi
 		alias yum='apt-get'
 	fi
