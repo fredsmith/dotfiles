@@ -6,7 +6,7 @@ function print { awk "{print \$$1}"; }
 
 function vars {
   pushd $VARSDIR > /dev/null;
-  ag -f $@;
+  ag --yaml -f $@;
   popd > /dev/null;
 }
 
