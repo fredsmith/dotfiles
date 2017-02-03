@@ -16,19 +16,11 @@ fi
 #debian specific
 if which dpkg &> /dev/null; then
 	if [ "$LOGNAME" = "root" ]; then
-    if which aptitude &> /dev/null; then
-		  alias apt-get='aptitude'
-    fi
-		alias yum='apt-get'
-		alias apt='apt-get'
+        alias yum='apt-get'
 	else
-    if which aptitude &> /dev/null; then
-		  alias apt-get='sudo aptitude'
-    else
-      alias apt-get='sudo apt-get'
-      alias apt='sudo apt'
-    fi
-		alias yum='apt-get'
+        alias apt-get='sudo apt-get'
+        alias apt='sudo apt'
+        alias yum='sudo apt'
 	fi
 	alias listfiles='dpkg --listfiles'
    function whatprovides() {
