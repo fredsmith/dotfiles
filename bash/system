@@ -1,0 +1,5 @@
+#! /usr/bin/env bash
+
+# Aliases
+
+alias listeners="sudo lsof -Pi | grep LISTEN | awk '{ print $1,$3,$9 }' | sort | uniq"
