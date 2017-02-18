@@ -1,3 +1,15 @@
+# set home to be wherever .bashrc is
+export HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# set configdir to be ~/[.]dotfiles
+export CONFIGDIR=$HOME;
+export XDG_CONFIG_HOME=$CONFIGDIR;
+
+# environment
+export TZ=US/Eastern
+export FULLNAME="Fred Smith"
+export EMAIL="fred.smith@fredsmith.org"
+export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:$PATH:/sbin:/usr/sbin:$HOME/.rvm/bin 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 fd=0   # stdin
@@ -6,11 +18,6 @@ if ! [[ -t "$fd" || -p /dev/stdin ]]; then
 fi
 #set -x
 
-# set home to be wherever .bashrc is
-export HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-# set configdir to be ~/[.]dotfiles
-export CONFIGDIR=$HOME;
 if [ -d $HOME/dotfiles ]; then
    export CONFIGDIR="$HOME/dotfiles";
 else if [-d $HOME/.dotfiles ]; then
@@ -26,18 +33,14 @@ else if [-d $HOME/.dotfiles ]; then
 fi
 fi
 
-export XDG_CONFIG_HOME=$CONFIGDIR
 
 # source system profile scripts
 for PROFILEFILE in /etc/profile.d/*.sh; do
    source $PROFILEFILE;
 done >/dev/null 2>&1
 
-# environment
-export TZ=US/Eastern
-export FULLNAME="Fred Smith"
-export EMAIL="fred.smith@fredsmith.org"
-export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:$PATH:/sbin:/usr/sbin:$HOME/.rvm/bin 
+# we set this twice, in case some system level init scripts overrides it
+export XDG_CONFIG_HOME=$CONFIGDIR;
 
 # bash modules
 
