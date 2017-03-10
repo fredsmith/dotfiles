@@ -9,7 +9,10 @@ fi
 
 alias mkdir='mkdir -p'
 
-function http { (exec 3<>/dev/tcp/$1/$2; echo -e "$3 $4 HTTP/1.0\r\n\r\n" >&3; cat <&3); }
+if !which http &> /dev/null; then
+
+    function http { (exec 3<>/dev/tcp/$1/$2; echo -e "$3 $4 HTTP/1.0\r\n\r\n" >&3; cat <&3); }
+fi
 function portcheck { (exec 3<>/dev/tcp/$1/$2) &>/dev/null; OPEN=$?; [ $OPEN -eq 0 ] && echo "open" || echo "closed"; return $OPEN; }
 function portscan { HOST=$1; STARTPORT=$(echo $2 | cut -f 1 -d '-'); ENDPORT=$(echo $2 | cut -f 2 -d '-'); for PORT in `seq $STARTPORT $ENDPORT`; do portcheck $HOST $PORT > /dev/null && echo $PORT; done }
 
