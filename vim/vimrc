@@ -76,6 +76,7 @@ Bundle 'ervandew/supertab'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'hashivim/vim-terraform'
 Bundle 'chase/vim-ansible-yaml'
+" Bundle 'dylanaraps/wal'
 
 Bundle 'vimwiki/vimwiki'
 
@@ -126,6 +127,7 @@ let g:airline_powerline_fonts = 1
 " Solarized
 set background=dark
 colorscheme solarized
+" colorscheme wal
 
 " Numbers
 nnoremap <F3> :NumbersToggle<CR>
