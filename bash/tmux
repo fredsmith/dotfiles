@@ -12,6 +12,11 @@ function settitle() {
     printf "\033]0;${1}\007"
 }
 
+function tmux_fix_ssh() {
+    eval $(tmux show-env    \
+        |sed -n 's/^\(SSH_[^=]*\)=\(.*\)/export \1="\2"/p')
+}
+
 alias tnew="tmux new-window"
 alias tls="tmux ls"
 alias tm="tmux attach -t $*"
