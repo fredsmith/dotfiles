@@ -29,6 +29,16 @@ prompt () {
       PS1="[\u@$hostcolor\h$default \w]\\\$ ";
       portcheck derf.us 80 &> /dev/null || prompt basicoffline
       ;;
+   offline)
+      export PROMPT_COMMAND='prompt offline-single; history -a';
+      PLUGIN_OUTPUT=$(for PLUGIN in $PROMPT_PLUGINS; do
+        PLUGIN_OUT=$($PLUGIN 2> /dev/null);
+        echo -n $PLUGIN_OUT;
+      done);
+      ONLINEPROMPT="$bold$blue[$default$red""OFFLINE$bold$blue]-"
+      #running this after every command is pretty expensive.  cache it maybe?
+      PS1="$bold$blue[$default$blue\u@$hostcolor\h$bold$blue]$PLUGIN_OUTPUT$ONLINEPROMPT$bold$blue[$default$blue\t$bold]-[$default$blue\w$bold$blue] \\\$ $default"
+      ;;
    offline-single)
       export PROMPT_COMMAND='prompt offline-single; history -a';
       PLUGIN_OUTPUT=$(for PLUGIN in $PROMPT_PLUGINS; do
