@@ -77,6 +77,7 @@ Bundle 'terryma/vim-multiple-cursors'
 Bundle 'hashivim/vim-terraform'
 Bundle 'chase/vim-ansible-yaml'
 " Bundle 'dylanaraps/wal'
+Bundle 'nrocco/vim-phplint'
 
 Bundle 'vimwiki/vimwiki'
 
