@@ -1,10 +1,17 @@
 #! /usr/bin/env bash
 
 
-# auto-start keychain
-if which keychain &> /dev/null; then
-	eval `keychain --inherit any --agents ssh --quick --quiet --eval`
+if [ -z $SSH_AUTH_SOCK ]; then
+    GPG_AUTH_SOCK_FILENAME=/run/user/`id -u`/gnupg/S.gpg-agent.ssh; 
+    if [ -S $GPG_AUTH_SOCK_FILENAME ] ; then
+        export SSH_AUTH_SOCK=$GPG_AUTH_SOCK_FILENAME
+    fi
 fi
+
+# auto-start keychain
+#if which keychain &> /dev/null; then
+#	eval `keychain --inherit any --agents ssh --quick --quiet --eval`
+#fi
 
 
 # bash completion for ssh config
