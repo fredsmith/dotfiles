@@ -17,9 +17,7 @@ order += "disk /"
 #order += "run_watch DHCP"
 order += "path_exists CiscoVPN"
 order += "path_exists OpenVPN"
-order += "wireless _first_"
-order += "ethernet enx0050b6df0942"
-order += "battery 0"
+order += "ethernet enp38s0"
 order += "load"
 order += "tztime local"
 
@@ -28,25 +26,18 @@ wireless _first_ {
         format_down = "W: down"
 }
 
-ethernet enx0050b6df0942 {
+ethernet enp38s0 {
         # if you use %speed, i3status requires root privileges
         format_up = "E: %ip (%speed)"
         format_down = "E: down"
 }
 
-battery 0 {
-        format = "%status %percentage %remaining"
-}
 
 run_watch DHCP {
         pidfile = "/var/run/dhclient*.pid"
 }
 
 path_exists CiscoVPN {
-        path = "/proc/sys/net/ipv4/conf/vpn0"
-}
-
-path_exists OpenVPN {
         path = "/proc/sys/net/ipv4/conf/tun0"
 }
 
