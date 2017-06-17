@@ -24,7 +24,7 @@ else if [-d $HOME/.dotfiles ]; then
    export CONFIGDIR="$HOME/.dotfiles";
  else
    export CONFIGDIR="$HOME/dotfiles";
-   git clone https://github.com/fredsmith/dotfiles $CONFIGDIR
+   git clone https://git.smith.bz/derf/dotfiles $CONFIGDIR
    mv ~/.bashrc ~/.bashrc.old
    ln -s $CONFIGDIR/bashrc ~/.bashrc
    mv ~/.profile ~/.profile.old
