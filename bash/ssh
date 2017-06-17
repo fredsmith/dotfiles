@@ -1,10 +1,16 @@
 #! /usr/bin/env bash
 
 
+#ssh agent
+alias lock='ssh-add -D'
+alias list='ssh-add -l'
+
+#GPG Agent running as ssh-agent
 if [ -z $SSH_AUTH_SOCK ]; then
     GPG_AUTH_SOCK_FILENAME=/run/user/`id -u`/gnupg/S.gpg-agent.ssh; 
     if [ -S $GPG_AUTH_SOCK_FILENAME ] ; then
         export SSH_AUTH_SOCK=$GPG_AUTH_SOCK_FILENAME
+        alias lock='echo > ~/.gnupg/sshcontrol'
     fi
 fi
 
@@ -41,9 +47,6 @@ function sshow {
 
 #aliases
 
-#ssh agent
-alias lock='ssh-add -D'
-alias list='ssh-add -l'
 
 
 #host specific commands
