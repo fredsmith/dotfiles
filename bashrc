@@ -20,7 +20,7 @@ fi
 
 if [ -d $HOME/dotfiles ]; then
    export CONFIGDIR="$HOME/dotfiles";
-else if [-d $HOME/.dotfiles ]; then
+else if [ -d $HOME/.dotfiles ]; then
    export CONFIGDIR="$HOME/.dotfiles";
  else
    export CONFIGDIR="$HOME/dotfiles";
@@ -29,7 +29,7 @@ else if [-d $HOME/.dotfiles ]; then
    ln -s $CONFIGDIR/bashrc ~/.bashrc
    mv ~/.profile ~/.profile.old
    ln -s $CONFIGDIR/profile ~/.profile
-   . ~/bashrc
+   . ~/.bashrc
 fi
 fi
 
