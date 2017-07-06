@@ -3,3 +3,23 @@
 ## Aliases
 
 alias g=git
+
+## Variables
+
+export SRCPATH="$HOME/src/"
+
+## Functions
+
+function gco {
+  REPO=$1
+  REPOPATH=$(echo $REPO | sed -e 's/.*\/\///' -e 's/\/[[:alnum:]_-]\+$//');
+  REPONAME=$(echo $REPO | sed -e 's/.*\///' -e 's/.git$//');
+  if ! [[ -d $SRCPATH$REPOPATH ]]; then
+    mkdir -p $SRCPATH$REPOPATH;
+  fi
+  cd $SRCPATH$REPOPATH;
+  if ! [[ -d $REPONAME ]]; then
+    git clone $REPO;
+  fi
+  cd $REPONAME;
+}
