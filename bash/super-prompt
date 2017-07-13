@@ -9,6 +9,7 @@ DEFAULTPROMPT="super-single"
 #functions
 
 prompt () {
+  export RETVAL=$?;
    [[ $# = 1 ]] && mode="$1" || mode=$DEFAULTPROMPT
 
    if [[ -z "$PROMPT_PLUGINS" ]]; then

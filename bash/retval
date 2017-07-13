@@ -1,0 +1,53 @@
+#! /usr/bin/env bash
+
+### show retval of previous command in prompt
+
+function retval_prompt {
+    if [[ $RETVAL > 0 ]]; then
+      case "$RETVAL" in
+        1) 
+          exitcode="Error";
+          ;;
+        2) 
+          exitcode="Missing Keyword";
+          ;;
+        126) 
+          exitcode="Not executable";
+          ;;
+        127) 
+          exitcode="Not Found";
+          ;;
+        128) 
+          exitcode="Invalid exit";
+          ;;
+        129) 
+          exitcode="SIGHUP";
+          ;;
+        130) 
+          exitcode="SIGINT";
+          ;;
+        131) 
+          exitcode="SIGQUIT";
+          ;;
+        136) 
+          exitcode="SIGFPE";
+          ;;
+        137) 
+          exitcode="SIGKILL";
+          ;;
+        142) 
+          exitcode="SIGALRM";
+          ;;
+        143) 
+          exitcode="SIGTERM";
+          ;;
+        *) 
+          exitcode="Error";
+          ;;
+      esac
+
+      echo -n "$default[$red$exitcode: $RETVAL$default]-"
+    fi
+}
+export PROMPT_PLUGINS="retval_prompt $PROMPT_PLUGINS";
+
