@@ -8,8 +8,23 @@
 
 # aliases
 
-alias ansible-playbook="ansible-playbook \$ANSIBLE_EXTRA_VARS"
-
 # functions
 
+function ansible-playbook {
+  `which ansible-playbook` $* $ANSIBLE_EXTRA_VARS
+}
 
+
+
+function setansibleenv {
+  unset ANSIBLE_EXTRA_VARS;
+  source ~/workspace/ansible-envs/$1.txt
+  for FILE in $ANSIBLE_VAR_FILES; do
+    if [[ -e "$FILE" ]]; then
+      echo "including $FILE";
+      export ANSIBLE_EXTRA_VARS="$ANSIBLE_EXTRA_VARS -e @$FILE";
+    fi
+  done
+  echo "Ansible set to $1"
+}
+complete -W "$(ls ~/workspace/ansible-envs/*.txt | sed -e 's/.*\///' | cut -f 1 -d '.')" setansibleenv
