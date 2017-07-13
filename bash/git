@@ -12,7 +12,7 @@ export SRCPATH="$HOME/src/"
 
 function gco {
   REPO=$1
-  REPOPATH=$(echo $REPO | sed -e 's/.*\/\///' -e 's/\/[[:alnum:]_-]\+$//');
+  REPOPATH=$(echo $REPO | sed -e 's/.*@//' -e 's/:/\//' -e 's/.*\/\///' -e 's/.git$//' -e 's/\/[[:alnum:]_-]\+$//');
   REPONAME=$(echo $REPO | sed -e 's/.*\///' -e 's/.git$//');
   if ! [[ -d $SRCPATH$REPOPATH ]]; then
     mkdir -p $SRCPATH$REPOPATH;
