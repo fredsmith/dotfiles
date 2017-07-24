@@ -4,7 +4,7 @@
 
 #variables
 
-DEFAULTPROMPT="super-single"
+DEFAULTPROMPT="super-boxes"
 
 #functions
 
@@ -50,8 +50,20 @@ prompt () {
       #running this after every command is pretty expensive.  cache it maybe?
       PS1="$bold$blue[$default$blue\u@$hostcolor\h$bold$blue]$PLUGIN_OUTPUT$ONLINEPROMPT$bold$blue[$default$blue\t$bold]-[$default$blue\w$bold$blue] \\\$ $default"
       ;;
-   super-single)
+   super-airline)
+      export SEPERATORL="";
+      export SEPERATORR="";
       export PROMPT_COMMAND='prompt super-single; post_history; history -a';
+      PLUGIN_OUTPUT=$(for PLUGIN in $PROMPT_PLUGINS; do
+        PLUGIN_OUT=$($PLUGIN 2> /dev/null);
+        echo -n $PLUGIN_OUT;
+      done);
+      #running this after every command is pretty expensive.  cache it maybe?
+      PS1="$bold$blue$SEPERATORL$default$blue\u@$hostcolor\h$bold$blue$SEPERATORL$PLUGIN_OUTPUT$bold$blue$SEPERATORL$default$blue\t$bold$SEPERATORL$default$blue\w$bold$blue$SEPERATORL \\\$ $default"
+      portcheck derf.us 80 &> /dev/null || prompt offline-single
+      ;;
+   super-boxes)
+      export PROMPT_COMMAND='prompt super-boxes; post_history; history -a';
       PLUGIN_OUTPUT=$(for PLUGIN in $PROMPT_PLUGINS; do
         PLUGIN_OUT=$($PLUGIN 2> /dev/null);
         echo -n $PLUGIN_OUT;
