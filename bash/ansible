@@ -27,4 +27,4 @@ function setansibleenv {
   done
   echo "Ansible set to $1"
 }
-complete -W "$(ls ~/workspace/ansible-envs/*.txt | sed -e 's/.*\///' | cut -f 1 -d '.')" setansibleenv
+complete -W "$(ls ~/workspace/ansible-envs/*.txt  2> /dev/null | sed -e 's/.*\///' | cut -f 1 -d '.')" setansibleenv
