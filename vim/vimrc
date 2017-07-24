@@ -61,6 +61,7 @@ Bundle 'airblade/vim-gitgutter'
 Bundle 'myusuf3/numbers.vim' 
 Bundle 'tpope/vim-markdown'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'morhetz/gruvbox'
 Bundle 'ivyl/vim-bling'
 "Bundle 'mileszs/ack.vim'
 Bundle 'rking/ag.vim'
@@ -125,10 +126,13 @@ set encoding=utf-8 " Necessary to show unicode glyphs
 " Airline
 let g:airline_powerline_fonts = 1
 
-" Solarized
 set background=dark
-colorscheme solarized
+set t_ut=
+" Solarized
+"colorscheme solarized
 " colorscheme wal
+
+colorscheme gruvbox
 
 " Numbers
 nnoremap <F3> :NumbersToggle<CR>
