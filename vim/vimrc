@@ -13,6 +13,8 @@ nmap <C-N><C-N> :set invnumber<CR>
 " http://www.reddit.com/r/vim/comments/16w481/what_is_your_vimrc_and_why_do_you_like_it/
 cmap w!! w !sudo tee % >/dev/null
 
+com! FormatJSON %!python -m json.tool
+
 set ruler " Show the cursor position
 set tabstop=2 shiftwidth=2      
 set ai 
@@ -79,6 +81,7 @@ Bundle 'hashivim/vim-terraform'
 Bundle 'chase/vim-ansible-yaml'
 " Bundle 'dylanaraps/wal'
 Bundle 'nrocco/vim-phplint'
+Bundle 'Lokaltog/vim-easymotion'
 
 Bundle 'vimwiki/vimwiki'
 
