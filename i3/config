@@ -145,6 +145,7 @@ workspace Slack output DP-2-2
 workspace Keybase output DP-2-2
 workspace IRC output DP-2-2
 workspace Discord output DP-2-2
+workspace Thunderbird output DP-2-2
 workspace 2 output DP-2-2
 workspace 3 output DP-2-2
 workspace 4 output DP-2-1
@@ -161,6 +162,7 @@ for_window [class="^Hexchat"] move container to workspace IRC
 for_window [class="^Slack"] move container to workspace Slack
 for_window [class="^Keybase"] move container to workspace Keybase
 for_window [title="Discord$"] move container to workspace Discord
+for_window [title="Mozilla Thunderbird$"] move container to workspace Thunderbird
 
 # reload the configuration file
 
