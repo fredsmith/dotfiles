@@ -60,7 +60,7 @@ Bundle 'bling/vim-airline'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'airblade/vim-gitgutter'
 "requires vim 7.3
-Bundle 'myusuf3/numbers.vim' 
+"Bundle 'myusuf3/numbers.vim' 
 Bundle 'tpope/vim-markdown'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'morhetz/gruvbox'
