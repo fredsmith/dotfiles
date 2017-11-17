@@ -1,6 +1,7 @@
 # set home to be wherever .bashrc is
 export HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+
 # set configdir to be ~/[.]dotfiles
 export CONFIGDIR=$HOME;
 export XDG_CONFIG_HOME=$CONFIGDIR;
