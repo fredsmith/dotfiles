@@ -4,7 +4,7 @@
 # variables
 export TODOTXT_DEFAULT_ACTION=list
 export TODOTXT_AUTO_ARCHIVE=1
-export TODOTXT_CFG_FILE=$HOME/Documents/Notes/todo.cfg
+export TODOTXT_CFG_FILE=$HOME/src/git.smith.bz/derf/notes/todo.cfg
 
 # aliases 
 
