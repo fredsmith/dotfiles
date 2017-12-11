@@ -28,3 +28,6 @@ function setansibleenv {
   echo "Ansible set to $1"
 }
 complete -W "$(ls ~/workspace/ansible-envs/*.txt  2> /dev/null | sed -e 's/.*\///' | cut -f 1 -d '.')" setansibleenv
+
+export ANSIBLE_COW_SELECTION=random
+#export ANSIBLE_NOCOWS=1
