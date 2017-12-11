@@ -41,8 +41,6 @@ bindsym $mod+minus scratchpad show
 
 # start rofi (a program launcher)
 bindsym $mod+d exec rofi -show run
-# start dmenu (a program launcher)
-bindsym $mod+shift+d exec dmenu_run
 bindsym $mod+shift+f exec rofi-pass
 bindsym $mod+shift+b exec bookm
 
@@ -179,6 +177,8 @@ bindsym $mod+Shift+s exec ~/bin/screenshot_selection
 set $mclip /home/derf/src/bitbucket.org/pandozer/rofi-clipboard-manager/mclip.py
 
 bindsym $mod+Shift+v exec rofi -modi "clipboard:$mclip menu" -show clipboard && $mclip paste
+
+bindsym $mod+Shift+t exec rofi -modi "todo:todo-rofi.sh" -show todo
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
