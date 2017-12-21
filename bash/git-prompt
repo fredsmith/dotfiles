@@ -4,7 +4,8 @@
 # Gracefully fails if not in a git repo and returns nothing.
 __gitBranch() {
     ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-    echo ${ref#refs/heads/}
+    branch=${ref//[^a-z0-9\/]/-}
+    echo ${branch#refs/heads/}
 }
 
 # Retrieves status information for git and places into predefined variables.
