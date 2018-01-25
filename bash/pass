@@ -1,0 +1,13 @@
+#! /usr/bin/env bash
+
+## Pass
+if which gopass &> /dev/null; then
+	alias pass=gopass
+fi
+
+function genpass () {
+  PASSLEN=${1:-10};
+  NUMPASS=${2:-1};
+  cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w $PASSLEN | head -n $NUMPASS
+}
+
