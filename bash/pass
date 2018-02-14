@@ -1,9 +1,9 @@
 #! /usr/bin/env bash
 
 ## Pass
-if which gopass &> /dev/null; then
-	alias pass=gopass
-fi
+#if which gopass &> /dev/null; then
+#	alias pass=gopass
+#fi
 
 function genpass () {
   PASSLEN=${1:-10};
