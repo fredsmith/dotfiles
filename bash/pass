@@ -8,6 +8,15 @@
 function genpass () {
   PASSLEN=${1:-10};
   NUMPASS=${2:-1};
-  cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w $PASSLEN | head -n $NUMPASS
+  case $3 in
+    nosym)
+      CHARSET='a-zA-Z0-9';
+      ;;
+    *)
+      CHARSET='a-zA-Z0-9!@#$%^&*()';
+      ;;
+  esac
+
+  cat /dev/urandom | tr -dc $CHARSET | fold -w $PASSLEN | head -n $NUMPASS
 }
 
