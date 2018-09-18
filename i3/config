@@ -43,6 +43,7 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+d exec rofi -show run
 bindsym $mod+shift+f exec rofi-pass
 bindsym $mod+shift+b exec bookm
+bindsym $mod+u exec ~/src/github.com/fdw/rofimoji/rofimoji.py
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -139,6 +140,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 workspace 1 output DP-2-1
 workspace Hipchat output DP-2-1
+workspace Messenger output DP-2-1
 workspace Slack output DP-2-1
 workspace Keybase output DP-2-1
 workspace IRC output DP-2-1
@@ -156,6 +158,7 @@ workspace 9 output HDMI-2
 
 # workspace application assignment
 for_window [class="^HipChat$"] move container to workspace Hipchat
+for_window [class="^Messenger for Desktop$"] move container to workspace Messenger
 for_window [class="^Hexchat"] move container to workspace IRC
 for_window [class="^Slack"] move container to workspace Slack
 for_window [class="^Keybase"] move container to workspace Keybase
