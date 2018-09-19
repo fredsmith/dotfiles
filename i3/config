@@ -142,6 +142,7 @@ workspace 1 output DP-2-1
 workspace Hipchat output DP-2-1
 workspace Messenger output DP-2-1
 workspace Slack output DP-2-1
+workspace FBM output DP-2-1
 workspace Keybase output DP-2-1
 workspace IRC output DP-2-1
 workspace Discord output DP-2-1
@@ -161,6 +162,7 @@ for_window [class="^HipChat$"] move container to workspace Hipchat
 for_window [class="^Messenger for Desktop$"] move container to workspace Messenger
 for_window [class="^Hexchat"] move container to workspace IRC
 for_window [class="^Slack"] move container to workspace Slack
+for_window [class="^Messenger for Desktop"] move container to workspace FBM
 for_window [class="^Keybase"] move container to workspace Keybase
 for_window [title="Discord$"] move container to workspace Discord
 for_window [title="Mozilla Thunderbird$"] move container to workspace Thunderbird
@@ -177,7 +179,7 @@ bindsym $mod+Control+l exec ~/bin/screen_lock
 
 bindsym $mod+Shift+s exec ~/bin/screenshot_selection
 
-set $mclip /home/derf/src/bitbucket.org/pandozer/rofi-clipboard-manager/mclip.py
+set $mclip /home/derf/src/git.smith.bz/derf/rofi-clipboard-manager/mclip.py
 
 bindsym $mod+Shift+v exec rofi -modi "clipboard:$mclip menu" -show clipboard && $mclip paste
 
