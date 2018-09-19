@@ -84,6 +84,7 @@ Bundle 'nrocco/vim-phplint'
 Bundle 'Lokaltog/vim-easymotion'
 
 Bundle 'vimwiki/vimwiki'
+Bundle 'tlvince/vim-auto-commit'
 
 let vimwiki_path='~/src/git.smith.bz/derf/vimwiki/'
 let vimwiki_export_path='~/src/git.smith.bz/derf/vimwiki_html/'
@@ -107,6 +108,12 @@ for wiki_name in wikis
     call add(g:vimwiki_list, wiki)
 endfor
 
+"augroup vimwiki
+"  au! BufRead ~/src/git.smith.bz/derf/vimwiki/index.wiki !git pull
+"  au! BufWritePost ~/src/git.smith.bz/derf/vimwiki/* !git add ;git commit -m "Auto commit + push.";git push
+"augroup END
+
+autocmd BufWritePost */vimwiki/* call AutoCommit()
 
 filetype plugin indent on
 
