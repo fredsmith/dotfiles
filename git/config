@@ -30,6 +30,7 @@
   c = "commit"
   cam = "commit -a -m"
 	alias = config --get-regexp ^alias\\.
+  tfo = reset --hard
 [filter "media"]
   clean = git-media-clean %f
   smudge = git-media-smudge %f
