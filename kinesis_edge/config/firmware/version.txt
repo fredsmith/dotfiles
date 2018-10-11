@@ -1,0 +1,2 @@
+Model name: FS Edge
+Firmware version: 1.0.66.us (4MB), 10/16/2017

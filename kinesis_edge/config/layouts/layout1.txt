@@ -1,0 +1,7 @@
+[caps]>[lwin]
+{hk1}>{x1}{-lwin}{d}{+lwin}
+{hk2}>{x1}{-lwin}{ent}{+lwin}
+{hk3}>{x1}{-lwin}{v}{+lwin}
+{hk4}>{x1}{-lwin}{h}{+lwin}
+{hk7}>{x1}{-rshft}{colon}{+rshft}{d}{i}{s}{a}{p}{p}{r}{o}{v}{a}{l}{-rshft}{colon}{+rshft}{lspc}
+{hk8}>{x1}{-rshft}{colon}{+rshft}{-rshft}{=}{+rshft}{1}{-rshft}{+rshft}{-rshft}{colon}{+rshft}{lspc}
