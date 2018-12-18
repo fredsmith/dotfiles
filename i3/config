@@ -142,6 +142,7 @@ workspace 1 output DP-2-1
 workspace Hipchat output DP-2-1
 workspace Messenger output DP-2-1
 workspace Slack output DP-2-1
+workspace Signal output DP-2-1
 workspace FBM output DP-2-1
 workspace Keybase output DP-2-1
 workspace IRC output DP-2-1
@@ -162,6 +163,7 @@ for_window [class="^HipChat$"] move container to workspace Hipchat
 for_window [class="^Messenger for Desktop$"] move container to workspace Messenger
 for_window [class="^Hexchat"] move container to workspace IRC
 for_window [class="^Slack"] move container to workspace Slack
+for_window [class="^Signal"] move container to workspace Signal
 for_window [class="^Messenger for Desktop"] move container to workspace FBM
 for_window [class="^Keybase"] move container to workspace Keybase
 for_window [title="Discord$"] move container to workspace Discord
@@ -178,6 +180,8 @@ bindsym $mod+Shift+m exec amixer set Capture toggle
 bindsym $mod+Control+l exec ~/bin/screen_lock
 
 bindsym $mod+Shift+s exec ~/bin/screenshot_selection
+
+bindsym $mod+Control+s exec sudo pm-suspend
 
 set $mclip /home/derf/src/git.smith.bz/derf/rofi-clipboard-manager/mclip.py
 
@@ -243,7 +247,7 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xautolock -time 15 -locker '~/bin/screen_lock'
 exec --no-startup-id ~/bin/env_run clipit
 
-exec --no-startup-id ~/bin/env_run run_keybase
+#exec --no-startup-id ~/bin/env_run run_keybase
 
 exec --no-startup-id ~/bin/env_run pasystray
 #exec --no-startup-id run_keybase
