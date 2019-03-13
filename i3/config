@@ -165,6 +165,7 @@ for_window [class="^Hexchat"] move container to workspace IRC
 for_window [class="^Slack"] move container to workspace Slack
 for_window [class="^Signal"] move container to workspace Signal
 for_window [class="^Telegram"] move container to workspace Signal
+for_window [class="^rdesktop"] move container to workspace rdesktop
 for_window [class="^Messenger for Desktop"] move container to workspace FBM
 for_window [class="^Keybase"] move container to workspace Keybase
 for_window [title="Discord$"] move container to workspace Discord
