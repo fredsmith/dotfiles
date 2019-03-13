@@ -1,0 +1,14 @@
+#! /usr/bin/env bash
+
+
+if which pass &> /dev/null; then
+
+  #functions
+  function setenv {
+    source <(pass env/$1)
+    echo "Env set to $1"
+  }
+  complete -W "$(pass ls env/ | awk '{print $2}')" setenv
+
+fi
+
