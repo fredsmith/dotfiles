@@ -1,0 +1,23 @@
+#! /usr/bin/env bash
+
+
+# functions
+
+function ssltest { 
+  sslshow $1 | grep -e 'Subject:'
+  sslshow $1 | grep -1 -e 'X509v3 Subject Alternative Name:'
+  CURL_RESP=$(curl -s -I https://$1/)
+  if [ $? -eq 0 ]; then
+    echo "SSL verification succeeded"
+  else
+    echo "SSL verification failed"
+  fi
+}
+
+function sslshow {
+  openssl s_client -connect $1:443 < /dev/null 2>/dev/null | openssl x509 -text -in /dev/stdin
+}
+
+#aliases
+
+
