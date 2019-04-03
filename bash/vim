@@ -2,8 +2,9 @@
 
 ## VIM
 if [ -f $CONFIGDIR/vim/vimrc ]; then
-   alias vim="vim -u $CONFIGDIR/vim/vimrc"
-   export EDITOR="vim -u $CONFIGDIR/vim/vimrc"
+  if [ ! -f $HOME/.vimrc ]; then
+    ln -s $CONFIGDIR/vim/vimrc $HOME/.vimrc;
+  fi
 fi
 if ! which vim &> /dev/null; then
 	alias vim=vi
