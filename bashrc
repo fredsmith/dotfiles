@@ -25,12 +25,17 @@ else if [ -d $HOME/.dotfiles ]; then
    export CONFIGDIR="$HOME/.dotfiles";
  else
    export CONFIGDIR="$HOME/dotfiles";
-   git clone https://git.smith.bz/derf/dotfiles $CONFIGDIR
+   git clone https://git.smith.bz/derf/dotfiles.git $CONFIGDIR
    mv ~/.bashrc ~/.bashrc.old
    ln -s $CONFIGDIR/bashrc ~/.bashrc
    mv ~/.profile ~/.profile.old
    ln -s $CONFIGDIR/profile ~/.profile
    . ~/.bashrc
+   if ! [ -d $HOME/bin ]; then
+     . dotfiles/bash/git
+     gco https://git.smith.bz/derf/utils.git
+     ln -s src/git.smith.bz/derf/utils $HOME/bin
+   fi
 fi
 fi
 
