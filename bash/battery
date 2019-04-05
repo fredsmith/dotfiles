@@ -1,19 +1,23 @@
 #! /usr/bin/env bash
 
-BATTERYPOWERED=$(upower -e | grep -i battery -c)
-BATTERYDEVICE=$(upower -e | grep -i battery)
-if [[ "$BATTERYPOWERED" -eq "1" ]]; then
-		function battery_prompt {
-				BATTERYSTATUS=$(upower -i $BATTERYDEVICE | grep -E "state" | print 2);
-				if [[ $BATTERYSTATUS == *"arging"* ]]; then
-						BATTERYPERCENT=$(upower -i $BATTERYDEVICE | grep -E "percentage" | print 2)
-						if [[ $BATTERYSTATUS == "discharging" ]]; then
-							echo -n "$default[B:$red$BATTERYPERCENT$default]-"
-						else
-							echo -n "$default[B:$green$BATTERYPERCENT$default]-"
-						fi
-				fi
-		}
-		export PROMPT_PLUGINS="$PROMPT_PLUGINS battery_prompt";
-fi
+upower -e &> /dev/null
 
+if [[ "$?" -eq "0" ]]; then
+
+  BATTERYPOWERED=$(upower -e | grep -i battery -c)
+  BATTERYDEVICE=$(upower -e | grep -i battery)
+  if [[ "$BATTERYPOWERED" -eq "1" ]]; then
+      function battery_prompt {
+          BATTERYSTATUS=$(upower -i $BATTERYDEVICE | grep -E "state" | print 2);
+          if [[ $BATTERYSTATUS == *"arging"* ]]; then
+              BATTERYPERCENT=$(upower -i $BATTERYDEVICE | grep -E "percentage" | print 2)
+              if [[ $BATTERYSTATUS == "discharging" ]]; then
+                echo -n "$default[B:$red$BATTERYPERCENT$default]-"
+              else
+                echo -n "$default[B:$green$BATTERYPERCENT$default]-"
+              fi
+          fi
+      }
+      export PROMPT_PLUGINS="$PROMPT_PLUGINS battery_prompt";
+  fi
+fi
