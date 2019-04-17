@@ -143,7 +143,7 @@ workspace 1 output DP-2-1
 workspace Hipchat output DP-2-1
 workspace Messenger output DP-2-1
 workspace Slack output DP-2-1
-workspace Signal output DP-2-1
+workspace Telegram output DP-2-1
 workspace FBM output DP-2-1
 workspace Keybase output DP-2-1
 workspace IRC output DP-2-1
@@ -164,8 +164,8 @@ for_window [class="^HipChat$"] move container to workspace Hipchat
 for_window [class="^Messenger for Desktop$"] move container to workspace Messenger
 for_window [class="^Hexchat"] move container to workspace IRC
 for_window [class="^Slack"] move container to workspace Slack
-for_window [class="^Signal"] move container to workspace Signal
-for_window [class="^Telegram"] move container to workspace Signal
+for_window [class="^Signal"] move container to workspace Telegram
+for_window [class="^Telegram"] move container to workspace Telegram
 for_window [class="^rdesktop"] move container to workspace rdesktop
 for_window [class="^Messenger for Desktop"] move container to workspace FBM
 for_window [class="^Keybase"] move container to workspace Keybase
