@@ -41,7 +41,8 @@
   smudge = git-lfs smudge %f
   required = true
 [credential]
-	helper = /home/derf/src/github.com/mithodin/pass-git-helper/pass-git-helper.sh
+  #helper = /home/derf/src/github.com/mithodin/pass-git-helper/pass-git-helper.sh
+  helper = store
 [rerere]
 	enabled = true
 [merge]
