@@ -26,18 +26,26 @@ if [ -f ~/.ssh/config ]; then
    complete -W "$(cat ~/.ssh/config 2>/dev/null | grep "Host \w" | cut -f 2 -d ' ')" sshow
 fi
 
-complete -W "$(ls ~/.ssh/*.*sa 2>/dev/null| sed -e 's/.*\///' | cut -f 1 -d '.')" add
 
 
 # functions
 function sshclear { if [ $1 -gt "0" ]; then REGEXP="${1}d"; sed -i".bak" $REGEXP ~/.ssh/known_hosts; fi }
-function add { 
-  FILELIST="$HOME/.ssh/key.rsa"
-  for ARG in $*; do
-    FILELIST="$FILELIST $HOME/.ssh/$ARG.*sa";
-  done
-  ssh-add $FILELIST
-}
+if [ -d $PASSWORD_STORE_DIR/ssh ]; then
+    function add {
+      ssh-add <(pass ssh/$1)
+  }
+  complete -W "$(ls $PASSWORD_STORE_DIR/ssh/*.*sa.gpg 2>/dev/null| sed -e 's/.*\///' -e 's/.gpg$//')" add
+else if [ -d $HOME/.ssh/ ]; then
+  complete -W "$(ls ~/.ssh/*.*sa 2>/dev/null| sed -e 's/.*\///' | cut -f 1 -d '.')" add
+  function add { 
+    FILELIST="$HOME/.ssh/key.rsa"
+    for ARG in $*; do
+      FILELIST="$FILELIST $HOME/.ssh/$ARG.*sa";
+    done
+    ssh-add $FILELIST
+  }
+  fi
+fi
 
 function sshow {
   for ARG in $*; do
@@ -50,8 +58,6 @@ function sshow {
 
 
 #host specific commands
-alias mi='ssh mimas'
-alias io='ssh io'
 
 # Add bash completion for ssh: it tries to complete the host to which you 
 # want to connect from the list of the ones contained in ~/.ssh/known_hosts
