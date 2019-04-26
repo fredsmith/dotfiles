@@ -2,7 +2,7 @@
 
 
 #ssh agent
-alias lock='ssh-add -D'
+alias lock='echo "KEYINFO --ssh-list --ssh-fpr" | gpg-connect-agent | grep 'MD5' | print 3 | while read KEY; do echo "DELETE_KEY $KEY" | gpg-connect-agent; done'
 alias list='ssh-add -l'
 
 #GPG Agent running as ssh-agent
