@@ -2,7 +2,7 @@
 
 ### linkjump
 
-if [[ -d ~/links ]]; then
+if [[ -d ~/src ]]; then
 
   # autocomplete
   complete -W "$(cd ~/links; ls -1; for FILE in ~/src/*/*/*; do if [[ -d "$FILE" ]]; then echo $FILE | sed -e 's/.*\///'; fi; done | sort)" j
