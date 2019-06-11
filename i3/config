@@ -41,8 +41,9 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # start rofi (a program launcher)
-bindsym $mod+d exec rofi -show run
+bindsym $mod+d exec rofi -show drun -modi drun
 bindsym $mod+shift+f exec rofi-pass
+bindsym $mod+shift+p exec rofi -modi lpass:rofi-lpass -show lpass
 bindsym $mod+shift+b exec bookm
 bindsym $mod+u exec ~/src/github.com/fdw/rofimoji/rofimoji.py
 
@@ -164,6 +165,7 @@ for_window [class="^HipChat$"] move container to workspace Hipchat
 for_window [class="^Messenger for Desktop$"] move container to workspace Messenger
 for_window [class="^Hexchat"] move container to workspace IRC
 for_window [class="^Slack"] move container to workspace Slack
+for_window [class="^Messages for web"] move container to workspace Messages
 for_window [class="^Signal"] move container to workspace Telegram
 for_window [class="^Telegram"] move container to workspace Telegram
 for_window [class="^rdesktop"] move container to workspace rdesktop
@@ -189,6 +191,8 @@ bindsym $mod+Control+s exec sudo pm-suspend
 set $mclip /home/derf/src/git.smith.bz/derf/rofi-clipboard-manager/mclip.py
 
 bindsym $mod+Shift+v exec rofi -modi "clipboard:$mclip menu" -show clipboard && $mclip paste
+
+bindsym $mod+Shift+x exec rofi-snippet
 
 bindsym $mod+Shift+t exec rofi -modi "todo:todo-rofi.sh" -show todo
 
