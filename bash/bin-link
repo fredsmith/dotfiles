@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+
+## Pass
+
+function bin-link () {
+  current_location=$(/usr/bin/env pwd -P);
+   ln -s $current_location/$1 $HOME/bin/$1
+}
+
