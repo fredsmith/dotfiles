@@ -13,16 +13,18 @@ general {
 }
 
 #order += "ipv6"
-order += "disk /"
+#order += "disk /"
 #order += "run_watch DHCP"
+order += "battery 0"
 order += "path_exists CiscoVPN"
 order += "path_exists OpenVPN"
+order += "wireless wlp4s0"
 order += "ethernet enp38s0"
 order += "load"
 order += "tztime local"
 
-wireless _first_ {
-        format_up = "W: (%quality at %essid) %ip"
+wireless wlp4s0 {
+        format_up = "W:(%quality at %essid) %ip"
         format_down = "W: down"
 }
 
@@ -50,9 +52,15 @@ tztime local {
 }
 
 load {
-        format = "%1min"
+        format = "L: %1min"
 }
 
-disk "/" {
-        format = "%avail"
+battery 0 {
+        format = "B: %percentage %status %remaining"
+        format_down = "No battery"
+        status_chr = "⚡ CHR"
+        status_bat = "🔋 BAT"
+        status_unk = "? UNK"
+        status_full = "☻ FULL"
+        low_threshold = 10
 }
