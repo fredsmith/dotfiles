@@ -4,6 +4,11 @@
 
 function bin-link () {
   current_location=$(/usr/bin/env pwd -P);
-   ln -s $current_location/$1 $HOME/bin/$1
+  if [ -z "$2" ]; then
+    target_name=$1
+  else
+    target_name=$2
+  fi
+  ln -s $current_location/$1 $HOME/bin/$target_name
 }
 
