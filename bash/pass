@@ -5,7 +5,7 @@
 #	alias pass=gopass
 #fi
 
-export PASSWORD_STORE_DIR=~/src/git.smith.bz/derf/personal-secure
+export PASSWORD_STORE_DIR=~/src/github.com/fredsmith/password-store
 
 function genpass () {
   PASSLEN=${1:-10};

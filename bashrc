@@ -10,7 +10,7 @@ export XDG_CONFIG_HOME=$CONFIGDIR;
 export TZ=US/Eastern
 export FULLNAME="Fred Smith"
 export EMAIL="fred@smith.bz"
-export CONFIGDIR="$HOME/src/git.smith.bz/derf/dotfiles";
+export CONFIGDIR="$HOME/src/github.com/fredsmith/dotfiles";
 export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:$PATH:/sbin:/usr/sbin:$HOME/.rvm/bin 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -21,7 +21,7 @@ fi
 #set -x
 if [ ! -d $CONFIGDIR ]; then
    mkdir -p $CONFIGDIR
-   git clone https://git.smith.bz/derf/dotfiles.git $CONFIGDIR
+   git clone https://github.com/fredsmith/dotfiles.git $CONFIGDIR
    mv ~/.bashrc ~/.bashrc.old
    ln -s $CONFIGDIR/bashrc ~/.bashrc
    mv ~/.profile ~/.profile.old
@@ -29,8 +29,8 @@ if [ ! -d $CONFIGDIR ]; then
    . ~/.bashrc
    if ! [ -d $HOME/bin ]; then
      . $CONFIGDIR/bash/git
-     gco https://git.smith.bz/derf/utils.git
-     ln -s src/git.smith.bz/derf/utils $HOME/bin
+     gco https://github.com/fredsmith/utils.git
+     ln -s src/github.com/fredsmith/utils $HOME/bin
    fi
 fi
 
