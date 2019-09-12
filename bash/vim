@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 
 ## VIM
+export EDITOR='vim'
 if [ -f $CONFIGDIR/vim/vimrc ]; then
   if [ ! -f $HOME/.vimrc ]; then
     ln -s $CONFIGDIR/vim/vimrc $HOME/.vimrc;
