@@ -4,7 +4,7 @@
 
 #variables
 
-DEFAULTPROMPT="super-boxes"
+DEFAULTPROMPT="offline-boxes"
 
 #functions
 
@@ -71,6 +71,15 @@ prompt () {
       #running this after every command is pretty expensive.  cache it maybe?
       PS1="$bold$blue[$default$blue\u@$hostcolor\h$bold$blue]$PLUGIN_OUTPUT$bold$blue[$default$blue\t$bold]-[$default$blue\w$bold$blue] \\\$ $default"
       portcheck derf.us 80 &> /dev/null || prompt offline-single
+      ;;
+   offline-boxes)
+      export PROMPT_COMMAND='prompt offline-boxes; history -a';
+      PLUGIN_OUTPUT=$(for PLUGIN in $PROMPT_PLUGINS; do
+        PLUGIN_OUT=$($PLUGIN 2> /dev/null);
+        echo -n $PLUGIN_OUT;
+      done);
+      #running this after every command is pretty expensive.  cache it maybe?
+      PS1="$bold$blue[$default$blue\u@$hostcolor\h$bold$blue]$PLUGIN_OUTPUT$bold$blue[$default$blue\t$bold]-[$default$blue\w$bold$blue] \\\$ $default"
       ;;
    offline-multi)
       export PROMPT_COMMAND='prompt offline-multi; history -a';
