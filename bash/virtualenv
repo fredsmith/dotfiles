@@ -4,12 +4,13 @@
 export PATH=$PATH:~/.local/bin
 
 if which virtualenvwrapper.sh &> /dev/null; then
+  export VIRTUALENVWRAPPER_PYTHON='/usr/bin/python3'
   export WORKON_HOME="$HOME/.virtualenvs"
   export VIRTUALENVWRAPPER_PROJECT_FILENAME="working"
   export VIRTUALENVWRAPPER_HOOK_DIR="$CONFIGDIR/virtualenv"
   source `which virtualenvwrapper.sh`
 fi
-export PROJECT_HOME="$HOME/workspace"
+export PROJECT_HOME="$HOME/src"
 
 virtualenv_prompt() {
   if ! [ -z "$VIRTUAL_ENV" ]; then
