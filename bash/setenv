@@ -11,7 +11,9 @@ if which pass &> /dev/null; then
   complete -W "$(pass ls env/ | awk '{print $2}')" setenv
 
   function securerun {
-    pass bin/$1 | bash
+    scriptname=$1
+    shift
+    pass bin/$scriptname | bash /dev/stdin $@
   }
   complete -W "$(pass ls bin/ | awk '{print $2}')" securerun
 
