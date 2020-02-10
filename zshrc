@@ -5,6 +5,7 @@
 export ZSH="/home/derf/.oh-my-zsh"
 
 autoload bashcompinit
+bashcompinit
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
