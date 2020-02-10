@@ -68,7 +68,7 @@ ZSH_THEME="bullet-train"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git pass kubectl)
+plugins=(git pass kubectl kube-ps1)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,3 +101,6 @@ export XDG_CONFIG_HOME="$CONFIGDIR";
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# added by travis gem
+[ -f /home/derf/.travis/travis.sh ] && source /home/derf/.travis/travis.sh
