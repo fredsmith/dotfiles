@@ -17,5 +17,9 @@ if which pass &> /dev/null; then
   }
   complete -W "$(pass ls bin/ | awk '{print $2}')" securerun
 
+  for util in $(pass ls bin/ | awk '{print $2}'); do
+    alias $util="securerun $util"
+  done
+
 fi
 

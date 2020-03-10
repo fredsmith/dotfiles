@@ -3,7 +3,7 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/derf/.oh-my-zsh"
-
+export PATH=$PATH:$HOME/.local/bin
 autoload bashcompinit
 bashcompinit
 
