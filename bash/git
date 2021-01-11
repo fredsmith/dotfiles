@@ -9,7 +9,7 @@ alias g=git
 export SRCPATH="$HOME/src/"
 
 ## Functions
-unalias gco
+#unalias gco
 
 function gco {
   REPO=$1
