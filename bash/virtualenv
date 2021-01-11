@@ -2,15 +2,27 @@
 
 # init virtualenvwrapper
 export PATH=$PATH:~/.local/bin
+export WORKON_HOME="$HOME/.virtualenvs"
 
 if which virtualenvwrapper.sh &> /dev/null; then
   export VIRTUALENVWRAPPER_PYTHON='/usr/bin/python3'
-  export WORKON_HOME="$HOME/.virtualenvs"
   export VIRTUALENVWRAPPER_PROJECT_FILENAME="working"
   export VIRTUALENVWRAPPER_HOOK_DIR="$CONFIGDIR/virtualenv"
   source `which virtualenvwrapper.sh`
+else
+  function workon {
+    . $WORKON_HOME/$1/bin/activate
+  }
+  complete -W "$(ls $WORKON_HOME | sed -e s'/\/$//')" workon
+  function mkvirtualenv {
+    python3 -m venv venv .virtualenvs/$1
+    workon $1
+  }
+
 fi
 export PROJECT_HOME="$HOME/src"
+
+
 
 virtualenv_prompt() {
   if ! [ -z "$VIRTUAL_ENV" ]; then
