@@ -40,6 +40,12 @@ for PROFILEFILE in /etc/profile.d/*.sh; do
    source $PROFILEFILE;
 done >/dev/null 2>&1
 
+# source system profile scripts
+for PROFILEFILE in /usr/local/etc/bash_completion.d/*; do
+   source $PROFILEFILE;
+done >/dev/null 2>&1
+
+
 # we set this twice, in case some system level init scripts overrides it
 export XDG_CONFIG_HOME=$CONFIGDIR;
 

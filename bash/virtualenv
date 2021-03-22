@@ -15,7 +15,7 @@ else
   }
   complete -W "$(ls $WORKON_HOME | sed -e s'/\/$//')" workon
   function mkvirtualenv {
-    python3 -m venv venv .virtualenvs/$1
+    python3 -m venv venv $WORKON_HOME/$1
     workon $1
   }
 

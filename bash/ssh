@@ -32,7 +32,11 @@ fi
 function sshclear { if [ $1 -gt "0" ]; then REGEXP="${1}d"; sed -i".bak" $REGEXP ~/.ssh/known_hosts; fi }
 if [ -d $PASSWORD_STORE_DIR/ssh ]; then
     function add {
-      ssh-add <(pass ssh/$1)
+      rm sshfifo
+      mkfifo -m 0600 sshfifo
+      pass ssh/$1 > sshfifo
+      ssh-add sshfifo
+      rm sshfifo
   }
   complete -W "$(ls $PASSWORD_STORE_DIR/ssh/*.*sa.gpg 2>/dev/null| sed -e 's/.*\///' -e 's/.gpg$//')" add
 else if [ -d $HOME/.ssh/ ]; then
