@@ -1,5 +1,4 @@
 #! /usr/bin/env bash
-echo $PATH
 if which tug &> /dev/null; then
-  tug completion bash
+  source <(tug completion bash)
 fi
