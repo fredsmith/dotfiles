@@ -9,7 +9,9 @@ fi
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 #variables
-export PATH="$HOME/.rbenv/bin:$PATH"
+if [ -d $HOME/.rbenv/bin ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+fi
 
 #aliases
 

@@ -1,3 +1,4 @@
 #! /usr/bin/env bash
-
-export PATH="$PATH:/snap/bin"
+if [ -d /snap/bin ]; then
+  export PATH="$PATH:/snap/bin"
+fi

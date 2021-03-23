@@ -1,3 +1,5 @@
-export PATH=./node_modules/.bin:$PATH
-export NODE_PATH=/usr/local/lib/node:/usr/local/lib/node_modules
-export NODE_ENV=development 
+if which npm &> /dev/null; then
+  PATH=$(npm bin):$PATH
+  export NODE_PATH=/usr/local/lib/node:/usr/local/lib/node_modules
+  export NODE_ENV=development 
+fi

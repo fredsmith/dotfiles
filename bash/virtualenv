@@ -1,7 +1,10 @@
 #! /usr/bin/env bash
 
 # init virtualenvwrapper
-export PATH=$PATH:~/.local/bin
+if [ -d ~/.local/bin ]; then
+  export PATH=$PATH:~/.local/bin
+fi
+
 export WORKON_HOME="$HOME/.virtualenvs"
 
 if which virtualenvwrapper.sh &> /dev/null; then
