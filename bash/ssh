@@ -34,8 +34,7 @@ if [ -d $PASSWORD_STORE_DIR/ssh ]; then
     function add {
       rm sshfifo
       mkfifo -m 0600 sshfifo
-      pass ssh/$1 > sshfifo
-      ssh-add sshfifo
+      pass ssh/$1 >sshfifo | ssh-add sshfifo
       rm sshfifo
   }
   complete -W "$(ls $PASSWORD_STORE_DIR/ssh/*.*sa.gpg 2>/dev/null| sed -e 's/.*\///' -e 's/.gpg$//')" add
