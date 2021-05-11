@@ -1,4 +1,0 @@
-#! /usr/bin/env bash
-if which tug &> /dev/null; then
-  source <(tug completion bash)
-fi
