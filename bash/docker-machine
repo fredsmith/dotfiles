@@ -11,3 +11,6 @@
 #    export DOCKER_CERT_PATH=$HOME/.docker/machine/machines/default
 #  fi
 #fi
+if [ "$(docker-machine status docker)" == "Running" ]; then
+  eval $(docker-machine env docker);
+fi
