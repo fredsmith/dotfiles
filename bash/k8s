@@ -1,4 +1,8 @@
 #! /usr/bin/env bash
 
-alias k=kubectl
+if which kubectl &> /dev/null; then
+  source <(kubectl completion bash)
+  alias k=kubectl
+  complete -F __start_kubectl k
+fi
 
