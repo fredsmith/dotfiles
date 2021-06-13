@@ -7,6 +7,7 @@ if which pass &> /dev/null; then
   function setenv {
     source <(pass env/$1)
     echo "Env set to $1"
+    export SETENV_NAME=$1
   }
   complete -W "$(pass ls env/ | awk '{print $2}')" setenv
 
@@ -20,6 +21,14 @@ if which pass &> /dev/null; then
   for util in $(pass ls bin/ | awk '{print $2}'); do
     alias $util="securerun $util"
   done
+
+  setenv_prompt() {
+    if ! [ -z "$SETENV_NAME" ]; then
+      echo -n "[E:$SETENV_NAME]-";
+    fi
+  }
+  export PROMPT_PLUGINS="setenv_prompt $PROMPT_PLUGINS"
+
 
 fi
 
