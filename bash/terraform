@@ -6,10 +6,10 @@ function terraform {
   docker run -i -t \
   --mount src=$(pwd)/..,target=/workspace,type=bind \
   --mount src=$(pwd),target=/workspace/project,type=bind \
-  --mount src=${HOME}/.aws,target=/.aws,type=bind \
-  -e AWS_SHARED_CREDENTIALS_FILE=/.aws/credentials \
   -e TF_LOG=${TF_LOG} \
   -e TF_LOG_FILE=${TF_LOG_FILE} \
+  -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
+  -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
   --workdir /workspace/project \
   hashicorp/terraform:$TFVER \
   $@
