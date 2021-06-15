@@ -24,7 +24,7 @@ if which pass &> /dev/null; then
 
   setenv_prompt() {
     if ! [ -z "$SETENV_NAME" ]; then
-      echo -n "[E:$SETENV_NAME]-";
+      echo -n "$blue[E:$green$SETENV_NAME$default]-"
     fi
   }
   export PROMPT_PLUGINS="setenv_prompt $PROMPT_PLUGINS"
