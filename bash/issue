@@ -1,0 +1,20 @@
+#! /usr/bin/env bash
+
+
+function issue() {
+  if ! [ -z "$1" ]; then
+    ISSUE_ID="$1"
+  else
+    unset ISSUE_ID;
+  fi
+}
+
+issue_prompt() {
+  if ! [ -z "$ISSUE_ID" ]; then
+    echo -n "[I:$ISSUE_ID]-";
+  fi
+}   
+
+
+export PROMPT_PLUGINS="issue_prompt $PROMPT_PLUGINS";
+
