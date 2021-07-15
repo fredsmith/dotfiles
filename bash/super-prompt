@@ -4,7 +4,7 @@
 
 #variables
 
-DEFAULTPROMPT="offline-boxes"
+DEFAULTPROMPT="multi-line"
 
 #functions
 
@@ -18,62 +18,26 @@ prompt () {
 
    case "$mode" in
    none)
-      export PROMPT_COMMAND='prompt none; history -a';
+      export PROMPT_COMMAND='prompt none';
       export PS1="\\\$ "
       ;;
-   basicoffline)
-      export PROMPT_COMMAND='prompt basicoffline; history -a';
-      PS1="[\u@$hostcolor\h$default [$red""OFFLINE$default] \w]\\\$ ";
-      ;;
    basic)
-      export PROMPT_COMMAND='prompt basic; post_history; history -a';
+      export PROMPT_COMMAND='prompt basic;';
       PS1="[\u@$hostcolor\h$default \w]\\\$ ";
-      portcheck derf.us 80 &> /dev/null || prompt basicoffline
-      ;;
-   offline)
-      export PROMPT_COMMAND='prompt offline-single; history -a';
-      PLUGIN_OUTPUT=$(for PLUGIN in $PROMPT_PLUGINS; do
-        PLUGIN_OUT=$($PLUGIN 2> /dev/null);
-        echo -n $PLUGIN_OUT;
-      done);
-      ONLINEPROMPT="$bold$blue[$default$red""OFFLINE$bold$blue]-"
-      #running this after every command is pretty expensive.  cache it maybe?
-      PS1="$bold$blue[$default$blue\u@$hostcolor\h$bold$blue]$PLUGIN_OUTPUT$ONLINEPROMPT$bold$blue[$default$blue\t$bold]-[$default$blue\w$bold$blue] \\\$ $default"
-      ;;
-   offline-single)
-      export PROMPT_COMMAND='prompt offline-single; history -a';
-      PLUGIN_OUTPUT=$(for PLUGIN in $PROMPT_PLUGINS; do
-        PLUGIN_OUT=$($PLUGIN 2> /dev/null);
-        echo -n $PLUGIN_OUT;
-      done);
-      ONLINEPROMPT="$bold$blue[$default$red""OFFLINE$bold$blue]-"
-      #running this after every command is pretty expensive.  cache it maybe?
-      PS1="$bold$blue[$default$blue\u@$hostcolor\h$bold$blue]$PLUGIN_OUTPUT$ONLINEPROMPT$bold$blue[$default$blue\t$bold]-[$default$blue\w$bold$blue] \\\$ $default"
       ;;
    super-airline)
       export SEPERATORL="";
       export SEPERATORR="";
-      export PROMPT_COMMAND='prompt super-single; post_history; history -a';
+      export PROMPT_COMMAND='prompt super-airline;';
       PLUGIN_OUTPUT=$(for PLUGIN in $PROMPT_PLUGINS; do
         PLUGIN_OUT=$($PLUGIN 2> /dev/null);
         echo -n $PLUGIN_OUT;
       done);
       #running this after every command is pretty expensive.  cache it maybe?
       PS1="$bold$blue$SEPERATORL$default$blue\u@$hostcolor\h$bold$blue$SEPERATORL$PLUGIN_OUTPUT$bold$blue$SEPERATORL$default$blue\t$bold$SEPERATORL$default$blue\w$bold$blue$SEPERATORL \\\$ $default"
-      portcheck derf.us 80 &> /dev/null || prompt offline-single
       ;;
-   super-boxes)
-      export PROMPT_COMMAND='prompt super-boxes; post_history; history -a';
-      PLUGIN_OUTPUT=$(for PLUGIN in $PROMPT_PLUGINS; do
-        PLUGIN_OUT=$($PLUGIN 2> /dev/null);
-        echo -n $PLUGIN_OUT;
-      done);
-      #running this after every command is pretty expensive.  cache it maybe?
-      PS1="$bold$blue[$default$blue\u@$hostcolor\h$bold$blue]$PLUGIN_OUTPUT$bold$blue[$default$blue\t$bold]-[$default$blue\w$bold$blue] \\\$ $default"
-      portcheck derf.us 80 &> /dev/null || prompt offline-single
-      ;;
-   offline-boxes)
-      export PROMPT_COMMAND='prompt offline-boxes; history -a';
+   boxes)
+      export PROMPT_COMMAND='prompt boxes';
       PLUGIN_OUTPUT=$(for PLUGIN in $PROMPT_PLUGINS; do
         PLUGIN_OUT=$($PLUGIN 2> /dev/null);
         echo -n $PLUGIN_OUT;
@@ -81,24 +45,14 @@ prompt () {
       #running this after every command is pretty expensive.  cache it maybe?
       PS1="$bold$blue[$default$blue\u@$hostcolor\h$bold$blue]$PLUGIN_OUTPUT$bold$blue[$default$blue\t$bold]-[$default$blue\w$bold$blue] \\\$ $default"
       ;;
-   offline-multi)
-      export PROMPT_COMMAND='prompt offline-multi; history -a';
+   multi-line)
+      export PROMPT_COMMAND='prompt multi-line';
       PLUGIN_OUTPUT=$(for PLUGIN in $PROMPT_PLUGINS; do
         PLUGIN_OUT=$($PLUGIN 2> /dev/null);
         echo -n $PLUGIN_OUT;
       done);
       #running this after every command is pretty expensive.  cache it maybe?
-      PS1="$bold$blue┌[$default$blue\u@$hostcolor\h$bold$blue]-$PLUGIN_OUTPUT$bold$blue[$default$red""OFFLINE$bold$blue]-[$default$blue\t \d$bold]\n$default$bold$blue└[$default$blue\w$bold$blue] \\\$ $default"
-      ;;
-   super-multi)
-      export PROMPT_COMMAND='prompt super-multi; post_history; history -a';
-      PLUGIN_OUTPUT=$(for PLUGIN in $PROMPT_PLUGINS; do
-        PLUGIN_OUT=$($PLUGIN 2> /dev/null);
-        echo -n $PLUGIN_OUT;
-      done);
-      #running this after every command is pretty expensive.  cache it maybe?
-      PS1="$bold$blue┌[$default$blue\u@$hostcolor\h$bold$blue]-$PLUGIN_OUTPUT$bold$blue[$default$blue\t \d$bold]\n$default$bold$blue└[$default$blue\w$bold$blue] \\\$ $default"
-      portcheck derf.us 80 &> /dev/null || prompt offline-multi
+      PS1="${bold}${blue}╔[$default$blue\u@$hostcolor\h$bold$blue]-$PLUGIN_OUTPUT$bold$blue[$default$blue\t \d$bold]\n╚$default$bold$blue[$default$blue\w$bold$blue] \\\$ $default"
       ;;
    *)
       ;;
