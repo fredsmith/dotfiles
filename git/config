@@ -1,6 +1,6 @@
 [user]
   name = Fred Smith
-  email = derf@edx.org
+  email = fred@untappd.com
 	signingkey = 7AD073C7
 [push]
   default = simple
