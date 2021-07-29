@@ -6,3 +6,8 @@ if which kubectl &> /dev/null; then
   complete -F __start_kubectl k
 fi
 
+if which flux &> /dev/null; then
+  source <(flux completion bash)
+  alias f=flux
+  complete -F __start_flux f
+fi
