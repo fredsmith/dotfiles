@@ -1,0 +1,12 @@
+#! /usr/bin/env bash
+
+function clipenv () {
+  clipcontents=$(pbpaste);
+  echo "hit enter to run:";
+  echo "$clipcontents" | cut -c 1-30 | sed -e 's/$/...../'
+  read
+  source <(echo $clipcontents)
+  if [[ $clipcontents == *"AWS_ACCESS_KEY"* ]]; then
+    export SETENV_NAME=$(aws iam list-account-aliases | jq .AccountAliases[0] | sed -e 's/"//g')
+  fi
+}
