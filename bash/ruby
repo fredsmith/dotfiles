@@ -18,3 +18,7 @@ fi
 if which bundle &> /dev/null; then
   alias rake="bundle exec rake"
 fi
+
+if [[ -f /usr/local/opt/asdf/libexec/asdf.sh ]]; then
+  source /usr/local/opt/asdf/libexec/asdf.sh
+fi
