@@ -80,4 +80,3 @@ function rehash {
 # added by travis gem
 [ -f /home/derf/.travis/travis.sh ] && source /home/derf/.travis/travis.sh
 
-gam() { "/home/derf/bin/gam/gam" "$@" ; }
