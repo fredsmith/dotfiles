@@ -9,16 +9,16 @@ if which pass &> /dev/null; then
     echo "Env set to $1"
     export SETENV_NAME=$1
   }
-  complete -W "$(pass ls env/ | awk '{print $2}')" setenv
+  complete -W "$(pass ls env/ | awk '{print $2}' | sed 's/\x1b\[[0-9;]*m//g')" setenv
 
   function securerun {
     scriptname=$1
     shift
     pass bin/$scriptname | bash /dev/stdin $@
   }
-  complete -W "$(pass ls bin/ | awk '{print $2}')" securerun
+  complete -W "$(pass ls bin/ | awk '{print $2}' | sed 's/\x1b\[[0-9;]*m//g')" securerun
 
-  for util in $(pass ls bin/ | awk '{print $2}'); do
+  for util in $(pass ls bin/ | awk '{print $2}' | sed 's/\x1b\[[0-9;]*m//g'); do
     alias $util="securerun $util"
   done
 
