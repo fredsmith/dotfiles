@@ -11,3 +11,17 @@ if which flux &> /dev/null; then
   alias f=flux
   complete -F __start_flux f
 fi
+
+function setkubectx() {
+  alias k="kubectl --context=$1"
+  export KUBE_CTX=$(echo $1 | sed -e 's/.*@//')
+}
+complete -W "$(kubectl config get-contexts -o name)" setkubectx 
+
+function kube_prompt() {
+  if ! [ -z "$KUBE_CTX" ]; then
+    echo -n "$blue[K:$green$KUBE_CTX$default]-";
+  fi
+}
+
+export PROMPT_PLUGINS="kube_prompt $PROMPT_PLUGINS"
