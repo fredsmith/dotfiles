@@ -14,6 +14,7 @@ fi
 
 function setkubectx() {
   alias k="kubectl --context=$1"
+  alias f="flux --context=$1"
   export KUBE_CTX=$(echo $1 | sed -e 's/.*@//')
 }
 complete -W "$(kubectl config get-contexts -o name)" setkubectx 
