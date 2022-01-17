@@ -7,7 +7,11 @@ if [[ -f ~/.aws/config ]]; then
   #functions
   function setawsenv {
     export AWS_PROFILE="$1"
-    export SETENV_NAME=$AWS_PROFILE
+    aws iam list-account-aliases > /dev/null 2>&1 || aws sso login
+    export SETENV_NAME=$(aws iam list-account-aliases | jq .AccountAliases[0] | sed -e 's/"//g')
+    if [[ -z $SETENV_NAME ]] || [[ "$SETENV_NAME" == "null" ]]; then
+      export SETENV_NAME=$AWS_PROFILE
+    fi
     echo "AWS set to $1"
   }
   complete -W "$(aws configure list-profiles)" setawsenv
