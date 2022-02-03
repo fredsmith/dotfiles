@@ -1,0 +1,27 @@
+# /usr/bin/env bash
+
+function garf_letters() {
+  if [[ -z "$1" ]]; then
+    letterprefix="garfield_";
+  else
+    letterprefix=$1;
+  fi
+  cat /dev/stdin | fold -w1 | while read letter; do
+    case $letter in
+      " ")
+        echo -n "$letter";
+        ;;
+      "")
+        echo -n " ";
+        ;;
+      *)
+        echo -n ":$letterprefix$letter:";
+        ;;
+    esac
+  done
+  echo "";
+}
+
+function commitmessage() {
+  curl --silent https://raw.githubusercontent.com/ngerakines/commitment/master/commit_messages.txt | shuf -n 1
+}
