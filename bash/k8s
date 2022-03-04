@@ -13,15 +13,35 @@ if which flux &> /dev/null; then
 fi
 
 function setkubectx() {
-  alias k="kubectl --context=$1"
-  alias f="flux --context=$1"
-  export KUBE_CTX=$(echo $1 | sed -e 's/.*@//')
+  if [[ ! -z $KUBE_NS ]]; then
+    alias k="kubectl --context=$1 --namespace=$KUBE_NS"
+    alias f="flux --context=$1 --namespace=$KUBE_NS"
+  else
+    alias k="kubectl --context=$1"
+    alias f="flux --context=$1"
+  fi
+  export KUBE_CTX=$1
+  complete -W "$(k get namespaces -o jsonpath="{range .items[*]}{.metadata.name}{'\n'}{end}")" setkubens 
 }
 complete -W "$(kubectl config get-contexts -o name)" setkubectx 
+
+function setkubens() {
+  if [[ ! -z $KUBE_CTX ]]; then
+    alias k="kubectl --context=$KUBE_CTX --namespace=$1"
+    alias f="flux --context=$KUBE_CTX --namespace=$1"
+  else
+    alias k="kubectl --namespace=$1"
+    alias f="flux --namespace=$1"
+  fi
+  export KUBE_NS=$1
+}
 
 function kube_prompt() {
   if ! [ -z "$KUBE_CTX" ]; then
     echo -n "$blue[K:$green$KUBE_CTX$default]-";
+  fi
+  if ! [ -z "$KUBE_NS" ]; then
+    echo -n "$blue[KN:$green$KUBE_NS$default]-";
   fi
 }
 
