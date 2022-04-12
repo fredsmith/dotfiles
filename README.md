@@ -4,7 +4,7 @@ This is my dotfiles directory, with some magic to automatically find home depend
 
 ## Installation
 ```
-curl https://get.derf.cloud/dotfiles/master/bashrc | bash
+curl -L https://get.derf.cloud/dotfiles/master/bashrc | bash
 ```
 
 ## testing
