@@ -15,6 +15,13 @@ if [[ -f ~/.aws/config ]]; then
     echo "AWS set to $1"
   }
   complete -W "$(aws configure list-profiles)" setawsenv
+  export AWS_REGION="us-east-2"
+
+  function setawsregion {
+    export AWS_REGION="$1"
+  }
+  #complete -W "$(aws ec2 describe-regions | jq '.Regions[] | .RegionName' | sed -e 's/"//g')" setawsregion
+  complete -W "us-east-1 us-east-2" setawsregion
 
 fi
 

@@ -87,6 +87,8 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'vimwiki/vimwiki'
 Bundle 'tlvince/vim-auto-commit'
 Plugin 'chrisbra/csv.vim'
+Bundle 'mrk21/yaml-vim'
+Plugin 'andrewstuart/vim-kubernetes'
 
 let vimwiki_path='~/src/git.smith.bz/derf/vimwiki/'
 let vimwiki_export_path='~/src/git.smith.bz/derf/vimwiki_html/'
