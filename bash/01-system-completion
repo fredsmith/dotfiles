@@ -9,6 +9,8 @@ if [ -d /opt/homebrew ]; then
 fi
 
 if which brew &> /dev/null; then
+  [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+
   if [ -d `brew --prefix`/etc/bash_completion.d ]; then
     for COMPLETIONFILE in `brew --prefix`/etc/bash_completion.d/*; do
       source $COMPLETIONFILE;

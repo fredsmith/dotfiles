@@ -15,6 +15,7 @@ function gco {
   REPO=$1
   REPOPATH=$(echo $REPO | sed -e 's/.*@//' -e 's/:/\//' -e 's/.*\/\///' -e 's/.git$//' -e 's/\/[[:alnum:]_-]\+$//');
   REPONAME=$(echo $REPO | sed -e 's/.*\///' -e 's/.git$//');
+  echo Cloning $REPONAME into $REPOPATH
   if ! [[ -d $SRCPATH$REPOPATH ]]; then
     mkdir -p $SRCPATH$REPOPATH;
   fi
