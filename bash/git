@@ -21,7 +21,7 @@ function gco {
   fi
   cd $SRCPATH$REPOPATH;
   if ! [[ -d $REPONAME ]]; then
-    git clone $REPO;
+    git clone $REPO .;
   fi
   cd $REPONAME;
 }

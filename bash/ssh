@@ -58,7 +58,8 @@ function sshow {
 
 #aliases
 
-
+alias deskpi='ssh -A derf@deskpi.local'
+alias callisto='ssh -A derf@192.168.0.77'
 
 #host specific commands
 

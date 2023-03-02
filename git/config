@@ -1,6 +1,6 @@
 [user]
   name = Fred Smith
-  email = fred@untappd.com
+  email = fsmith@wanderu.com
 	signingkey = 7AD073C7
 [push]
   default = simple
@@ -13,11 +13,11 @@
   forcepush = push --force origin HEAD
   newpush = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\""
   p = "push"
-  pull-request = "!hub pull-request -m \"$(git log -1 --pretty=%B)\""
+  #pull-request = "!hub pull-request -m \"$(git log -1 --pretty=%B)\""
   undo = reset --soft HEAD~1
   discard = checkout --
   cop = "!cop() { DEFAULTBRANCH="main"; BRANCHNAME=${@-$DEFAULTBRANCH}; git fetch --all; git checkout $BRANCHNAME && git pull;}; cop"
-  commitnewbranchandpr = "!commitnewbranchandpr() { ARGS=$@; BRANCHNAME=$(echo $ARGS | sed -e 's/ /-/g'); git checkout -b fredsmith/$BRANCHNAME && git commit -a -m \"$ARGS\" && git newpush && git pull-request;}; commitnewbranchandpr"
+  commitnewbranchandpr = "!commitnewbranchandpr() { ARGS=$@; BRANCHNAME=$(echo $ARGS | sed -e 's/ /-/g'); git checkout -b $BRANCHNAME && git commit -a -m \"$ARGS\" && git newpush && git pull-request;}; commitnewbranchandpr"
   syncwithmaster = "!git checkout master; git pull; git checkout @{-1}; git rebase master"
   wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
   unpublish = "!git push origin :$(git branch-name)"
