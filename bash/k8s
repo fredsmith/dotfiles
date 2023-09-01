@@ -21,6 +21,7 @@ function setkubectx() {
     alias f="flux --context=$1"
   fi
   export KUBE_CTX=$1
+  export HELM_KUBECONTEXT=$1
   complete -W "$(k get namespaces -o jsonpath="{range .items[*]}{.metadata.name}{'\n'}{end}")" setkubens 
 }
 complete -W "$(kubectl config get-contexts -o name)" setkubectx 
@@ -34,6 +35,7 @@ function setkubens() {
     alias f="flux --namespace=$1"
   fi
   export KUBE_NS=$1
+  export HELM_NAMESPACE=$1
 }
 
 function kube_prompt() {
@@ -44,5 +46,7 @@ function kube_prompt() {
     echo -n "$blue[KN:$green$KUBE_NS$default]-";
   fi
 }
+
+alias kshell='k run -i -t fsmith-temp-shell-box --image=ubuntu:latest --restart=Never --command=true --annotations "sidecar.istio.io/inject=false" /bin/bash; k delete pod fsmith-temp-shell-box'
 
 export PROMPT_PLUGINS="kube_prompt $PROMPT_PLUGINS"
