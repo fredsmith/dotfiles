@@ -1,3 +1,10 @@
 #! /usr/bin/env bash
 
 alias dfimage="docker run -v /var/run/docker.sock:/var/run/docker.sock --rm alpine/dfimage"
+
+function dockeron {
+  if [[ "$@" == "localhost" ]]; then
+    unset DOCKER_HOST;
+  fi
+  export DOCKER_HOST=ssh://$@
+}
