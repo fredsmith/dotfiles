@@ -21,7 +21,7 @@ if [[ -f ~/.aws/config ]]; then
     export AWS_REGION="$1"
   }
   #complete -W "$(aws ec2 describe-regions | jq '.Regions[] | .RegionName' | sed -e 's/"//g')" setawsregion
-  complete -W "us-east-1 us-east-2" setawsregion
+  complete -W "us-east-1 us-west-2" setawsregion
 
   function makesshconfig {
     aws ec2 describe-instances | jq '.Reservations[].Instances[] | (.Tags[]|select(.Key=="Name")|.Value), .PrivateIpAddress' | while read HOSTNAME; do read IPADDRESS; echo "Host $HOSTNAME" | sed -e 's/"//g'; echo "    HostName $IPADDRESS" | sed -e 's/"//g'; done
