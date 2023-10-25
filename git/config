@@ -17,7 +17,7 @@
   undo = reset --soft HEAD~1
   discard = checkout --
   cop = "!cop() { DEFAULTBRANCH="main"; BRANCHNAME=${@-$DEFAULTBRANCH}; git fetch --all; git checkout $BRANCHNAME && git pull;}; cop"
-  commitnewbranchandpr = "!commitnewbranchandpr() { ARGS=$@; BRANCHNAME=$(echo $ARGS | sed -e 's/ /-/g' -e 's/:/-/g' ); git checkout -b $BRANCHNAME && git commit -a -m \"$ARGS\" && git newpush && hub pull-request;}; commitnewbranchandpr"
+  commitnewbranchandpr = "!commitnewbranchandpr() { ARGS=$@; if [ -z \"$ISSUE_ID\" ]; then echo -n 'Issue ID:'; read ISSUE_ID; export ISSUE_ID; fi;  BRANCHNAME=$(echo $ISSUE_ID $ARGS | sed -e 's/ /-/g' -e 's/:/-/g' ); git checkout -b $BRANCHNAME && git commit -a -m \"$ARGS - $ISSUE_ID\" && git newpush && gh pr create --fill;}; commitnewbranchandpr"
   syncwithmaster = "!git checkout master; git pull; git checkout @{-1}; git rebase master"
   wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
   unpublish = "!git push origin :$(git branch-name)"
