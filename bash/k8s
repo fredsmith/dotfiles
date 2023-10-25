@@ -15,10 +15,16 @@ fi
 function setkubectx() {
   if [[ ! -z $KUBE_NS ]]; then
     alias k="kubectl --context=$1 --namespace=$KUBE_NS"
+    alias kubectl="kubectl --context=$1 --namespace=$KUBE_NS"
     alias f="flux --context=$1 --namespace=$KUBE_NS"
+    alias istioctl="istioctl --context=$1 --namespace=$KUBE_NS"
+    alias kail="kail --context $1 --ns $KUBE_NS"
   else
     alias k="kubectl --context=$1"
+    alias kubectl="kubectl --context=$1"
     alias f="flux --context=$1"
+    alias istioctl="istioctl --context=$1"
+    alias kail="kail --context $1"
   fi
   export KUBE_CTX=$1
   export HELM_KUBECONTEXT=$1
@@ -29,10 +35,15 @@ complete -W "$(kubectl config get-contexts -o name)" setkubectx
 function setkubens() {
   if [[ ! -z $KUBE_CTX ]]; then
     alias k="kubectl --context=$KUBE_CTX --namespace=$1"
+    alias kubectl="kubectl --context=$KUBE_CTX --namespace=$1"
     alias f="flux --context=$KUBE_CTX --namespace=$1"
+    alias istioctl="istioctl --context=$KUBE_CTX --namespace=$1"
+    alias kail="kail --context $KUBE_CTX --ns $1"
   else
     alias k="kubectl --namespace=$1"
     alias f="flux --namespace=$1"
+    alias istioctl="istioctl --namespace=$1"
+    alias kail="kail --ns $1"
   fi
   export KUBE_NS=$1
   export HELM_NAMESPACE=$1
