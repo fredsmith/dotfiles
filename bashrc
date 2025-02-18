@@ -11,7 +11,7 @@ export TZ=US/Eastern
 export FULLNAME="Fred Smith"
 export EMAIL="fred@smith.bz"
 export CONFIGDIR="$HOME/src/github.com/fredsmith/dotfiles";
-export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH:/sbin:/usr/sbin:$HOME/.rvm/bin 
+export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH:/sbin:/usr/sbin:$HOME/.rvm/bin:~/.local/bin 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 fd=0   # stdin
@@ -77,6 +77,6 @@ function rehash {
 }
 
 
-# added by travis gem
-[ -f /home/derf/.travis/travis.sh ] && source /home/derf/.travis/travis.sh
 
+# uv
+export PATH="/Users/fsmith/.local/bin:$PATH"
