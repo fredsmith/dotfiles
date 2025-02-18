@@ -8,7 +8,7 @@ function dsh {
   HOSTMASK=$1; 
   shift 1; 
   for HOST in `dshlist | grep $HOSTMASK`; do 
-    (ssh -q -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -x $HOST "$@" | xargs -n 500 echo "$HOST:" | tee -a /tmp/dsh.log )&
+    (ssh -q -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $DSHSSHARGS -x $HOST "$@" | xargs -n 500 echo "$HOST:" | tee -a /tmp/dsh.log )&
   done; 
   ACTIVE=1; 
   until [[ $ACTIVE = 0 ]]; do 
