@@ -1,0 +1,26 @@
+
+[nodejs]
+#disabled = true
+detect_extensions = []
+detect_files = []
+detect_folders = []
+
+
+[python]
+#disabled = true
+detect_extensions = []
+detect_files = []
+
+# Disable cloud providers that might show email
+[gcloud]
+disabled = true
+
+[env_var.KUBE_CTX]
+variable = 'KUBE_CTX'
+format = "K⎈:[$env_value]($style) "
+style = "blue bold"
+
+[env_var.KUBE_NS]
+variable = 'KUBE_NS'
+format = "KN:[$env_value]($style) "
+style = "blue bold dimmed"
