@@ -1,4 +1,6 @@
 
+ZSH_DISABLE_COMPFIX=true
+
 autoload -U compinit; compinit
 
 if [[ -d $HOME/src/github.com/fredsmith/dotfiles ]]; then

@@ -1,0 +1,5 @@
+#! /usr/bin/env bash
+
+function cursor {
+  open -a "/Applications/Cursor.app" "$@"
+}

@@ -65,11 +65,13 @@ function setkubectx
   if test -n "$KUBE_NS"
     alias k="kubectl --context=$argv[1] --namespace=$KUBE_NS"
     alias kubectl="kubectl --context=$argv[1] --namespace=$KUBE_NS"
+    alias k9s="k9s --context=$argv[1] --namespace=$KUBE_NS"
     alias istioctl="istioctl --context=$argv[1] --namespace=$KUBE_NS"
     alias kail="kail --context $argv[1] --ns $KUBE_NS"
   else
     alias k="kubectl --context=$argv[1]"
     alias kubectl="kubectl --context=$argv[1]"
+    alias k9s="k9s --context=$argv[1]"
     alias istioctl="istioctl --context=$argv[1]"
     alias kail="kail --context $argv[1]"
   end
@@ -85,10 +87,13 @@ function setkubens
   if test -n "$KUBE_CTX"
     alias k="kubectl --context=$KUBE_CTX --namespace=$argv[1]"
     alias kubectl="kubectl --context=$KUBE_CTX --namespace=$argv[1]"
+    alias k9s="k9s --context=$KUBE_CTX --namespace=$argv[1]"
     alias istioctl="istioctl --context=$KUBE_CTX --namespace=$argv[1]"
     alias kail="kail --context $KUBE_CTX --ns $argv[1]"
   else
     alias k="kubectl --namespace=$argv[1]"
+    alias kubectl="kubectl --namespace=$argv[1]"
+    alias k9s="k9s --namespace=$argv[1]"
     alias istioctl="istioctl --namespace=$argv[1]"
     alias kail="kail --ns $argv[1]"
   end

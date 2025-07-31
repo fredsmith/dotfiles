@@ -1,0 +1,5 @@
+# Load rbenv automatically by appending
+# the following to ~/.bashrc:
+if which rbenv &> /dev/null; then
+  eval "$(rbenv init -)" 2>&1 > /dev/null
+fi

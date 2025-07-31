@@ -32,8 +32,10 @@ if test -f ~/.aws/config
 end
 
 if type -q aws
-  if type -q aws_completer
-    complete -c aws -a "(aws_completer)"
+  function __fish_complete_aws
+    env COMP_LINE=(commandline -pc) aws_completer | tr -d ' '
   end
+  
+  complete -c aws -f -a "(__fish_complete_aws)"
 end
 set -gx AWS_REGION 'us-east-1'
