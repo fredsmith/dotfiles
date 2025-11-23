@@ -1,2 +1,1 @@
-
-fish_add_path "/Users/fsmith/.local/bin"
+fish_add_path "$HOME/.local/bin"
