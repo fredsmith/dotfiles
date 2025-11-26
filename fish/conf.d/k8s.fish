@@ -61,6 +61,7 @@ end
 function setkubectx
   if test -n "$argv[2]"
     set -gx KUBE_NS $argv[2]
+    set -gx HELM_NAMESPACE $argv[2]
   end
   if test -n "$KUBE_NS"
     alias k="kubectl --context=$argv[1] --namespace=$KUBE_NS"
@@ -77,6 +78,14 @@ function setkubectx
   end
   set -gx KUBE_CTX $argv[1]
   set -gx HELM_KUBECONTEXT $argv[1]
+
+  # Check if matching AWS profile exists and switch to it
+  if type -q aws
+    if contains $argv[1] (aws configure list-profiles)
+      setawsenv $argv[1]
+    end
+  end
+
   complete -c setkubens -f
   complete -c setkubens -a "(kubectl --context=$argv[1] get namespaces -o name | string replace 'namespace/' '')"
 end
