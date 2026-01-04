@@ -6,13 +6,12 @@ alias lock='ssh-add -D'
 alias list='ssh-add -l'
 
 # GPG Agent running as ssh-agent
-if test -z "$SSH_AUTH_SOCK"
-    set GPG_AUTH_SOCK_FILENAME /run/user/(id -u)/gnupg/S.gpg-agent.ssh
-    if test -S $GPG_AUTH_SOCK_FILENAME
-        set -x SSH_AUTH_SOCK $GPG_AUTH_SOCK_FILENAME
-        alias lock='echo > ~/.gnupg/sshcontrol'
-    end
+set GPG_AUTH_SOCK_FILENAME /run/user/(id -u)/gnupg/S.gpg-agent.ssh
+if test -S $GPG_AUTH_SOCK_FILENAME
+    set -x SSH_AUTH_SOCK $GPG_AUTH_SOCK_FILENAME
+    alias lock='echo > ~/.gnupg/sshcontrol'
 end
+
 
 # fish completion for ssh config
 if test -f ~/.ssh/config
@@ -31,7 +30,8 @@ end
 set -x PASSWORD_STORE_DIR $HOME/src/github.com/fredsmith/password-store
 if test -d $PASSWORD_STORE_DIR/ssh
     function add
-        pass ssh/$argv[1] | ssh-add -
+        set -lx SSH_ASKPASS_REQUIRE never
+        ssh-add (pass ssh/$argv[1] | psub) < /dev/tty
     end
     complete -f add
     complete -c add -a "(ls $PASSWORD_STORE_DIR/ssh/*.*sa.gpg 2>/dev/null | sed -e 's/.*\///' -e 's/.gpg//')"
