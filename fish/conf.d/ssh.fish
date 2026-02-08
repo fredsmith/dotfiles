@@ -6,7 +6,7 @@ alias lock='ssh-add -D'
 alias list='ssh-add -l'
 
 # GPG Agent running as ssh-agent
-set GPG_AUTH_SOCK_FILENAME /run/user/(id -u)/gnupg/S.gpg-agent.ssh
+set GPG_AUTH_SOCK_FILENAME (gpgconf --list-dirs agent-ssh-socket)
 if test -S $GPG_AUTH_SOCK_FILENAME
     set -x SSH_AUTH_SOCK $GPG_AUTH_SOCK_FILENAME
     alias lock='echo > ~/.gnupg/sshcontrol'
