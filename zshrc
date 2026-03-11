@@ -15,4 +15,3 @@ if (( ${+CONFIGDIR} )); then
     done
   fi
 fi
-
