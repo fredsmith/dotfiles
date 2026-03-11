@@ -1,12 +1,12 @@
-# Fred Smith's ~/dotfiles directory.   
+# Fred Smith's ~/dotfiles directory.
 
-This is my dotfiles directory, with some magic to automatically find home depending on where bashrc is located, as well as automatically setting config files for commands like tmux, vim, screen, etc without having to copy or link them out of ~/dotfiles.
+Cross-platform (macOS + Linux) dotfiles with fish as the primary shell. Config is organized into `conf.d/` directories per shell, and the repo doubles as `XDG_CONFIG_HOME`.
 
 ## Installation
 ```
-curl -L https://get.derf.cloud/dotfiles/master/bashrc | bash
+curl -fsSL https://get.derf.cloud/dotfiles/install.sh | bash
 ```
 
-## testing
+## Testing
 
-check out this repo, then do `docker build .`  you will be dropped into a bash shell with my dotfiles installed.
+Check out this repo, then do `docker build -t dotfiles . && docker run -it dotfiles` to get dropped into a fish shell with dotfiles installed.

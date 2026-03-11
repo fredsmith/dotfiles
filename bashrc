@@ -19,20 +19,6 @@ if ! [[ -t "$fd" || -p /dev/stdin ]]; then
    return
 fi
 #set -x
-if [ ! -d $CONFIGDIR ]; then
-   mkdir -p $CONFIGDIR
-   git clone https://github.com/fredsmith/dotfiles.git $CONFIGDIR
-   mv ~/.bashrc ~/.bashrc.old
-   ln -s $CONFIGDIR/bashrc ~/.bashrc
-   mv ~/.profile ~/.profile.old
-   ln -s $CONFIGDIR/profile ~/.profile
-   . ~/.bashrc
-   if ! [ -d $HOME/bin ]; then
-     . $CONFIGDIR/bash/git
-     gco https://github.com/fredsmith/utils.git
-     ln -s src/github.com/fredsmith/utils $HOME/bin
-   fi
-fi
 
 
 # source system profile scripts

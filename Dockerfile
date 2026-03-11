@@ -1,10 +1,10 @@
-FROM ubuntu
+FROM ubuntu:24.04
 
-RUN apt-get -y update
-RUN apt-get -y install curl git upower
+RUN apt-get -y update && apt-get -y install curl git fish
 
-RUN useradd -ms /bin/bash derf
+RUN useradd -ms /usr/bin/fish derf
 USER derf
 WORKDIR /home/derf
-ADD bashrc /home/derf/.bashrc
-RUN cat .bashrc | bash
+RUN curl -fsSL https://raw.githubusercontent.com/fredsmith/dotfiles/master/install.sh | bash
+SHELL ["/usr/bin/fish", "-c"]
+CMD ["fish"]
