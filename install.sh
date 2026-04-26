@@ -27,4 +27,10 @@ if [ -d "$HOME/.config/fish" ] && [ ! -L "$HOME/.config/fish" ]; then
 fi
 ln -sf "$CONFIGDIR/fish" "$HOME/.config/fish"
 
-echo "Done! Start a new shell to pick up changes."
+# environment.d - systemd reads this at user manager startup, before the
+# desktop session begins. Sets XDG_CONFIG_HOME early enough that GUI apps
+# and services launched outside a shell still see the right value.
+mkdir -p "$HOME/.config/environment.d"
+ln -sf "$CONFIGDIR/environment.d/10-dotfiles.conf" "$HOME/.config/environment.d/10-dotfiles.conf"
+
+echo "Done! Log out and back in for environment.d changes to take effect."

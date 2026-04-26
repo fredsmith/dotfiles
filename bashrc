@@ -1,17 +1,16 @@
 # set home to be wherever .bashrc is
 export HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-
-# set configdir to be ~/[.]dotfiles
-export CONFIGDIR=$HOME;
-export XDG_CONFIG_HOME=$CONFIGDIR;
-
-# environment
+# environment - exported before the non-interactive guard so login scripts
+# that source ~/.profile -> ~/.bashrc don't leak wrong XDG_CONFIG_HOME
+# into the session.
+export CONFIGDIR="$HOME/src/github.com/fredsmith/dotfiles"
+export XDG_CONFIG_HOME=$CONFIGDIR
 export TZ=US/Eastern
 export FULLNAME="Fred Smith"
 export EMAIL="fred@smith.bz"
-export CONFIGDIR="$HOME/src/github.com/fredsmith/dotfiles";
 export PATH=~/bin:~/.local/bin:/usr/local/bin:/usr/local/sbin:/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH:/sbin:/usr/sbin:$HOME/.rvm/bin
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 fd=0   # stdin
