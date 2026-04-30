@@ -51,3 +51,5 @@
 [mergetool]
 	prompt = false
 [commit]
+[init]
+	defaultBranch = main

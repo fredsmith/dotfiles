@@ -6,3 +6,4 @@ if status is-interactive
     set CONFIGDIR "$HOME/src/github.com/fredsmith/dotfiles";
     set XDG_CONFIG_HOME $CONFIGDIR;
 end
+
