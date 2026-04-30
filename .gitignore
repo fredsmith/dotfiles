@@ -1,14 +1,179 @@
-.keychain
-google-chrome
-chromium
-gtk-2.0
-gtk-3.0
-Jaxx
-Keybase
-htop
-nautilus
-VirtualBox
-vlc
-gh
+# =============================================================================
+# Dotfiles .gitignore
+#
+# This repo doubles as $XDG_CONFIG_HOME, so tools constantly drop files here.
+# Default to ignoring; only opt files in by `git add`-ing them deliberately.
+#
+# Policy: aggressive. Only track files that (1) provide value across systems,
+# (2) are hand-edited, and (3) contain no secrets.
+#
+# NOTE: gitignore does not support trailing inline comments — every comment
+# must be on its own line, or the pattern will fail to match.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Credentials, tokens, keys — broad safety net (match anywhere in tree)
+# -----------------------------------------------------------------------------
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+*.keystore
+*.gpg
+*.asc
+*_rsa
+*_dsa
+*_ecdsa
+*_ed25519
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+known_hosts
+*.token
+*.tokens
+*credentials*
+*secret*
+*secrets*
+.netrc
+.npmrc
+.pypirc
+.env
+.env.*
+!.env.example
+
+# -----------------------------------------------------------------------------
+# Tools known to write secrets here
+# -----------------------------------------------------------------------------
+# Cloudflare wrangler oauth tokens
+.wrangler/
+# legacy hub CLI — stores GitHub oauth token
+hub
+# password manager config
+autopass/
+# npm update-notifier (can hold tokens)
+configstore/
+# GitLab API responses
+gitlab_settings.json
+Yubico/
+# RDP server certs and known_hosts
+freerdp/
+# PulseAudio auth cookie
+pulse/
+.aws/credentials
+.kube/config
+.docker/config.json
+
+# -----------------------------------------------------------------------------
+# OS / editor / VCS noise
+# -----------------------------------------------------------------------------
 .DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.bak
+*.orig
+
+# -----------------------------------------------------------------------------
+# Caches, logs, browser-like state (Electron apps drop these everywhere)
+# -----------------------------------------------------------------------------
+*.log
+logs/
+Cache/
+Cache_Data/
+Code Cache/
+GPUCache/
+ShaderCache/
+DawnCache/
+DawnGraphiteCache/
+DawnWebGPUCache/
+Cookies
+Cookies-journal
+Local Storage/
+Session Storage/
+IndexedDB/
+Service Worker/
+blob_storage/
+databases/
+WebStorage/
+Partitions/
+
+# -----------------------------------------------------------------------------
+# Tool state directories that auto-create themselves under $XDG_CONFIG_HOME
+# (per-host runtime state, not config worth syncing)
+# -----------------------------------------------------------------------------
+# Already-ignored, kept for clarity
+.keychain
+google-chrome/
+chromium/
+gtk-2.0/
+gtk-3.0/
+Jaxx/
+Keybase/
+htop/
+nautilus/
+VirtualBox/
+vlc/
+gh/
 fish_variables
+
+# Electron / GUI apps (caches, cookies, window state)
+Hyper/
+Plexamp/
+etcher/
+caret
+alacritty/
+
+# Linux desktop apps (often leak through XDG_CONFIG_HOME on Linux machines)
+Atlassian/
+Pinta/
+Synergy/
+Trolltech.conf
+audacious/
+autostart/
+clipit/
+enchant/
+gthumb/
+inkscape/
+kazam/
+menus/
+mimeapps.list
+mono.addins/
+nitrogen/
+parcellite/
+pavucontrol.ini
+plank/
+polybar/
+transmission/
+volumeicon/
+xmms2/
+xmonad/
+zoomus.conf
+
+# CLI tools that write runtime state here
+# (the bash/atuin shell snippet is intentional and tracked separately)
+atuin/
+# helm repo cache + lock
+helm/
+# k9s aliases/skins/screen dumps
+k9s/
+
+# Build / lock artifacts
+Brewfile.lock.json
+*.hi
+*.o
+
+# Auto-generated fish files (fish writes "don't edit this file" on top)
+fish/completions/
+fish/conf.d/fish_frozen_*.fish
+
+# AI assistant chat histories — may contain code snippets, paths, secrets
+.aider.chat.history.md
+.aider*
