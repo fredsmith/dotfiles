@@ -56,15 +56,21 @@ if type -q todo.sh
         set -l date
         if string match -q -r '^\d{4}-\d{2}-\d{2}$' -- $when
             set date $when
-        else
+        else if date -v+1d +%Y-%m-%d >/dev/null 2>&1
             set date (date -v+"$when"d +%Y-%m-%d)
+        else
+            set date (date -d "+$when days" +%Y-%m-%d 2>/dev/null)
+        end
+        if test -z "$date"
+            echo "snooze: couldn't compute date for '$when' (need a number of days or YYYY-MM-DD)" >&2
+            return 1
         end
         set -l current (sed -n "$item"p $HOME/Documents/todo/todo.txt)
         if test -z "$current"
             echo "snooze: no task at line $item" >&2
             return 1
         end
-        set -l stripped (echo $current | sed -E 's/ +t:[0-9]{4}-[0-9]{2}-[0-9]{2}//g')
+        set -l stripped (echo $current | sed -E 's/ +t:([0-9]{4}-[0-9]{2}-[0-9]{2})?//g')
         todo.sh replace $item "$stripped t:$date"
     end
 
@@ -79,7 +85,9 @@ if type -q todo.sh
             echo "wake: no task at line $item" >&2
             return 1
         end
-        set -l stripped (echo $current | sed -E 's/ +t:[0-9]{4}-[0-9]{2}-[0-9]{2}//g')
+        # Match valid t:YYYY-MM-DD AND any orphan t: tags (e.g. from a failed
+        # earlier snooze before this fix landed).
+        set -l stripped (echo $current | sed -E 's/ +t:([0-9]{4}-[0-9]{2}-[0-9]{2})?//g')
         todo.sh replace $item "$stripped"
     end
 
