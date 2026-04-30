@@ -24,3 +24,11 @@ style = "blue bold"
 variable = 'KUBE_NS'
 format = "KN:[$env_value]($style) "
 style = "blue bold dimmed"
+
+[custom.todo]
+description = "todo.txt now/next/someday task counts (kanban)"
+command = 'now=$(todo.sh lsp A 2>/dev/null | wc -l); nxt=$(todo.sh lsp B 2>/dev/null | wc -l); some=$(todo.sh lsp C 2>/dev/null | wc -l); printf "%d:%d:%d" $((now - 2)) $((nxt - 2)) $((some - 2))'
+when = 'command -v todo.sh >/dev/null && test -f "$TODOTXT_CFG_FILE"'
+format = '-\[T:[$output]($style)\]- '
+style = "blue bold"
+shell = ["bash", "--noprofile", "--norc"]
