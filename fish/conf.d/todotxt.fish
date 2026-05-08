@@ -15,6 +15,8 @@
 set -gx TODOTXT_DEFAULT_ACTION list
 set -gx TODOTXT_AUTO_ARCHIVE 1
 set -gx TODOTXT_CFG_FILE $HOME/Documents/todo/todo.cfg
+set -xg RUNDOWN_CONTEXT_TAG "@wanderu"
+set -xg RUNDOWN_USER_NAME Fred
 
 if type -q todo.sh
     alias t 'todo.sh'
