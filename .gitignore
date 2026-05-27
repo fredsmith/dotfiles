@@ -171,7 +171,7 @@ Brewfile.lock.json
 *.o
 
 # Auto-generated fish files (fish writes "don't edit this file" on top)
-fish/completions/
+
 fish/conf.d/fish_frozen_*.fish
 
 # AI assistant chat histories — may contain code snippets, paths, secrets

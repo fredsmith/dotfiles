@@ -30,14 +30,19 @@ function gwt
     return
   end
   set BRANCHNAME $argv[1]
-  set REPOROOT (git rev-parse --show-toplevel 2>/dev/null)
+  # the first entry in `worktree list` is always the main worktree
+  set REPOROOT (git worktree list --porcelain 2>/dev/null | grep -m1 '^worktree ' | string replace 'worktree ' '')
   if test -z "$REPOROOT"
     echo "Not in a git repo"
     return 1
   end
-  # branch names can contain /, which we don't want as nested dirs
   set SAFENAME (string replace -a '/' '-' $BRANCHNAME)
   set WTPATH "$REPOROOT/.worktrees/$SAFENAME"
+
+  if test -d "$WTPATH"
+    cd "$WTPATH"
+    return
+  end
 
   git fetch --all
   if git show-ref --verify --quiet "refs/heads/$BRANCHNAME"
