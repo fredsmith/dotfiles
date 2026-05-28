@@ -23,14 +23,12 @@ function gco
   cd "$REPONAME"
 end
 
-
 function gwt
   if test (count $argv) -eq 0
     git worktree list
     return
   end
   set BRANCHNAME $argv[1]
-  # the first entry in `worktree list` is always the main worktree
   set REPOROOT (git worktree list --porcelain 2>/dev/null | grep -m1 '^worktree ' | string replace 'worktree ' '')
   if test -z "$REPOROOT"
     echo "Not in a git repo"
@@ -39,18 +37,23 @@ function gwt
   set SAFENAME (string replace -a '/' '-' $BRANCHNAME)
   set WTPATH "$REPOROOT/.worktrees/$SAFENAME"
 
-  if test -d "$WTPATH"
-    cd "$WTPATH"
+  # If this branch is checked out in ANY worktree, cd there
+  set EXISTING (git worktree list --porcelain | awk -v b="refs/heads/$BRANCHNAME" '
+    /^worktree / { wt = $2 }
+    $0 == "branch " b { print wt; exit }
+  ')
+  if test -n "$EXISTING"
+    cd "$EXISTING"
     return
   end
 
   git fetch --all
   if git show-ref --verify --quiet "refs/heads/$BRANCHNAME"
-    git worktree add "$WTPATH" "$BRANCHNAME"
+    git worktree add "$WTPATH" "$BRANCHNAME"; or return
   else if git show-ref --verify --quiet "refs/remotes/origin/$BRANCHNAME"
-    git worktree add "$WTPATH" "$BRANCHNAME"
+    git worktree add "$WTPATH" "$BRANCHNAME"; or return
   else
-    git worktree add "$WTPATH" -b "$BRANCHNAME"
+    git worktree add "$WTPATH" -b "$BRANCHNAME"; or return
   end
   cd "$WTPATH"
 end
