@@ -5,6 +5,8 @@ alias g git
 # Variables
 
 set -gx SRCPATH "$HOME/src/"
+set -gx project_dirs "$SRCPATH/github.com/wanderu/:$SRCPATH/github.com/fredsmith/:$SRCPATH/github.com/smith-bz/"
+set -gx RUNDOWN_PERSONAL_REPO_PATTERNS "fredsmith/*,smith-bz/*"
 
 # Functions
 
