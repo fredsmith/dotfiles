@@ -13,6 +13,10 @@ export SRCPATH="$HOME/src/"
 
 function gco {
   REPO=$1
+  # Expand shorthand "owner/repo" to a GitHub SSH URL
+  if [[ $REPO =~ ^[[:alnum:]_.-]+/[[:alnum:]_.-]+$ ]]; then
+    REPO="git@github.com:$REPO.git"
+  fi
   REPOPATH=$(echo $REPO | sed -e 's/.*@//' -e 's/:/\//' -e 's/.*\/\///' -e 's/.git$//' -e 's/\/[[:alnum:]_-]\+$//');
   REPONAME=$(echo $REPO | sed -e 's/.*\///' -e 's/.git$//');
   echo Cloning $REPONAME into $REPOPATH
@@ -21,7 +25,7 @@ function gco {
   fi
   cd $SRCPATH$REPOPATH;
   if ! [[ -d $REPONAME ]]; then
-    git clone $REPO .;
+    git clone $REPO $REPONAME;
   fi
   cd $REPONAME;
 }
