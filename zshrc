@@ -3,7 +3,9 @@ ZSH_DISABLE_COMPFIX=true
 
 autoload -U compinit; compinit
 
-export SSH_AUTH_SOCK="$HOME/.gnupg/S.gpg-agent.ssh"
+if ! { [ -n "$SSH_CONNECTION" ] && [ -S "$SSH_AUTH_SOCK" ]; }; then
+  export SSH_AUTH_SOCK="$HOME/.gnupg/S.gpg-agent.ssh"
+fi
 
 if [[ -d $HOME/src/github.com/fredsmith/dotfiles ]]; then
   export CONFIGDIR="$HOME/src/github.com/fredsmith/dotfiles";
