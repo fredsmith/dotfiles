@@ -36,6 +36,7 @@ See [Snowflake.md](Snowflake.md)
 
 ## Datadog
 Querying/investigation: use `pup`.  `pup --help`, pass `--no-agent` to commands the user runs.
+pup "authentication expired" usually means the hourly token refresh couldn't write to the macOS keychain from the sandbox. If `pup auth status` shows `has_refresh: true`, run `pup auth refresh` with the sandbox disabled and retry; ask me to log in only if that fails.
 generating reports or sustained investigation: use the datadog MCP. Load skill guides first.
 new monitors+dashboards: use DatadogMonitor CRDS.  existing resources not tagged generated:kubernetes should be modified with `pup`
 
