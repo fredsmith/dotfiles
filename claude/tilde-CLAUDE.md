@@ -21,7 +21,7 @@ If you have a question, ask.  If you have a recommendation, suggest implementing
 Always check your current branch before committing. Never commit directly to main — create a feature branch first.
 
 ## Git Worktrees
-Create and enter worktrees only via EnterWorktree with `name`; the WorktreeCreate hook puts them at <repo>/.worktrees/<name> (gitignored globally), branched from origin's default branch. Never `git worktree add` and then EnterWorktree with `path`: it needs approval, and fails for any repo other than the launch repo.
+Create and enter worktrees only via EnterWorktree with `name`; the WorktreeCreate hook puts them next to the repo at <repo>-worktrees/<name> (never inside the repo: that double-loads .claude/rules and breaks Node resolution), branched from origin's default branch. Never `git worktree add` and then EnterWorktree with `path`: it needs approval, and fails for any repo other than the launch repo.
 For a repo other than the launch repo (or when launched from a non-repo dir such as ~/src/github.com/wanderu), use name `repo.<repo-dir>/<branch>`, e.g. `repo.infrastructure-as-code/fix/airbyte-legacy-bucket-access`. Never use /tmp or /private/tmp for worktrees.
 
 ## Superpowers
