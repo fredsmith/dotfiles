@@ -73,7 +73,7 @@ function gwt
     return 1
   end
   set SAFENAME (string replace -a '/' '-' $BRANCHNAME)
-  set WTPATH "$REPOROOT/.worktrees/$SAFENAME"
+  set WTPATH (path dirname $REPOROOT)/(path basename $REPOROOT)-worktrees/$SAFENAME
 
   # If this branch is checked out in ANY worktree, cd there
   set EXISTING (git worktree list --porcelain | awk -v b="refs/heads/$BRANCHNAME" '
